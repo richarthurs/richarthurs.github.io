@@ -39,4 +39,3 @@ It didn't take too long to understand how pages and posts are created. The conte
 
 
 
-
