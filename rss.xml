@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Thu, 03 Jan 2019 00:28:03 GMT</lastBuildDate><item><title><![CDATA[Goodbye Wordpress, Hello Gatsby]]></title><description><![CDATA[I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant…]]></description><link>https://gatsby-casper.netlify.com/posts/byebye-wordpress/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/byebye-wordpress/</guid><pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant software development
+projects I did as a kid. However, as my hosting account expired recently and I got hit with renewal fees that were 3x the original cost (this is &lt;em&gt;extremely common&lt;/em&gt; across web hosts), I decided to take a second look at how I could maintain a personal site with less technical and financial overhead. &lt;/p&gt;
+&lt;p&gt;I’ve also been thinking a lot about how I’d like to lay out my site. I really wanted to keep blog posts and projects separate. Wordpress could do this, but the off-the-shelf themes didn’t exactly support what I wanted to do. Of course, I could extend an existing theme, but I didn’t really want to write PHP and deal with Wordpress any more.&lt;/p&gt;
+&lt;p&gt;Enter Gatsby - the static site generator. As opposed to Wordpress which generates pages on the fly by pulling post data from a database, Gatsby takes markdown files (for pages, posts, etc.) and generates an entirely static site. The content can then be hosted inexpensively, with zero server-side dependencies. The pages are constructed using typical modern web technologies, like React. I’ve been having a great time with React recently, so I decided to give it a shot. &lt;/p&gt;
+&lt;h2&gt;The Old Host&lt;/h2&gt;
+&lt;p&gt;First I had to deal with the old web host. Once my account expired, they locked me out of cpanel, and I also couldn’t use an FTP connection. I totally understand the site going down (since I was behind on payment), but I was not thrilled that the admin panel was closed and my data was held hostage by the host. &lt;/p&gt;
+&lt;p&gt;Not wanting to pay 3x the original hosting cost, I converted to monthly billing and paid my final month. This let me login to the sites and export the wordpress data. Ten bucks was easily worth it to get away from them. &lt;/p&gt;
+&lt;h2&gt;Gatsby Bringup&lt;/h2&gt;
+&lt;p&gt;Gatsby has starter templates, so I chose &lt;a href=&quot;https://github.com/scttcper/gatsby-casper&quot;&gt;this one&lt;/a&gt; to serve as a base template for the new site. &lt;/p&gt;
+&lt;p&gt;Next I had to install Gatsby, and it was here that I encountered my first issues. After running &lt;code class=&quot;language-text&quot;&gt;npm install -g gatsby&lt;/code&gt;, the &lt;code class=&quot;language-text&quot;&gt;gatsby&lt;/code&gt; command did nothing, as if Gatsby were never installed. &lt;/p&gt;
+&lt;p&gt;The solution came from &lt;a href=&quot;https://github.com/gatsbyjs/gatsby/issues/4967&quot;&gt;this Github issue&lt;/a&gt;, in the form of the following commands:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;`npm config set prefix /usr/local`
+`npm i -g gatsby-cli`
+`npm i -g gatsby`&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Adjusting the Theme&lt;/h2&gt;
+&lt;p&gt;Gatsby development was very smooth once the install issue was worked out, so I set about stripping down some elements of the theme that I didn’t want, such as the social media hooks and buttons. For the most part, I commented these out since I may want them later.&lt;/p&gt;
+&lt;p&gt;It didn’t take too long to understand how pages and posts are created. The content folder structure is very similar to Wordpress, too. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[CubeSat Onboard Computer Design]]></title><description><![CDATA[Over the past year and a half, I have been working on the SFU Satellite Design Team as the computing subsystem lead. The team and I have…]]></description><link>https://gatsby-casper.netlify.com/projects/cubesat-onboard-computer-design/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/cubesat-onboard-computer-design/</guid><pubDate>Wed, 06 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Over the past year and a half, I have been working on the SFU Satellite Design Team as the computing subsystem lead. The team and I have been developing a low-cost, reliable, custom onboard computer (OBC) to meet the current and future mission requirements. This post features quite a few details about the project.&lt;/p&gt;
+&lt;p&gt;The original mission the OBC was designed for was calibration of the CHIME experiment, which was SFUSat’s first CubeSat mission developed during the Canadian Satellite Design Challenge.&lt;/p&gt;
+&lt;h2&gt;Features&lt;/h2&gt;
+&lt;p&gt;The SFUSat OBC is an inexpensive command and data handling system designed to be flexible across CubeSat missions. It features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automotive and extended temperature range hardware wherever possible&lt;/li&gt;
+&lt;li&gt;Cortex R4 processor with lockstep architecture&lt;/li&gt;
+&lt;li&gt;Extensive self-tests, error handling, SECDED&lt;/li&gt;
+&lt;li&gt;RTC with minimum 7-day supercapacitor backup&lt;/li&gt;
+&lt;li&gt;Nonvolatile storage of mission data&lt;/li&gt;
+&lt;li&gt;Optional triple-redundant data storage&lt;/li&gt;
+&lt;li&gt;Flexible bus architecture with PC/104 form factor&lt;/li&gt;
+&lt;li&gt;2x SPI, I2C, ADC pins broken out to bus connector&lt;/li&gt;
+&lt;li&gt;Multiple interrupt-capable GPIO on bus connector&lt;/li&gt;
+&lt;li&gt;Simple-to-integrate 3.3 V power supply requirement&lt;/li&gt;
+&lt;li&gt;External USB power for development purposes&lt;/li&gt;
+&lt;li&gt;External watchdog timer&lt;/li&gt;
+&lt;li&gt;Current monitoring and auto reset for SEL protection&lt;/li&gt;
+&lt;li&gt;Onboard temperature sensor&lt;/li&gt;
+&lt;li&gt;FreeRTOS-based software stack ensuring priority and multi-tasking&lt;/li&gt;
+&lt;li&gt;Immediate and time-tagged commands&lt;/li&gt;
+&lt;li&gt;Automatic logging and timestamp of any data with friendly API&lt;/li&gt;
+&lt;li&gt;Minimum 7-day file history capacity&lt;/li&gt;
+&lt;li&gt;File downlink capability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The TMS570 microcontroller used in the design has flight heritage with Robonaut, several satellites, and was confirmed to function correctly to 2.5 KRad by SFUSat. [1]&lt;/p&gt;
+&lt;h2&gt;File Handling &amp;#x26; Telemetry&lt;/h2&gt;
+&lt;p&gt;The satellite is intended to be frequently transmitting its most up-to-date telemetry packet, called standard telemetry. Telemetry points are also saved to a file onboard the satellite. One file is created per sensor, per day, and after 7 days have passed (or no room remains), the oldest set of log files are deleted. Log files can be downloaded at any time by a remote command. Standard telemetry sending can be suspended for a defined period of time for power saving purposes.&lt;/p&gt;
+&lt;p&gt;The filesystem chosen for the project is SPIFFS, an open-source and lightweight filesystem designed for SPI NOR flash devices. It proved simple to integrate and performed well in all of our tests.&lt;/p&gt;
+&lt;p&gt;The ring buffer style file architecture was simple and worked well overall. I developed an easy-to-use API to log data to files, where arbitrary text could be formatted and written into a file with a single function call using printf-style format specifiers. All writes to files were automatically timestamped. Developing easy-to-use APIs is a common theme of this project, and helps immensely when getting new members up to speed.&lt;/p&gt;
+&lt;p&gt;Files are named with a simple prefix-suffix methodology. The prefix ‘a’, ‘b’, and so on, represents the current “day” or time step. Over the course of a week, files with prefixes ‘a’ to ‘g’ will be created, and once ‘g’ files are finished, the ‘a’ will be deleted and replaced with new ‘a’-prefixed files. The suffix is another letter, ‘A’, corresponding to the file’s function, such as OBC temperature logs or general error logs. This naming methodology was chosen to make finding files quick, and to exploit the batch delete feature of SPIFFS.&lt;/p&gt;
+&lt;p&gt;We also have a “flag file” capability, which is used for storing and retrieving short, non-volatile flags from external flash memory. At startup, the system looks for the presence of this file, creates it if it doesn’t exist (and populates sensible defaults), or uses the existing flags.&lt;/p&gt;
+&lt;h2&gt;Self-Tests&lt;/h2&gt;
+&lt;p&gt;Upon startup, the OBC executes self tests to verify core functionality and connection to peripherals. Self-tested features include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU and all peripherals&lt;/li&gt;
+&lt;li&gt;Battery management system&lt;/li&gt;
+&lt;li&gt;External non-volatile memory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since the TMS570 self-tests wipe RAM, we save the results of self tests into a spare CAN data register that is not used by our application. The data in this register survives the self test, allowing us to determine which (if any) self tests have failed.&lt;/p&gt;
+&lt;h2&gt;OBC Epoch&lt;/h2&gt;
+&lt;p&gt;The OBC epoch is the real-time clock (RTC) based timestamp used throughout the system. Upon deployment, once the satellite has enough power to turn on the OBC, the real-time clock will start ticking from time 0. With a large super capacitor backup on the RTC, it is able to keep time for weeks without main system power. This capability can be used to determine how long the satellite had lost power, and it is used to timestamp files and coordinate antenna deployments.&lt;/p&gt;
+&lt;p&gt;The RTC chip is the Abracon AB-RTCMC-EA09-S3-D-B-T. It was chosen for low power, wide temperature range, and temperature compensated crystal features. It also has an alarm feature connected to a GPIO, which can be used to wake up the OBC from extended deep sleep periods. The time is represented in a human-readable date format which is converted to an absolute zero-based seconds format, with time 0 being the time the satellite first powered on.&lt;/p&gt;
+&lt;h2&gt;Command System&lt;/h2&gt;
+&lt;p&gt;The OBC software features a command system designed to be flexible. Commands have a main command, optional subcommand, and optional arguments (represented as hex data). The command system is linked to the UART for tethered development, and it’s linked to the radio so commands can be sent wirelessly.&lt;/p&gt;
+&lt;p&gt;Some of the commands include:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;- state get, set, and previous state
+- log file dump by prefix and file name
+- schedule a command to run in the future
+- get OBC epoch, minimum heap
+- get RTOS task snapshot (running tasks, task priorities)
+- suspend and enable RTOS tasks
+- execute CHIME calibration sequence
+- external reset
+- file system erase&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;FreeRTOS&lt;/h2&gt;
+&lt;p&gt;FreeRTOS is used as the real-time operating system solution. Now on version 10, version 9 is used on the OBC. It was chosen for its ease of use, excellent documentation, and vendor support with the TMS570. We rely heavily on the following RTOS features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;task priorities&lt;/li&gt;
+&lt;li&gt;task suspension and deletion&lt;/li&gt;
+&lt;li&gt;mutexes and queues
+We have found that many features that might be otherwise difficult to implement, have become straightforward by placing the functionality into a task that can be suspended. Good examples are external reset capability, and automatic SAFE mode entry if no signals are received over a long period of time. Task stack usage values are determined through experimentation, aided immensely by the command system’s task snapshot command, which can show tasks that are not running because of insufficient stack.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Radiation Effects Mitigation&lt;/h2&gt;
+&lt;p&gt;The OBC has been tested to 3.0 KRad at the TRIUMF facility. Tests were successful with zero occurrences of permanent data corruption, zero software lockups, and zero detected hardware latchups.&lt;/p&gt;
+&lt;p&gt;Single event upset effects are mitigated in the following ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TMS570 internal SECDED ECC&lt;/li&gt;
+&lt;li&gt;External watchdog triggered reset and self-test upon software lockup&lt;/li&gt;
+&lt;li&gt;Reset initiates TMS570 self tests which validate ECC and exercise on-chip peripherals&lt;/li&gt;
+&lt;li&gt;Important configuration data and logs stored in flash memory&lt;/li&gt;
+&lt;li&gt;Single event latchup events are detected by an OBC-wide current monitor. In the event of an overcurrent event, a full power reset is triggered.&lt;/li&gt;
+&lt;li&gt;Fast reset prevents damage from overcurrent condition&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Startup procedures are run, including on-chip self-tests which can clear invalid bits
+Resets are logged and can be analyzed on the ground.&lt;/p&gt;
+&lt;h2&gt;Watchdog&lt;/h2&gt;
+&lt;p&gt;An external watchdog is used to mitigate the effects of a software lockup. With an approximately 0.5 second timeout period, the watchdog will execute a power-on reset of the MCU if not ‘pet’ within the timeout period. The watchdog ‘pet’ feature is implemented in an RTOS task. By suspending the watchdog task from the command system, external hard reset capability is provided.&lt;/p&gt;
+&lt;h2&gt;Technical Specifications&lt;/h2&gt;
+&lt;p&gt;Nominal Power Draw:                        313 mW
+Maximum Power Draw:                     380 mW
+Voltage Supply:                                   3.3 V
+Tested Radiation Tolerance:              3.0 KRAD
+Mechanical Form Factor:                   PC/104
+Nonvolatile Memory:                          8 MB
+RTC Backup Time:                               1 week
+Clock Speed:                                        60 MHz&lt;/p&gt;
+&lt;h2&gt;Ground Segment&lt;/h2&gt;
+&lt;p&gt;SFUSat has developed a custom ground segment application called Houston. Huston provides the following functionality:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Live monitoring of all debug messages transmitted by the satellite&lt;/li&gt;
+&lt;li&gt;Compatibility with RF or wired connections&lt;/li&gt;
+&lt;li&gt;Command sequence creator&lt;/li&gt;
+&lt;li&gt;Load and save of command sequences&lt;/li&gt;
+&lt;li&gt;Uplink of command sequences&lt;/li&gt;
+&lt;li&gt;Validation of uplinked commands&lt;/li&gt;
+&lt;li&gt;Parsing of downloaded files and save to .csv&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Project Management&lt;/h2&gt;
+&lt;p&gt;The project was managed with google docs as the document storage solution, and GitHub issues as the primary task tracking tool. I also experimented with Trello and Asana. A spreadsheet-based task tracker was adopted in the last phase of the project when the development team ballooned to 8 people under my management.&lt;/p&gt;
+&lt;p&gt;We preferred to use the GitHub wiki for software documentation.&lt;/p&gt;
+&lt;h2&gt;Versioning&lt;/h2&gt;
+&lt;p&gt;The hardware versions are outlined below:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0.1&lt;/strong&gt; – experiments on LaunchPad&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0.2&lt;/strong&gt; – “DemoBoard” PCB built to prototype individual circuit designs for core features: latchup protection, flash memory, RTC, etc.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0.3&lt;/strong&gt; – First full revision, fully functional once reset circuit was bodged. 2-layer white PCB.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0.4&lt;/strong&gt; – Second revision, minor bug fixes from 0.3 version. 2-layer black PCB.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0.5&lt;/strong&gt; – Version used at CSDC final testing, black + ENIG 4-layer PCB. Minor bug fixes from 0.4, remove before flight programming jumper, full PC/104 connector layout.
+The software operated on a continuous release schedule.&lt;/p&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.academia.edu/11992711/On-board_data_handling_for_ambitious_nanosatellite_missions_using_automotive-grade_lockstep_microcontrollers&quot;&gt;1- On-board data handling for ambitious nanosatellite missions&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Getting Started With Deep Learning – Classifying Images From a Drone]]></title><description><![CDATA[Being as wrapped up in the tech industry as I am, I knew it would only be a matter of time until I would try my hand at some deep learning…]]></description><link>https://gatsby-casper.netlify.com/posts/deep-learning-drone-getting-started/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/deep-learning-drone-getting-started/</guid><pubDate>Fri, 06 Apr 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Being as wrapped up in the tech industry as I am, I knew it would only be a matter of time until I would try my hand at some deep learning. For me, the motivation to get stated came from two things; the realization that deep learning and ML are just another tool in the modelling toolbox, and the availability of a top-down and free course called FastAI.&lt;/p&gt;
+&lt;p&gt;As I tend to do, this article will be part tutorial (I’ll share the steps and interesting things I’ve found), and part observational in nature. Let’s start learning!&lt;/p&gt;
+&lt;h3&gt;My Interest in ML and Deep Learning&lt;/h3&gt;
+&lt;p&gt;I’m interested in applying machine learning to the following areas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;analysis of satellite and drone data (telemetry and imagery)&lt;/li&gt;
+&lt;li&gt;robotics applications, such as path planning and obstacle avoidance&lt;/li&gt;
+&lt;li&gt;stock and forex training (deep earning)&lt;/li&gt;
+&lt;li&gt;ML in embedded systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I’m not as interested in algorithm development – at least the low level stuff. To me, machine learning approaches are a tool. Combining tools together in interesting ways is great and fun, and looks like making different function calls. Digging into the guts of TensorFlow is something I’ll leave to the researchers. What’s great about this area is that the bleeding-edge research is quickly being implemented in various ML toolkits, making the state of the art approaches available to us so we can tinker with them. The pace at which this is all happening is absolutely blistering – and it’s great that us (aspiring) practitioners who want to use it to get things done have (essentially free) access to the world’s best knowledge.&lt;/p&gt;
+&lt;p&gt;Over the past little while, I’ve watched many hours of deep learning video and courses. However, none of them really helped the concepts click, until I stumbled across fast.ai. This is a relatively short course that revolves their PyTorch-based library of the same name. The explanations are clear, the code works out of the box, and the instructor mentions the tips and tricks for how to apply the techniques and have them work better. The last point is the key for me – you can get the basics anywhere, but it’s the tricks that’ll get you out of a hole. Fast.ai includes these, and I really appreciate it.&lt;/p&gt;
+&lt;h3&gt;Deep Learning Without a GPU&lt;/h3&gt;
+&lt;p&gt;Fast.ai starts off with details about a few ways to get GPU access. I decided to see how far I could get without a GPU using just my macbook pro (early 2015 with Intel Iris 6100 graphics). It turns out, that with my small test data set, training times were quite acceptable to me – a few minutes or less for 20 epochs of 100 or so 224px images. Given that for my test set, I don’t actually have any more data, this was totally fine. In the future, I’ll get everything running on my desktop which has a GTX650 and we’ll benchmark the difference.&lt;/p&gt;
+&lt;p&gt;One free way to get GPU access is through Google Collab, which can run Jupyter notebooks and has a GPU accelerator option. Details are here. However, I found it a bit tricky to deal with my own files in Collab, and there were long delays while I’m assuming I was queued for GPU access. It was much smoother to run on my local machine, at least for me. Still though, it’s free GPU access, which is pretty amazing. Thanks Google!&lt;/p&gt;
+&lt;h3&gt;Setting up FastAI&lt;/h3&gt;
+&lt;p&gt;The FastAI videos go through some installation, but I decided to go it on my own. Here are the steps I took:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Install anaconda&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;git clone https://github.com/fastai/fastai.git
+cd fastai&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;run the CPU-only install option:
+&lt;code class=&quot;language-text&quot;&gt;conda env update -f environment-cpu.yml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You can enter the environment with:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;conda activate fastai-cpu
+cd courses/dl1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the course directory, you can open up lesson 1 by launching jupyter and browsing for the lesson 1 notebook. I made a copy of it too.&lt;/p&gt;
+&lt;p&gt; &lt;code class=&quot;language-text&quot;&gt;jupyter notebook&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now you can work your way through by running the cells with shift+enter. Hopefully you’re watching the videos too. I ended up having to reinstall opencv as it wasn’t playing nice with MacOS. There’s lots of information out there about how to fix any errors that may come up, but it’ll probably be much smoother overall if you install under Ubuntu. That’s what I’ll do when I spin it up on my desktop.&lt;/p&gt;
+&lt;h3&gt;Working With Drone Images&lt;/h3&gt;
+&lt;p&gt;Initially I wasn’t quite sure about the data I wanted to work with. Then I remembered that I have a set of images taken at the Unmanned Systems Canada 2016 competition. Most of these images are of the dry grass surrounding the Southport, Manitoba airfield. However, there are some large arrow shapes and QR codes in some of the images. Our task at the competition was to geo-locate these features, find their enclosed area (for the arrows), or decode them (for the QR code).&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7e1439f0b567385c52f9eedee4787ec6/1e6f3/drone-ml-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1024px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 36.62109375%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAABE0lEQVQoz0WRWXLDMAxDfZg01r7Q8pLm/udiAcpNPjj0WNAjQC3Ssr7OTa+96y/66xDdpejWWUlLDppRbn1oCE/NyWuvUWsJmuKq0f9oZscZa+Eh6xpF36fo++h6jqoXwANgAbijnMPF5LTVgEEZZ1lr9h9QAJi1FIg4iZ1gwYUDYtaAQ8HlVhPET7jycOxVWtRjmwkanNLhF5inqCKWNAAIRe8A0w3/F8T0EDOmAELQLrOkTWCCyxQRmTsxGJxQTMgERnxzV9H2OB1+49L9gFMm8+7xSblQ3AHYICLI3Bb+izPuDeQFG3Y7ZOxuCby54+PYo7SaASs2mRDupN5D6LBY5ADxaju0R2zx3qczV/+PwxR/MfvWGnC/+jsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Left: image with ground features, Right: uninteresting image&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7e1439f0b567385c52f9eedee4787ec6/1e6f3/drone-ml-1.png&quot;
+        srcset=&quot;/static/7e1439f0b567385c52f9eedee4787ec6/28404/drone-ml-1.png 293w,
+/static/7e1439f0b567385c52f9eedee4787ec6/d7dd0/drone-ml-1.png 585w,
+/static/7e1439f0b567385c52f9eedee4787ec6/1e6f3/drone-ml-1.png 1024w&quot;
+        sizes=&quot;(max-width: 1024px) 100vw, 1024px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Left: image with ground features, Right: uninteresting image&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Since our image downlink wasn’t working during the flight, as soon as we landed the drone, we grabbed the SD card from the vision computer and rapidly did a manual screen of the images. I remember it being really difficult to see the images in the brightly-lit tent, and I definitely hid under a jacket to reduce the glare. Our task was to sort out all of the images with an arrow or QR code so we could process them further. The question is, can we instead do this with deep learning?&lt;/p&gt;
+&lt;h3&gt;Yes we Can&lt;/h3&gt;
+&lt;p&gt;Part of what’s neat about finally experimenting with something after observing it for a while is finally answering your questions. One of those was how data should be organized to feed it into a model. That brings me to the file structure, which looked like this.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/68053c944baa97dc89eabc505f9d9b2d/e0e1a/drone-ml-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 664px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 80.72289156626505%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAABdElEQVQ4y51U2Y6CQBDk/39qgcS43CReUZGIL2IEBI/IXdvDLmhYQWInTTrDUF1TXQNXliXaURQF2Hr97rfGoODYI/A9fPE8FEWFqqoIgqDZUA5FegbMshSe5+F0OsH3fSRJgjRNEcdxw/Q5+xpx7Rd5lkEUBIzH33B2u5cf9bHmHho9krEri5KYZ7hczgjDiDKk+oL7/d6pcwPY1fl6vWI6mUCWFeiahuVySU3yXsZce7GtVSNFnsPduzgcDnApt9stdiQJO00nwy5wFrfbDbIkwbIsrFZrmKaJ9dr6t68TsCZY13meYbOxYdt2BTqfz7EnxnGcvGfYNUnHcSqw2XSGxWJRHX0wQxZsoqqiwDCMyvC6bpBm2bChvNrArMHswjKKIgRk/JSsxAaU0TDYBWD1R0eOie1oNIJJbHVKgReItUZNy8+mzOzhuu6f0UMcj0difW4keMuwDc7uu0bmliQZoiiCp5+JZW2GH7mPMdO2vV7HD82Z3ysLywc4AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Folder structure&quot;
+        title=&quot;&quot;
+        src=&quot;/static/68053c944baa97dc89eabc505f9d9b2d/e0e1a/drone-ml-2.png&quot;
+        srcset=&quot;/static/68053c944baa97dc89eabc505f9d9b2d/9dd49/drone-ml-2.png 293w,
+/static/68053c944baa97dc89eabc505f9d9b2d/45184/drone-ml-2.png 585w,
+/static/68053c944baa97dc89eabc505f9d9b2d/e0e1a/drone-ml-2.png 664w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;File structure&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Data folder structure&lt;/h3&gt;
+&lt;p&gt;So it’s straightforward – just a training and validation set, and the two classes of images are split manually into each directory. I ended up with 50 examples of each class, so 25 for each class in the training and validation sets. This is a very small amount of data by DL standards, but it’s workable when we’re just using a CPU to train the model.&lt;/p&gt;
+&lt;p&gt;To start, I kept the same setup as the lesson. The model is a pre-trained Resnet34, said to be useful for image classification purposes. This is a convolutional neural network, meaning it performs convolutions to extract features. Basically this means it will “wipe” a matrix (kernel) across an image, and perform a matrix operation at each step of the wipe. This has the effect of consolidating data in a specific area, and it can, for example, effectively outline edges of shapes in an image. That’s just one part of this, and as I said, I’m not a low level algorithm guy – the details are better found elsewhere. Back to the results for us!&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;arch &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; resnet34
+sz &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;224&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# images will be resized to this size&lt;/span&gt;
+data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; ImageClassifierData&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;from_paths&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;PATH&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; tfms&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;tfms_from_model&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;arch&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; sz&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+learn &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; ConvLearner&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pretrained&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;arch&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; precompute&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+learn&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fit&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0.01&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/259de9be2147e20f6a596ea9d7a12e98/1e6f3/drone-ml-3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1024px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 58.984375%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsSAAALEgHS3X78AAABxklEQVQoz4VT626iQBT2zTfZpN1t32SzT9HGgIkiqy1UCiLKTSzDiCveUL/OORv85dpJDjmE4ZvvcqYFtc7nM5IwwUv0ivvOA+50VdpPrnvV/9Af8a39Hb/s35inGbIsQxiGCKZTzGYzxHGCJEmQpilaVVVhuVxit9uh2lbIygxJkSL/m2Ox+uB+LucQlUBWZBC5wGazQV3X2O/3XIfDgYv61mq1YnRa9aGG7/kYmgOUsoQUEs6bgziMUe9ruI6L0WjEgP9bLXoQy+PxyCc4jgNd15HnOYQQMAwDvu8zSBRFvK+x6Vox4Hq95o0kg7yxbRvEnKygPgwjlsS+BQG22+0F9CpDKeXFkzcFoGkaiqLAYrFghiSTQGzbQqfTUQeVtwEbhg0LAiB2ZVnCUT0lSd+CYILh8IUtuglI8k6nEzMcj8fo9/uKoWSWf0zzAmhZFoyewftvAhIbMp1+8jwP3W5XhSIY0Oj14LoeH2ZZrzD7Jiv6UnIjmyS/q6TL8l8oruuqwY0ZkAKh9y8BKRSp2BBDCuX56YllUSi6rnHSNPiDwQDtdptH6iYgJUhFPtK1mkwmbAExmarrRVeKpoC+kZ/NYF8D/ATrjomkqmlqdQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;First run of the model&quot;
+        title=&quot;&quot;
+        src=&quot;/static/259de9be2147e20f6a596ea9d7a12e98/1e6f3/drone-ml-3.png&quot;
+        srcset=&quot;/static/259de9be2147e20f6a596ea9d7a12e98/28404/drone-ml-3.png 293w,
+/static/259de9be2147e20f6a596ea9d7a12e98/d7dd0/drone-ml-3.png 585w,
+/static/259de9be2147e20f6a596ea9d7a12e98/1e6f3/drone-ml-3.png 1024w&quot;
+        sizes=&quot;(max-width: 1024px) 100vw, 1024px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;First run of the model&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This was a pre-trained model, so we just updated the last layers in the model to recognize our particular problem. Each iteration took about 1 second on my CPU, with images of size 224 px. We ended up at 94.2% accuracy.&lt;/p&gt;
+&lt;p&gt;A classifier will create a prediction for the class of an image. Like weather, 50% means we don’t have a preference either way as to which class it is. For me, 1 (100%) is target and 0 is bare ground.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ad1b23fe8d90aadbb2fad938e246116f/1e6f3/drone-ml-4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1024px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 23.4375%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsSAAALEgHS3X78AAABi0lEQVQY0x2OzUuaAQDGvXcoaEHQh5lzflS+e62sVXQYBEHQDoMgYoP+g0W0jTLL8tIkWOUkoh02zIqg7bRRUbqXnGWnPrT19pYYFoadLMzbL9fpx3N4fs+jisXOOTjYRzk95SaVIpPJkEgkiEQiHEejXF1dks1mub5OIssnHB0dchGPc3d3y/19hmQyiaIoj0yn06iMugqa6kXEaj29b3sI+LewCNXUi2bEGhPWOpG9cJjOjvZcNtLSWEeNUceiz0sg4Mc5Pob7i4eJTy58Cz5UT9UltDZYEAxa3nR34d/aRKgy0FgrUGs2IeSk4d0d2tte8rxKT7PVgq6iFO/3bwSDQaampvEtr+D2zLL64yeqooI8zHot6uJCXr/qYGN9DX1lOQatmmeaMrSa8lxxm5YXVjSlxZh0Gp7k5/F1fg5Jkphxe1hYWsE1+Rnv/4fv+9/hdNgZ+jjA3KyHf8dRxkZsOOxDjxy12zg7U5h0TWAb/IBjZJiB/j7+5kZkWUb6IxHaCfPr9xqhUIgHBcIBkBZGDrcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;A selection of images and their class prediction (100 is target, 0 is ground).&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ad1b23fe8d90aadbb2fad938e246116f/1e6f3/drone-ml-4.png&quot;
+        srcset=&quot;/static/ad1b23fe8d90aadbb2fad938e246116f/28404/drone-ml-4.png 293w,
+/static/ad1b23fe8d90aadbb2fad938e246116f/d7dd0/drone-ml-4.png 585w,
+/static/ad1b23fe8d90aadbb2fad938e246116f/1e6f3/drone-ml-4.png 1024w&quot;
+        sizes=&quot;(max-width: 1024px) 100vw, 1024px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;A selection of images and their class prediction (100 is target, 0 is ground).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;From the images above you can see that larger, more obvious features get picked up as a stronger target prediction (images 2 and 4). The first image only has faint arrows in it, and therefore a less confident (closer to 50%) prediction that it’s a target. Pretty neat!&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/0a68c8297e55bf5578f1d7bf95d3fdfa/1e6f3/drone-ml-5.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1024px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 23.925781249999996%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsSAAALEgHS3X78AAABVElEQVQY0x2QSU/CYBiE+eOauNQSrUWrLEUjtYCtLEVxw4gLeCaYaEJlUcFewAiEBEjg8Pjh6U1mJrO8vm63S7PZZHHH4zGz2YzBYEC7/YXneYxGI+bzOcPhkE6nI/A2/X7/XzeZTPjp9QQusN9fptMpPml9DU3bY2lpmaOjGG+vr4SDe5imgSxvoChb1N9dlE2ZQEAlHAkhb0i4rstZzsEwYsQMA0mSKBaL+CK6jpk8YTuwi2WdUqvVhJnJaTpNWI9ycHBIo15H3VZIJuNYtoWuh/n8+MDJZoknEqQyGXShK5efF4ZRDDPBjraPbaeoVCrIfj+hSAQtGBKNdFwRsrqywuaWwq5Yo6oqrVYL8zhOYEcjKswW3P39A76bmwKPT2Xy+QuRUKbRaIqmNmfnebKOw+Xl1f/vbMvCcXJcXxfIiPbet0epVOJC8IXbO1LpDNXqC3/qtTnC7q4YpQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Most confident target predictions&quot;
+        title=&quot;&quot;
+        src=&quot;/static/0a68c8297e55bf5578f1d7bf95d3fdfa/1e6f3/drone-ml-5.png&quot;
+        srcset=&quot;/static/0a68c8297e55bf5578f1d7bf95d3fdfa/28404/drone-ml-5.png 293w,
+/static/0a68c8297e55bf5578f1d7bf95d3fdfa/d7dd0/drone-ml-5.png 585w,
+/static/0a68c8297e55bf5578f1d7bf95d3fdfa/1e6f3/drone-ml-5.png 1024w&quot;
+        sizes=&quot;(max-width: 1024px) 100vw, 1024px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Most confident target predictions.&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;This was an interesting experiment, and it’s encouraging to see how straightforward it is to get a model running, and how good the results were. Looking at the mis-classified data, there appear to only be one or two images (I tweaked my image sets a bit since taking the screenshots). The misses are shadowy pieces of arrows, and are even difficult for me to classify. Given the small amount of data, I’m impressed.&lt;/p&gt;
+&lt;p&gt;I did not find that data augmentation helped with these images. It makes sense, as the arrows appear in all different orientations in the data anyway, so the net is exposed to a variety of versions of the same thing. Tweaking contrast and brightness would likely help for these images, as they’re quite dull and flat even for a human to process.&lt;/p&gt;
+&lt;p&gt;Currently I plan to write some more friendly wrapper functions for this library. Ones that don’t error out when there are no incorrectly classified images, for example. Beyond that, I plan to experiment with the course content a bit more, get more of a feel for deep learning, and then tackle a couple of projects I’ve had in mind.&lt;/p&gt;
+&lt;p&gt;If you’re interested in giving deep learning a go, don’t hesitate. There are many resources out there, and it’s easy to get going on small data sets with a mainstream computing setup.&lt;/p&gt;</content:encoded></item></channel></rss>
