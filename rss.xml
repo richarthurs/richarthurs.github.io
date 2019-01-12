@@ -1,4 +1,632 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Thu, 03 Jan 2019 00:28:03 GMT</lastBuildDate><item><title><![CDATA[Goodbye Wordpress, Hello Gatsby]]></title><description><![CDATA[I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant…]]></description><link>https://gatsby-casper.netlify.com/posts/byebye-wordpress/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/byebye-wordpress/</guid><pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant software development
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Sat, 12 Jan 2019 19:13:19 GMT</lastBuildDate><item><title><![CDATA[Customizing AXI IP]]></title><description><![CDATA[Customizing IP RTL Now that we have an IP block that can be accessed from userspace, let’s customize it with a register that the user can…]]></description><link>https://gatsby-casper.netlify.com/posts/cora-customizing-axi-ip/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/cora-customizing-axi-ip/</guid><pubDate>Sun, 06 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;Customizing IP RTL&lt;/h3&gt;
+&lt;p&gt;Now that we have an IP block that can be accessed from userspace, let’s customize it with a register that the user can read to determine the state of the LEDs. Right now, the example only has a writable register. These changes will allow the user to read data from the block using a memory-mapped register. &lt;/p&gt;
+&lt;p&gt;To do this, we will edit the IP block and assign some of the counter bits to an axi-accessable register. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Right click on the block and choose &lt;code class=&quot;language-text&quot;&gt;edit in IP packager&lt;/code&gt;. This opens up a new temporary Vivado project that allows you to change the RTL, save the changes, and have them reflected in the main project that uses the IP block.
+&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/fb2b0b69f655fd8687f368ca6de5b6f4/be9be/2-edit-ip.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.927223719676554%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsSAAALEgHS3X78AAAB1UlEQVQoz42SW2+cMBCF+f+/aps+RepTVSXabkr2xh1swHdsOB2bpkqqVqqlj8EjM3N8huzTw2ccDgc8Pn7B1+cc345XHPMSL5cGP67tB/6WO51rPL8U+J7XeL33yMqiRNvUEEKgaRn4KCCVgdQWyjhMQoNPEuOsErM0FHXKK+0S2iwwdkm5rO4lGmbgPDCPHGIW+Lg2bOuK/13ZOAl0PYf3K7YtfkxssQz2SA+pFDo+J3qCjRFBSiV82Pa22x4zMc0wWmNd94IxvpEaEEppXJsR53pEfq3wdLogp/dytJDlCW4oYGMNOpuJeYaSCjFWZQXOOGZ6j0gpwWhvrIMknzh5NJGHl6JH0QkMs8Pc3MG7FoEEeO+RMcZSEWtt8i/G90rjIUnGV6TmRn4fadI9j1dd4RYP7VZwPpFVASEsyDjn6JoOy7L80+iVfI1e2WVNhf5cVTuh6uhGljw01kBrsysU5KfRcM4mrDWJZXFYg/+NJyXe7wTa9x1LKgM1zt66KCXofzyjay8YugtYf0VT55jGGtYM7+h/McDZCCfLBjpH195WZCGE5JmQNMmixb3ieL0NZDzDueAomgl1N1Ge4VYOKGqOkiYe91XDSYjCMAyI1mma9E+PCEztl8q1GwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Edit IP&quot;
+        title=&quot;&quot;
+        src=&quot;/static/fb2b0b69f655fd8687f368ca6de5b6f4/a66a3/2-edit-ip.png&quot;
+        srcset=&quot;/static/fb2b0b69f655fd8687f368ca6de5b6f4/65e34/2-edit-ip.png 293w,
+/static/fb2b0b69f655fd8687f368ca6de5b6f4/8d594/2-edit-ip.png 585w,
+/static/fb2b0b69f655fd8687f368ca6de5b6f4/a66a3/2-edit-ip.png 1170w,
+/static/fb2b0b69f655fd8687f368ca6de5b6f4/59785/2-edit-ip.png 1755w,
+/static/fb2b0b69f655fd8687f368ca6de5b6f4/be9be/2-edit-ip.png 1855w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: Edit the IP&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the lines to assign the counter to a user-accessible register&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;// TODO: insert code&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Save and close the Vivado window&lt;/li&gt;
+&lt;li&gt;Vivado will alert you that something is out of date and needs to be updated, choose &lt;code class=&quot;language-text&quot;&gt;Refresh IP status&lt;/code&gt; and then &lt;code class=&quot;language-text&quot;&gt;Update Selected&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8a2aa95d96a197cd8e110569cb61e225/be9be/2-upgrade-selected.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.927223719676554%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsSAAALEgHS3X78AAAB2UlEQVQoz41S2YrcMBD0/39VhryEPAQWQsJm7lnsGUse3bIsX5VuTYbNkpcIipLkdlNVrWqz+YzN5hO+fP2Gl58HfH+94Nehwe7cYn8RBbuzwJbO21Nb9u+g855qdzX2xxbHyx1VUzcQ7Q3ee7RCQRuPEBNCP6BPGdpF3LqATkdIHaBswt30BTYMMCETE+JIdxEVF7cqIU+AMxrBB/y9lmXFOM3431UZ6yE7jWlesK4r5nkuzCgNiYxjdQ5COVLqcGeQE+NCqf/Q0FmLISUkQtd1sHRm+4wYI4x1peGbMDjdDA5vV/zYnrG/GrRmwFVqSNsjpgHTOKLiH9nmMAwY6WKapsLP/SPPjJBGaM+5JZzrDrX0UG6AVB6C8jU+PhoqpaDu6oN0dvvHcVkmjLiajEsX8XqWZUDTvCLnmfJdC/qBBSyotNboRAdHKhUNRWkF6wydLU2c98TOozOcoaVmllSGf8H/U1wVZzeQf01ZNc0JxtxwJa7rY4GUDUXSESRCkFSr4Z2grFs4Yt4z830iVE9bid6NaCVSn6g40kBG0OBJaYIQ1CTO0KTQ0atgGFKc+J3eDSQ5fEZULcvCqZUM+v4xbR5QzoyMgZjv+JsnW4/vudS8M6HUZvwG1ipLuwrIcvsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Edit IP&quot;
+        title=&quot;&quot;
+        src=&quot;/static/8a2aa95d96a197cd8e110569cb61e225/a66a3/2-upgrade-selected.png&quot;
+        srcset=&quot;/static/8a2aa95d96a197cd8e110569cb61e225/65e34/2-upgrade-selected.png 293w,
+/static/8a2aa95d96a197cd8e110569cb61e225/8d594/2-upgrade-selected.png 585w,
+/static/8a2aa95d96a197cd8e110569cb61e225/a66a3/2-upgrade-selected.png 1170w,
+/static/8a2aa95d96a197cd8e110569cb61e225/59785/2-upgrade-selected.png 1755w,
+/static/8a2aa95d96a197cd8e110569cb61e225/be9be/2-upgrade-selected.png 1855w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: Upgrade the selected IP&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Vivado will alert you to generate the output products again
+&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8a3cd35790c9b6eba4b3736636c0752d/72fb1/2-generate-output.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsSAAALEgHS3X78AAAB00lEQVQoz01Ry4oUMRStH/YzdCc6uBhcyCjobNqFiJt240YUZEQQbGi7nX7NdKXyqkpu3lWp8lYXNHM5nKqc5CYnJ8Xni8vNZkcrwqRm0mrbGp9dHGIebBxcGnwaWbtO2c6GHkVzYgi5+PL0ZcmNcV0InlPWte0wDCmG379uft78QHz/9vXvcjGM1T9En3Nx9fx9XUOtXc79VLjKGLPbbgkh5bGklGx3t40yCpwG27bdMO3U98WH6ytvfNsmrbVSCtustUII/HfWTetIxf4sb1d3olKRCiW0dyGmlIp3zy5Bg3MuhBBPhWrTNFLWACaf/DDO17vyQBTXkUlDhFXGpxSL+WxeS4mHTIanwr0YZYILAEgxbg/HA6lzHlLKbdd33RBii/6L6ydvhJC1rNVoWypdWwd4T0YpitZobKaUoh6i9cGcARaK2eO3aDWERCrC2VHwsjzuN9tVVdFG1os1uSs5Ke+bhgJw0BxAIMegwKhi/vrT9AgYlmoa72OjMI6uImS9Wi2W+9W/7WG/x4NUMwalFdCKY9ap64uPFzNs7nIG48egrTuFN3rBr/dBaTCj6HHKIjs/Dr3XxhevHr1wweHDUFYTKs8oKzHxfcke6mdUTP4H1MRlM23PfyEAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Generate output products&quot;
+        title=&quot;&quot;
+        src=&quot;/static/8a3cd35790c9b6eba4b3736636c0752d/a66a3/2-generate-output.png&quot;
+        srcset=&quot;/static/8a3cd35790c9b6eba4b3736636c0752d/65e34/2-generate-output.png 293w,
+/static/8a3cd35790c9b6eba4b3736636c0752d/8d594/2-generate-output.png 585w,
+/static/8a3cd35790c9b6eba4b3736636c0752d/a66a3/2-generate-output.png 1170w,
+/static/8a3cd35790c9b6eba4b3736636c0752d/59785/2-generate-output.png 1755w,
+/static/8a3cd35790c9b6eba4b3736636c0752d/72fb1/2-generate-output.png 1920w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: Generate the output products&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Or, run synthesis and implementation again and generate bitstream if you hit cancel before. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Customizing Application Software&lt;/h3&gt;
+&lt;p&gt;Now that the RTL is coded and the bitstream has been generated, it’s time to head back into SDK and update the application software so that we can use the new hardware capabilities. &lt;/p&gt;
+&lt;p&gt;// talk about the updates to the application&lt;/p&gt;
+&lt;p&gt;// talk about updates to the kernel driver&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I updated the kernel driver with the new read command &lt;/li&gt;
+&lt;li&gt;Rebuild the petalinux image with &lt;code class=&quot;language-text&quot;&gt;petalinux-build&lt;/code&gt;. Unlike the first time around, the build this time only takes around 4 minutes since the changes are minor. &lt;/li&gt;
+&lt;li&gt;Move the petalinux files over to the SD card. &lt;/li&gt;
+&lt;li&gt;Initialize the kernel module as per the tutorial. I later moved these commands into a shell script and I placed it on the &lt;code class=&quot;language-text&quot;&gt;bulk&lt;/code&gt; partition of my SD card so it sticks around between resets.&lt;/li&gt;
+&lt;li&gt;Upon running the app for the first time, nothing crashed. However, I was not seeing the results I expected (this turned out to be an RTL bug, which I found later). &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since things weren’t working at this point, I tried several things during the debug process, which are worth mentioning. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I used the &lt;code class=&quot;language-text&quot;&gt;devmem&lt;/code&gt; command to look at the memory directly, instead of interacting through the application. &lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;devmem 0x43C00000&lt;/code&gt; returns the value of the user-writable bit that starts and stops the blinking, since it is mapped to user register 0 in the HDL. &lt;/p&gt;
+&lt;p&gt;When the RTL bug was fixed, &lt;code class=&quot;language-text&quot;&gt;devmem 0x43C00008&lt;/code&gt; returns the counter value. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;One of the issues was I neglected to export the new hardware from Vivado to SDK, so I was flashing the FPGA with old code that didn’t update an AXI-accessable register with the counter value. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also ended up adapting the C file &lt;a href=&quot;http://svenand.blogdrives.com/files/gpio-dev-mem-test.c&quot;&gt;here&lt;/a&gt;, which I found from &lt;a href=&quot;http://fpga.org/2013/05/28/how-to-design-and-access-a-memory-mapped-device-part-two/&quot;&gt;this tutorial&lt;/a&gt;. I wrote this on the board over an SSH connection and compiled it with &lt;code class=&quot;language-text&quot;&gt;gcc filename.c&lt;/code&gt;. As before, I did this on the partition of my SD card which I mounted to a directory (&lt;code class=&quot;language-text&quot;&gt;sdcard&lt;/code&gt;) with the command: &lt;code class=&quot;language-text&quot;&gt;mount /dev/mmcblk0p2 ./sdcard&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Here is the final test C file. I played around with this and ended up solving the RTL issue. This exposed the fact that my Linux device driver had a bug since it was not able to read the register, but the test file could. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/mman.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+
+int main(void){
+unsigned addr, offset;
+
+int reg_addr = 0x43c00000;
+
+int value;
+int fd;
+
+void *ptr;
+unsigned pg_sz = sysconf(_SC_PAGESIZE);
+
+printf(&amp;quot;Access through /dev/mem - pg_sz: %x\n&amp;quot;, pg_sz);
+
+// Open the mem file
+fd = open(&amp;quot;/dev/mem&amp;quot;, O_RDWR);
+if(fd &amp;lt; 1){
+        perror(&amp;quot;can&amp;#39;t open&amp;quot;);
+        return -1;
+}
+
+// mmap the device into memory
+addr = (reg_addr &amp;amp; (~(pg_sz - 1)));
+offset = (reg_addr - addr);
+ptr = mmap(NULL, pg_sz, PROT_READ|PROT_WRITE, MAP_SHARED, fd, addr);
+
+// Read values from device registers:
+for(int i = 0; i &amp;lt; 4; i +=1){
+        value = *((unsigned *)(ptr + offset + i*4));
+        printf(&amp;quot;Value from reg%d: %x\n&amp;quot;,i, value);
+}
+
+// Write to a reg and read it back
+*((unsigned *)(ptr + offset + 12)) = 0xdeadbeef;
+value = *((unsigned *) (ptr + offset + 12));
+printf(&amp;quot;Reg3 after write: %x\n&amp;quot;, value);
+
+return 0;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;SD Rootfs&lt;/h3&gt;
+&lt;p&gt;So the simple test app works, the Linux driver has a bug, and by now I’m fairly annoyed with how many commands I need to enter in order to get things running. It’s time to configure the SD card rootfs, which will place the filesystem onto the SD card as opposed to it being in RAM. Therefore, it will be nonvolatile and I can copy things over to it and restart whenever I like. It’s also time to write more shell scripts. &lt;/p&gt;
+&lt;p&gt;Following the instructions in the &lt;a href=&quot;https://github.com/Digilent/Petalinux-Cora-Z7-10&quot;&gt;petalinux repo for Cora&lt;/a&gt;, I made a couple of scripts to set up the SD card for me once I had the SD rootfs configured in petalinux. &lt;/p&gt;
+&lt;p&gt;// todo: insert scripts or make github repo&lt;/p&gt;
+&lt;p&gt;Now it’s simply a matter of &lt;code class=&quot;language-text&quot;&gt;petalinux-build&lt;/code&gt;, then running my two scripts in order to set up a new SD card. Nice! &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Petalinux Bringup on Cora Z7-10 Zynq Board]]></title><description><![CDATA[This post contains notes that I generated while bringing up Petalinux on my Cora Z7-10 Zynq board. First I get Petalinux working and do a…]]></description><link>https://gatsby-casper.netlify.com/posts/cora-linux-getting-started/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/cora-linux-getting-started/</guid><pubDate>Sat, 05 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This post contains notes that I generated while bringing up Petalinux on my Cora Z7-10 Zynq board. First I get Petalinux working and do a couple of hello world examples. It can serve as a companion to the following resources: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.hackster.io/100311/estimating-pi-with-a-cora-z7-running-linux-03995b&quot;&gt;Hackster.io article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Digilent/Petalinux-Cora-Z7-10&quot;&gt;github repo for Cora Z7-10 Petalinux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the second section, Petalinux is built from scratch, and I implement custom AXI-compliant IP on the FPGA fabric. A Xilinx tutorial is followed (with extra notes) to write a Linux device driver and an app to leverage the driver. The result? AXI-controlled blinky LEDs from Linux. &lt;/p&gt;
+&lt;p&gt;Topics covered:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SSH connections to the board&lt;/li&gt;
+&lt;li&gt;Adapting Xilinx tutorials for different target dev boards&lt;/li&gt;
+&lt;li&gt;Cross-compiling apps on the desktop and copying them to the board&lt;/li&gt;
+&lt;li&gt;Petalinux build and installation notes &lt;/li&gt;
+&lt;li&gt;Notes where existing tutorials weren’t correct (for my particular setup, anyway)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As usual, this article is not a standalone tutorial. It’s a supplement to the linked resources.&lt;/p&gt;
+&lt;p&gt;Note: some links are to Cora Z7-10 specific resources. If you have a different board, be sure to poke around and see if a similar resource exists for your platform.&lt;/p&gt;
+&lt;h2&gt;Section 1 - Petalinux Bringup&lt;/h2&gt;
+&lt;h3&gt;Petalinux Install&lt;/h3&gt;
+&lt;p&gt;I started by following the readme instructions in the repo linked below. I was not able to execute the petalinux installer from my root account, I had to make a new user, chmod +w the installation directory from the new user, and then run the installation script.  &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/Digilent/Petalinux-Cora-Z7-10&quot;&gt;github repo for Cora Z7-10&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I also added the source petalinux script call to the bottom of my .cshrc file so it will be sourced every time I make a new terminal. You could also make it an alias, since the command takes a couple of seconds to run, which is annoying when you want to bring up a new terminal quickly.  &lt;/p&gt;
+&lt;h3&gt;SD Card Partitioning&lt;/h3&gt;
+&lt;p&gt;I partitioned my SD card with the following partitions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Name: fpga, format: FAT, size: 1 GB&lt;/li&gt;
+&lt;li&gt;Name: bulk, format: EXT4, size: 7 GB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Go App&lt;/h3&gt;
+&lt;p&gt;These notes accompany the &lt;a href=&quot;https://www.hackster.io/100311/estimating-pi-with-a-cora-z7-running-linux-03995b&quot;&gt;Hackster.io article&lt;/a&gt;. I thought it would be interesting to write the first example in go, so I tried it out. Once I understood the flow, I went back to writing things in C. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make a new folder with &lt;code class=&quot;language-text&quot;&gt;main.go&lt;/code&gt; inside it. Note that the final executable will have the same name as this directory. &lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;cd&lt;/code&gt; into the directory you placed &lt;code class=&quot;language-text&quot;&gt;main.go&lt;/code&gt; in. &lt;/li&gt;
+&lt;li&gt;Run this command to compile: &lt;code class=&quot;language-text&quot;&gt;GOARCH=arm go build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;An executable will be generated with the name of the current directory. &lt;/li&gt;
+&lt;li&gt;Copy it into the “bulk” partition on the SD card. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Petalinux Bringup&lt;/h3&gt;
+&lt;p&gt;I used a pre-built Petalinux image from Digilent. As I learned later, this was a good call. Building Petalinux takes about an hour for me, so using the pre-compiled package made the process much quicker for an initial bringup. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Download the &lt;a href=&quot;https://github.com/Digilent/Petalinux-Cora-Z7-10/releases/&quot;&gt;board support package from github&lt;/a&gt;, then place it in a directory called bsp somewhere. &lt;/li&gt;
+&lt;li&gt;Make a new directory to contain the petalinux project and cd into it. &lt;/li&gt;
+&lt;li&gt;Run the following command to generate the project: &lt;code class=&quot;language-text&quot;&gt;petalinux-create -t project -s &amp;lt;path to .bsp file&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;As per the instructions, I copied the boot files onto the first partition of my microSD card and made the MAC address file. The MAC address on the board sticker needs a colon between every set of 2 characters in the file.  &lt;/li&gt;
+&lt;li&gt;Plug in the SD card to the Cora, short jumper JP2.&lt;/li&gt;
+&lt;li&gt;Connected a terminal to /dev/ttyUSB1 at 115200 baud, 8-N-1. &lt;/li&gt;
+&lt;li&gt;Press SRST. I was soon greeted with a &lt;code class=&quot;language-text&quot;&gt;Zynq:&lt;/code&gt; prompt, which has several low-level commands that you can see by entering &lt;code class=&quot;language-text&quot;&gt;help&lt;/code&gt;. It was proving difficult to navigate and enter commands in this mode. I was getting filesystem configuration errors. So I cycled power and SRST. I was greeted with a &lt;code class=&quot;language-text&quot;&gt;root@Cora-Z7-10:&lt;/code&gt; prompt. Great, it’s working! In this mode, commands like &lt;code class=&quot;language-text&quot;&gt;ls&lt;/code&gt; work without error. &lt;/li&gt;
+&lt;li&gt;The bulk of my filesystem is on a 2nd partition of the SD card, which is also where I placed the demo go app executable. &lt;/li&gt;
+&lt;li&gt;Enter the following commands to mount to the partition:
+&lt;code class=&quot;language-text&quot;&gt;mkdir SDFS&lt;/code&gt;
+&lt;code class=&quot;language-text&quot;&gt;mount /dev/mmcblk0p2 ./SDFS&lt;/code&gt;&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;cd SDFS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Now you can run the go app executable as usual: &lt;code class=&quot;language-text&quot;&gt;./test-app&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;There was an issue with the demo app where it was set to run a &lt;em&gt;huge&lt;/em&gt; number of iterations, so the app appears to do nothing after the initial print. Whoops. Don’t believe everything you see on the internet. However, the print worked, so at least we know the app worked. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;C Hello World&lt;/h3&gt;
+&lt;p&gt;GCC is installed under petalinux, so may as well make an app in C and check that it works too. &lt;/p&gt;
+&lt;p&gt;Still in the SDFS directory, I wrote a hello world file in c:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;// hello.c
+#include &amp;lt;stdio.h&amp;gt;
+
+int main(){
+    printf(&amp;quot;Hello, world!\n&amp;quot;);
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that you’ll need to use vim to write the code since the only interface is a command prompt over a UART. I discuss writing apps on the PC and transferring them over a couple sections down in this article. &lt;/p&gt;
+&lt;p&gt;Compile it with: &lt;code class=&quot;language-text&quot;&gt;gcc hello.c&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Run it with: &lt;code class=&quot;language-text&quot;&gt;./a.out&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;SSH&lt;/h3&gt;
+&lt;p&gt;Let’s SSH into the board so that files can be edited and compiled on the desktop, and then executables copied over over Ethernet. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Plug the board into your router with an Ethernet cable. &lt;/li&gt;
+&lt;li&gt;You should see a “link up” message soonafter&lt;/li&gt;
+&lt;li&gt;On the terminal connected over the UART, run &lt;code class=&quot;language-text&quot;&gt;ifconfig&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The first &lt;code class=&quot;language-text&quot;&gt;inet addr&lt;/code&gt; is the ip address of the board, 192.168.1.69 for me. I will use this address throughout this article. If you’re following along, always replace it with the IP address your board is given. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1b4f7e4c7293d172ee38c958bb7df956/fa7b5/ifconfig.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 830px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 60.48192771084337%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAIAAADtbgqsAAAACXBIWXMAAAsSAAALEgHS3X78AAABSElEQVQoz31Si0oDMRDM5XWXd67xM6zQq6BIrbalgv//Q85uhINSHcLebHLJ7E4ivg/Px+Pb9fJx+jx8XU+X8/F8ekd8fVmW3eN+edov29+x2y7rwNJWaDsOYgCMseM4TtPkvNdaI0WOSMQSV1IJwrBGJSWiMSaEkGL0DHDnXIwhxgiCFHOYzynxqk8pQUYoRecprekn71nZdfieMkFRlLoJRZEuQ3Sgrlrnh9ZqraWUea4Zn1paaxABKbWC1HkmwRsYo0OIKJsr9BHlBR8iuDPcNJShOY5EerErYBD1h73cWz+iR7aNoBkg6+bOpJQ4nYftUmgVS1JJMYg/Ibvb1lJLpZKfgYAuu/k4S/wPXGfOuW02ZA/5U2BBa5tOUopola/b3ttsDCsXVg25ZIo5TwzwfoUgt26xYdrx8+iPjB+a6w4rxt16fwClCx2oSIjQRAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;ifconfig output&quot;
+        title=&quot;&quot;
+        src=&quot;/static/1b4f7e4c7293d172ee38c958bb7df956/fa7b5/ifconfig.png&quot;
+        srcset=&quot;/static/1b4f7e4c7293d172ee38c958bb7df956/60c5b/ifconfig.png 293w,
+/static/1b4f7e4c7293d172ee38c958bb7df956/7c836/ifconfig.png 585w,
+/static/1b4f7e4c7293d172ee38c958bb7df956/fa7b5/ifconfig.png 830w&quot;
+        sizes=&quot;(max-width: 830px) 100vw, 830px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: output from &lt;code class=&quot;language-text&quot;&gt;ifconfig&lt;/code&gt; command&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On the PC in a new terminal, SSH into the board using the following command: &lt;code class=&quot;language-text&quot;&gt;ssh root@192.168.1.69&lt;/code&gt; (replacing with the IP address you just determined).&lt;/li&gt;
+&lt;li&gt;You will be prompted for a password, it was &lt;code class=&quot;language-text&quot;&gt;root&lt;/code&gt; for me. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By now, you should see a command prompt appear for the board. SSH success! Use the &lt;code class=&quot;language-text&quot;&gt;logout&lt;/code&gt; command to close the SSH connection when you’re done.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;SSH and Cross-compile Flow&lt;/h3&gt;
+&lt;p&gt;Now let’s test out a more reasonable development flow where we write an app on the PC, cross-compile it there, then copy the executable to the device over ssh. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Make a new directory on your PC called &lt;code class=&quot;language-text&quot;&gt;zynq-apps&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Inside, make an app project directory &lt;code class=&quot;language-text&quot;&gt;hello-world&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Inside the &lt;code class=&quot;language-text&quot;&gt;hello-world&lt;/code&gt; directory, add the following makefile:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;make&quot;&gt;&lt;pre class=&quot;language-make&quot;&gt;&lt;code class=&quot;language-make&quot;&gt;# Cross compiler prefix: https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842547/Install+Xilinx+Tools#InstallXilinxTools-XilinxVivadoandPetaLinuxTools 
+# many existing tutorials are not updated for Vivado
+
+CC = arm-linux-gnueabihf-gcc
+CFLAGS = -lm
+
+all : hello-world
+
+hello-world : hello-world.o
+    ${CC} ${CFLAGS} $^ -o $@
+
+clean :
+    rm -rfv *.o
+    rm -rf hello-world
+
+uplink:
+    # this target will upload the executable to the board. Change to an IP address assigned to your board. 
+    scp hello-world root@192.168.1.69:
+    
+
+.PHONY : clean&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;Add the hello-world.c code from above, or add something more complex. &lt;/li&gt;
+&lt;li&gt;Make the app with &lt;code class=&quot;language-text&quot;&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Upload the app to the board using the &lt;code class=&quot;language-text&quot;&gt;uplink&lt;/code&gt; target with this command: &lt;code class=&quot;language-text&quot;&gt;make uplink&lt;/code&gt;. This will use &lt;code class=&quot;language-text&quot;&gt;scp&lt;/code&gt; to copy the executable over to the board. You will need to enter the password &lt;code class=&quot;language-text&quot;&gt;root&lt;/code&gt; when you run this command. &lt;/li&gt;
+&lt;li&gt;SSH into the board again: &lt;code class=&quot;language-text&quot;&gt;ssh root@192.168.1.69&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The hello-world app was copied into the root directory, so it can be executed with the following command: &lt;code class=&quot;language-text&quot;&gt;./hello-world&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Section 2: Connecting the ARM Cores and FPGA&lt;/h2&gt;
+&lt;p&gt;The best tutorial I found for connecting the ARM cores and FPGA is &lt;a href=&quot;https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_2/ug1165-zynq-embedded-design-tutorial.pdf&quot;&gt;this one&lt;/a&gt; from Xilinx. In this section, I include some notes for section 7 of the linked document, as I had to modify the process slightly to work with the Cora board. &lt;/p&gt;
+&lt;p&gt;The tutorial walks you through building an AXI-controlled IP block, adding a device driver to the petalinux build, and writing and running an application that uses the petalinux device driver. &lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8ae1fb7bfb6f1258af7261de8063b118/5cf5b/block-diagram.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 42.72727272727273%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAIAAAC9o5sfAAAACXBIWXMAAAsSAAALEgHS3X78AAABLElEQVQoz41Q127DMAz0/39bgQAZTRo5w7bioeEhUVu2K6OP6UMOBEEceMTxMuOCVIb24yBAu2B98BsiKNUPo9bGh7gsy/ofsiMqUEWa0eaYHXJc1kRIfUB1SSQRjspoXViWedt9O5GhokGYlVTuUXW6vS7oefq5777v96YnMlRMsVEr4/mk+ARCe22cUtpaG2PMQohSOwF2Aps8xnk+nPPjtbwUXScChTlp0LPe5zgdKpkifAQAY8wmdnGdwLBB9FPiPGiPHnVDhqrti5q/yEDZYKyfwI3CpB7ibH3KIWy207fNZAsiKq4Rpl8XvDvXr3bsmEzVUtEQkQbC4a8aKm9lzTlPKWaYa8xN0Qncm/Oz3V8rPsj1M2RhXsEEMFGozbPzcf0Y2Tu1fCz+BUvyAwPI2PmWAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Block Diagram&quot;
+        title=&quot;&quot;
+        src=&quot;/static/8ae1fb7bfb6f1258af7261de8063b118/a66a3/block-diagram.png&quot;
+        srcset=&quot;/static/8ae1fb7bfb6f1258af7261de8063b118/65e34/block-diagram.png 293w,
+/static/8ae1fb7bfb6f1258af7261de8063b118/8d594/block-diagram.png 585w,
+/static/8ae1fb7bfb6f1258af7261de8063b118/a66a3/block-diagram.png 1170w,
+/static/8ae1fb7bfb6f1258af7261de8063b118/5cf5b/block-diagram.png 1210w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: the block diagram for the system that will be created.&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Prerequisites&lt;/h3&gt;
+&lt;p&gt;You should already have the Digilent board files installed, and you should be able to create a simple RTL project and load the bitstream on to the Cora board from Vivado. You should also be familiar with the Petalinux procedure discussed above, as it is used in this part too. &lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Writing HW Drivers&lt;/h3&gt;
+&lt;p&gt;These notes correspond to the &lt;strong&gt;Creating Peripheral IP section of the tutorial linked above&lt;/strong&gt;. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a new vivado project and select the Cora board. This assumes that you’ve got the Digilent board descriptions installed. &lt;/li&gt;
+&lt;li&gt;In the IP integrator, create a new block design. Add the Zynq PS IP to it. &lt;/li&gt;
+&lt;li&gt;Double click the Zynq block, in the re-customize IP window, click Import XPS settings. &lt;/li&gt;
+&lt;li&gt;Navigate to &lt;code class=&quot;language-text&quot;&gt;vivado-boards-master/new/board_files/cora-z7-10/B.0&lt;/code&gt; and select &lt;code class=&quot;language-text&quot;&gt;preset.xml&lt;/code&gt;. Click OK. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/884d2ea11bafd8336c6fbbb83e7ef962/cc7d9/specify-file.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 65.65096952908587%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsSAAALEgHS3X78AAAB2klEQVQoz31S2W6jMBTl/39jpMmo2clGlr7M80ijVpq0gbKGJEBsMGAwxixzSzTLQ9OjY+vo+l77LpZede9gBpqDX4zgYKG97h+sKwigat+I/6d5Thw/u1FCGBcsd2xjJk/XynK5kNfK4nG33m2V7Wa5Wa+2GwX0brt63CrLxcTU1bZtm6Zq21pKUxqFhMRpFEYYR2EY5VmOcQiac942oqoE52Vd103bVhXnRd6A6iCxotDVN9MwVVW1Ldt2zP3+1+nkepeL73vff1gv2tF14MByju6b7rjuOSIkDMOMUgldr5vlbDGXh8P+eDzqj3oP/d58NpvDmsnf+uPReCLLk+l0PJ/Lo9FgMOwPBg+9r19WykoyDEMzT1dERNXwsirLRoh3caMQdQlGUdOce56PriiKIoxQEifniycdHcc5R5RV7R00XYk0Y5qqk4iwPM+yrCiKIAggbZxS1jl9GkzZ089n27SPjpskiRCiC8Y46YI/fznLC9OwYCIlFNZZEEKSZVlxQv863QPUX/9x+BdsmHacZre04fhDAhgXpYCZvwNyBv8ubYR9HxGSxjFlrGTFx8wZp5SmaZokKctp21S+70uEELgDhg5/CjpB7wOaDFvJ8ycNPWvB6Wj/BnGpy/uT8Rj+AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;XPS settings&quot;
+        title=&quot;&quot;
+        src=&quot;/static/884d2ea11bafd8336c6fbbb83e7ef962/a66a3/specify-file.png&quot;
+        srcset=&quot;/static/884d2ea11bafd8336c6fbbb83e7ef962/65e34/specify-file.png 293w,
+/static/884d2ea11bafd8336c6fbbb83e7ef962/8d594/specify-file.png 585w,
+/static/884d2ea11bafd8336c6fbbb83e7ef962/a66a3/specify-file.png 1170w,
+/static/884d2ea11bafd8336c6fbbb83e7ef962/cc7d9/specify-file.png 1444w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: setting up the XPS settings for the ARM processing subsystem.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This file comes from the &lt;code class=&quot;language-text&quot;&gt;vivado-boards&lt;/code&gt; repo from Digilent and allows the Zynq to be configured with all of the other hardware on the board. &lt;/p&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;Run block automation. &lt;/li&gt;
+&lt;li&gt;Connect the clocks (fig 2-8 in the tutorial). I get some warnings about negative clock skew. This is a known issue and can be ignored, apparently. &lt;/li&gt;
+&lt;li&gt;Continue until step 10 of the &lt;strong&gt;Integrating Peripheral IP with PS GP Master Port&lt;/strong&gt; section where the LED port settings are configured. &lt;/li&gt;
+&lt;li&gt;Search for “leds” in the port list of the elaborated design. Refer to the Cora reference manual and set the Package pin for each bit of the led port. Set the IO standard to &lt;code class=&quot;language-text&quot;&gt;LVCMOS33&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d768e6edc3e53e3dea91b398fe71032b/be9be/led-config.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.927223719676554%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsSAAALEgHS3X78AAABR0lEQVQoz6WS62rDMAyF8/4P1VEYDAaDwe6k69qtzVLHcXzPpUnOZKejfzZ2qeDDkq0oR7aS+fwcs9kZLi6vcHWb4vruBTePa6SrHRavBRZr9i0p8bDY4j7d4mmZY7kRSErOwfJ3ZLsSz6sMRalQVgY5q8C4AhcGnGIu9LQeKKWlPBtzo0+EnIQLC+P2FCgwxmGMg6+buAas9THW2kBKHffynFFsIZWGUiYSzqpKIQkq3jYMeSFR6RamHmCbEa7FRBMYYesR0vXQdC5NCx1839P+EL8JviZhifceXdPA1S3GccRk4xf8zhKtNZx10NRa3w9TOSr8XxIhBLJNhoruYTgoPCr9uyU1XXixY+ClxGedkwp6X0OUApJebRjGk9qNLTvnYWgknG9wgrCjQqUUdJgnUhhmy9IDhZ84/wMuzGeNbr9H1x35APOJVZWonVqsAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;XPS settings&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d768e6edc3e53e3dea91b398fe71032b/a66a3/led-config.png&quot;
+        srcset=&quot;/static/d768e6edc3e53e3dea91b398fe71032b/65e34/led-config.png 293w,
+/static/d768e6edc3e53e3dea91b398fe71032b/8d594/led-config.png 585w,
+/static/d768e6edc3e53e3dea91b398fe71032b/a66a3/led-config.png 1170w,
+/static/d768e6edc3e53e3dea91b398fe71032b/59785/led-config.png 1755w,
+/static/d768e6edc3e53e3dea91b398fe71032b/be9be/led-config.png 1855w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&quot;9&quot;&gt;
+&lt;li&gt;As per the tutorial, open up SDK. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Petalinux Driver Setup&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Execute the petalinux module creation commands in the &lt;strong&gt;Device Driver Development&lt;/strong&gt; section. &lt;/li&gt;
+&lt;li&gt;Copy the provided blink.c and blink.h files into project-spec/meta-user/recipes-modules/blink/files and update the .bb file. Don’t forget the trailing slash in the bb file, or the build process will throw an error. &lt;/li&gt;
+&lt;li&gt;Run the command &lt;code class=&quot;language-text&quot;&gt;petalinux-build&lt;/code&gt;, not &lt;code class=&quot;language-text&quot;&gt;petalinux build&lt;/code&gt; as stated in the tutorial. &lt;/li&gt;
+&lt;li&gt;Time for coffee! The build process took quite a while on my i5 machine, approximately an hour. It includes some very large file downloads - I guess this is where the 100 GB (!) free space requirement comes from. &lt;/li&gt;
+&lt;li&gt;Generate the boot image from the command in the cora &lt;a href=&quot;https://github.com/Digilent/Petalinux-Cora-Z7-10&quot;&gt;petalinux repo&lt;/a&gt;: &lt;code class=&quot;language-text&quot;&gt;petalinux-package --boot --force --fsbl images/linux/zynq_fsbl.elf --fpga images/linux/cora_z7_10_wrapper.bit --u-boot&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;As described in the repo readme above, copy the newly generated image on to the SD card in the correct location. &lt;/li&gt;
+&lt;li&gt;Insert the SD card into the board. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/4e253fa7ec14a20600342f42723808e4/7989f/blinky-1.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 58.80000000000001%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAMABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAwACBP/EABUBAQEAAAAAAAAAAAAAAAAAAAID/9oADAMBAAIQAxAAAAHhIHVAsxP/xAAaEAACAgMAAAAAAAAAAAAAAAABAgADEBEh/9oACAEBAAEFAjYGRmwDqOez/8QAFxEBAAMAAAAAAAAAAAAAAAAAAAERMf/aAAgBAwEBPwGMW//EABYRAQEBAAAAAAAAAAAAAAAAAAARQf/aAAgBAgEBPwHKr//EABsQAAEEAwAAAAAAAAAAAAAAAAEAAxARITFB/9oACAEBAAY/AmxmwKXZ0I//xAAZEAADAQEBAAAAAAAAAAAAAAAAAREhMVH/2gAIAQEAAT8hTfphHNT0o5k0ZoiqjP/aAAwDAQACAAMAAAAQ6/8A/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERMf/aAAgBAwEBPxBtUs//xAAXEQEBAQEAAAAAAAAAAAAAAAABABFR/9oACAECAQE/EAVcWr//xAAZEAEAAwEBAAAAAAAAAAAAAAABABExIYH/2gAIAQEAAT8QCM8wG25LFhtcMe8gsC50uECaKod9YrbTrP/Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;LED App&quot;
+        title=&quot;&quot;
+        src=&quot;/static/4e253fa7ec14a20600342f42723808e4/27561/blinky-1.jpg&quot;
+        srcset=&quot;/static/4e253fa7ec14a20600342f42723808e4/06456/blinky-1.jpg 293w,
+/static/4e253fa7ec14a20600342f42723808e4/4b3e4/blinky-1.jpg 585w,
+/static/4e253fa7ec14a20600342f42723808e4/27561/blinky-1.jpg 1170w,
+/static/4e253fa7ec14a20600342f42723808e4/278c2/blinky-1.jpg 1755w,
+/static/4e253fa7ec14a20600342f42723808e4/7989f/blinky-1.jpg 2000w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: a preview of the working blinky app&lt;/em&gt;&lt;/p&gt;
+&lt;h4&gt;SDK and FPGA Programming&lt;/h4&gt;
+&lt;p&gt;These notes are for the &lt;strong&gt;Example Project: Loading a Module into Kernel and Executing
+the Application&lt;/strong&gt; section. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Open SDK, skip the TCF agent on the host machine step. I won’t be using the debugger right now. &lt;/li&gt;
+&lt;li&gt;Make a new SDK project, set Linux as the OS in the wizard. I skipped the toolchain and system root configurations because the directories in the tooltips were not present on my system.  &lt;/li&gt;
+&lt;li&gt;Import the &lt;code class=&quot;language-text&quot;&gt;blink.h&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;linux_blinkled_app.c&lt;/code&gt; file from the &lt;code class=&quot;language-text&quot;&gt;LKM_App&lt;/code&gt; directory in the example code download from the Xilinx tutorial. Delete the &lt;code class=&quot;language-text&quot;&gt;helloworld.c&lt;/code&gt; file that’s included by default. It should automatically build without errors. The .elf file generated by SDK will be copied over to the board in a later step. &lt;/li&gt;
+&lt;li&gt;Program the FPGA with &lt;code class=&quot;language-text&quot;&gt;Xilinx &amp;gt; Program FPGA&lt;/code&gt;. The board was auto-detected for me. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Testing out the Device&lt;/h4&gt;
+&lt;p&gt;Now that everything is built and programmed, let’s try to run the app and communicate to custom hardware from a Linux device driver!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;With the new linux image set, cycle power and connect up to the serial port. &lt;/li&gt;
+&lt;li&gt;Run the &lt;code class=&quot;language-text&quot;&gt;mknod&lt;/code&gt; commands on the board as described in the tutorial. &lt;/li&gt;
+&lt;li&gt;Create a directory &lt;code class=&quot;language-text&quot;&gt;/Apps&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I decided to skip using the Xilinx tools for navigating on the device, and do it through SSH/the UART connection instead. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;scp the &lt;code class=&quot;language-text&quot;&gt;.elf&lt;/code&gt; file from &lt;code class=&quot;language-text&quot;&gt;.sdk/linux-blinkled-app/Debug/linux-blinkled-app.elf&lt;/code&gt; from the PC onto the board in the &lt;code class=&quot;language-text&quot;&gt;/Apps&lt;/code&gt; directory using the following command on the PC: &lt;code class=&quot;language-text&quot;&gt;scp &amp;lt;path to elf file&amp;gt; root@192.168.1.69:&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I had to remove the old SSH key stored for this IP address, since it changed when petalinux was rebuilt. Then I SSH’d into the board again.&lt;/p&gt;
+&lt;p&gt;I moved the .elf file into the Apps directory I made earlier, chmod +777’d it as is done in the tutorial, and executed. To my great surprise, the example fired right up and lights started blinking!&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/9372cc92bbf5a88c049d7549f7f9443f/7989f/blinky-2.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 75.64999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAIDBP/EABYBAQEBAAAAAAAAAAAAAAAAAAMCBP/aAAwDAQACEAMQAAABzyi2lYihT//EABsQAAMAAgMAAAAAAAAAAAAAAAACAwEEEBES/9oACAEBAAEFAsbFKDWY7Jv5GfDcf//EABcRAAMBAAAAAAAAAAAAAAAAAAABESH/2gAIAQMBAT8ByFZ//8QAFxEAAwEAAAAAAAAAAAAAAAAAAAEREv/aAAgBAgEBPwGRU2z/xAAcEAABBAMBAAAAAAAAAAAAAAABAAIQUREhgTL/2gAIAQEABj8CyQzoXlvBFiloR//EABsQAQACAgMAAAAAAAAAAAAAAAEAESFhEDFR/9oACAEBAAE/IUlSiLOzrRwv5NiKoB4TE//aAAwDAQACAAMAAAAQlD//xAAYEQACAwAAAAAAAAAAAAAAAAAAASExYf/aAAgBAwEBPxBJLSbH/8QAFhEBAQEAAAAAAAAAAAAAAAAAAEFh/9oACAECAQE/EKTR/8QAHxABAAIBAwUAAAAAAAAAAAAAAQARITFBUWFxgcHh/9oACAEBAAE/EBIFCij0mGzAv0Yp4jDVbbofIyF1BcG+d/MUNAvdn//Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Blinking LEDs&quot;
+        title=&quot;&quot;
+        src=&quot;/static/9372cc92bbf5a88c049d7549f7f9443f/27561/blinky-2.jpg&quot;
+        srcset=&quot;/static/9372cc92bbf5a88c049d7549f7f9443f/06456/blinky-2.jpg 293w,
+/static/9372cc92bbf5a88c049d7549f7f9443f/4b3e4/blinky-2.jpg 585w,
+/static/9372cc92bbf5a88c049d7549f7f9443f/27561/blinky-2.jpg 1170w,
+/static/9372cc92bbf5a88c049d7549f7f9443f/278c2/blinky-2.jpg 1755w,
+/static/9372cc92bbf5a88c049d7549f7f9443f/7989f/blinky-2.jpg 2000w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Above: blinking LEDs controlled by an AXI-enabled peripheral from a Petalinux device driver.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;To recap, from scratch, we did the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;built Petalinux&lt;/li&gt;
+&lt;li&gt;installed a custom device driver&lt;/li&gt;
+&lt;li&gt;implemented an AXI-compliant IP block and hooked it up to the Zynq processing system&lt;/li&gt;
+&lt;li&gt;implemented and built an app to use the driver to interface to the custom IP&lt;/li&gt;
+&lt;li&gt;learned the build flows, practiced communicating with the target board&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That’s pretty good! All of the building blocks of a really interesting project are in place now. It’s time to look at the example code and examine how it can be used to bootstrap a more complex application and more complex custom IP. &lt;/p&gt;
+&lt;h2&gt;Custom AXI IP [WIP]&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;make folder for IP in project directory&lt;/li&gt;
+&lt;li&gt;tools &gt; create and package IP&lt;/li&gt;
+&lt;li&gt;setup the IP settings&lt;/li&gt;
+&lt;li&gt;If you don’t choose edit now, you can just click “add IP” in the block diagram and search for the IP name you just created. It will show up and then you can edit it.&lt;/li&gt;
+&lt;li&gt;Add it to the diagram&lt;/li&gt;
+&lt;li&gt;Edit in IP packager&lt;/li&gt;
+&lt;li&gt;Make the changes to the IP&lt;/li&gt;
+&lt;li&gt;In the IP packager flow, update the ports (should be an auto thing to do this). This occurs in the &lt;code class=&quot;language-text&quot;&gt;Package IP &amp;lt;IP Name&amp;gt;&lt;/code&gt; tab. Make your way down the left hand bar with all of the steps in it. &lt;/li&gt;
+&lt;li&gt;Re-Package IP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now go back to the main design and re-sync with the IP. Now is also a good time to run connection and block automation. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Right click at the top of the &lt;code class=&quot;language-text&quot;&gt;sources&lt;/code&gt; tab and choose &lt;code class=&quot;language-text&quot;&gt;generate HDL wrapper&lt;/code&gt;. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Hook up IO Ports&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;RTL Analysis &gt; Open Elabrorated Design
+// hookup-io picture&lt;/li&gt;
+&lt;li&gt;At the top, click the IO Ports&lt;/li&gt;
+&lt;li&gt;Near the bottom there is a search icon&lt;/li&gt;
+&lt;li&gt;Search for &lt;code class=&quot;language-text&quot;&gt;led&lt;/code&gt; and the pins will show up&lt;/li&gt;
+&lt;li&gt;Set the package pins to &lt;code class=&quot;language-text&quot;&gt;N15&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;G17&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;L15&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;M15&lt;/code&gt; and LVCMOS33. Which LED is assigned which pin doesn’t really matter. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Using a Project From Git&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Open up the project in Vivado&lt;/li&gt;
+&lt;li&gt;Generate bitstream&lt;/li&gt;
+&lt;li&gt;When that’s done, &lt;code class=&quot;language-text&quot;&gt;File &amp;gt; Export Hardware&lt;/code&gt; to send the design to SDK&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;File &amp;gt; Launch SDK&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;When SDK opens, &lt;code class=&quot;language-text&quot;&gt;File &amp;gt; Import Projects From Filesystem&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Navigate to repo&lt;em&gt;base/project&lt;/em&gt;name.sdk/sdk&lt;em&gt;project&lt;/em&gt;name and select it. SDK should automatically detect that a project is present. Click OK to open up the project. &lt;/p&gt;
+&lt;ol start=&quot;6&quot;&gt;
+&lt;li&gt;Right click on the SDK project in the sidebar and choose &lt;code class=&quot;language-text&quot;&gt;Debug As &amp;gt; Debug Configurations...&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Select a Xilinx System Debugger type&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the target setup tab, make sure the following settings are there:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Debug Type: &lt;strong&gt;Linux Application Debug&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Connection: click the new button and enter the IP address of the board in the &lt;code class=&quot;language-text&quot;&gt;Host&lt;/code&gt; field. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Press the &lt;code class=&quot;language-text&quot;&gt;Test Connection&lt;/code&gt; button. It should succeed. &lt;/li&gt;
+&lt;li&gt;All good, time to flash the bitstream! Click the &lt;code class=&quot;language-text&quot;&gt;Program FPGA&lt;/code&gt; button. &lt;/li&gt;
+&lt;li&gt;Once that’s done, you can debug the software application. Simply hit the &lt;code class=&quot;language-text&quot;&gt;Debug&lt;/code&gt; button and the debugger perspective should open up. Click the &lt;code class=&quot;language-text&quot;&gt;Start&lt;/code&gt; button when you are ready to run the code. &lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[Drone Guidance System]]></title><description><![CDATA[For the past few years, I’ve been working on a guidance system for drones with  SFU Team Guardian . This is truly a system, which…]]></description><link>https://gatsby-casper.netlify.com/posts/drone-guidance-system/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/drone-guidance-system/</guid><pubDate>Thu, 03 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;For the past few years, I’ve been working on a guidance system for drones with &lt;a href=&quot;teamguardian.ca&quot;&gt;SFU Team Guardian&lt;/a&gt;. This is truly a system, which encompasses simulator (APM SITL) or real drone support, path planning, mission creation, drone control, and a web-based ground control app. I started the project for the team to meet the requirements of the AUVSI competition, where a drone must complete objectives while avoiding stationary and moving objects. &lt;/p&gt;
+&lt;h2&gt;Tech Stack&lt;/h2&gt;
+&lt;p&gt;The guidance system is executed on a laptop computer in the field, and continuously sends velocity vectors and other commands over the telemetry radio connection. The drone itself is a multicopter, running stock APM firmware and sending back telemetry at roughly 10 Hz. Running the guidance system on a laptop provides flexibility of developing in a high-level language (Python) and facilitates much easier testing when the simulator is involved. For the task at hand (avoiding large obstacles), the communication latency and potential for dropped packets is not a significant concern. &lt;/p&gt;
+&lt;p&gt;The DroneKit library provides an application layer that allows high-level commands to be sent to the drone via MAVProxy, and hides the details about the connection. During development, the APM SITL simulator is hooked up identically to a real drone by connecting to its provided telemetry stream. When we tune the real copter PID paramaters, we set them in the SITL drone as well, allowing the simulated drone to have similar flight characteristics to the real drone. This makes it easier to tune paramaters of the guidance system. &lt;/p&gt;
+&lt;h2&gt;Control Loop&lt;/h2&gt;
+&lt;p&gt;Control of drone movement is provided by the velocity vector commands exposed by DroneKit. You need to continuously feed velocity vectors to a drone running APM firmware otherwise it will quickly stop and hover. This turns out to be a &lt;em&gt;really&lt;/em&gt; nice safety feature, and apparently wasn’t present in the earliest versions of APM. Yikes!&lt;/p&gt;
+&lt;p&gt;The guidance system calculates a velocity vector at a user-settable frequency, usually 5-10 Hz. Velocities are specified in NED coordinates - North, East, Down, which makes navigation quite easy using standard equations for navigation on the Earth. To generate a velocity vector, the following things are considered:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;maximum velocity setting&lt;/li&gt;
+&lt;li&gt;current and desired location, driven by the path planning algorithm and mission itself&lt;/li&gt;
+&lt;li&gt;PID values from the navigation PID controller (internal to the guidance system, separate from the APM PID controllers)&lt;/li&gt;
+&lt;li&gt;a few safety checks for altitude limits and overshoot detection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once the velocity vector is calculated, it is sent up to the drone. It turns out that packet loss is not a significant concern - most of the velocity commands make it up to the copter. The velocity vector needs to be recalculated continuously to account for dynamic effects such as wind, and so the drone won’t stop as mentioned before. &lt;/p&gt;
+&lt;h2&gt;Mission Modules&lt;/h2&gt;
+&lt;p&gt;Similar to how missions are planned on standard ground control apps like APM Planner, I introduced the concept of a mission module to the guidance system. Each mission module is a representation of a few things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a set of coordinates (multiple coordinates are used to define a search pattern, for example)&lt;/li&gt;
+&lt;li&gt;a particular action to perform when the final coordinte is reached&lt;/li&gt;
+&lt;li&gt;an altitude&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The simplest mission module is a waypoint - it contains a single set of coordinates, an altitude, and tells the drone to hover at the location for a few seconds. An example of an extension to the waypoint module is the drop location module, which sends a few servo commands to release something from the drone as it hovers over a particular location. There are also search pattern modules, where the corners of an area are defined by the user, as well as a swath width, allowing a set of coordinates to be generated in a lawnmower-style zigzag search. &lt;/p&gt;
+&lt;p&gt;Initially, missions (a collection of mission modules) were defined in a .CSV file. In the future, users will be able to graphically create them using the GCS GUI. &lt;/p&gt;
+&lt;p&gt;To execute a mission, the guidance system essentially loops through all of the locations in a mission module, one mission module at a time. &lt;/p&gt;
+&lt;h2&gt;Path Planning&lt;/h2&gt;
+&lt;p&gt;The path planning system uses the A* algorithm, which allows a route to be calculated between a particular location and the target location from the current mission module. Along the way, any “obstacles” will be avoided. A* operates on a grid representation of the flight area, and obstacles are simply nodes on the grid that the path is not allowed to use. In practice, I use a circle generation algorithm from computer graphics to find grid nodes around a central coordinate to mark off as the edges of an obstacle. &lt;/p&gt;
+&lt;p&gt;The real-world resolution of the grid is customizable, and I usually use 1 metre. So, the flight area is broken up into a set of geographical coordinates along a 1m grid. A* operates on the indices of the geographical coordinates to calculate the path. In various places, a KD tree is used to quickly determine the closest grid coordinate to another coordinate (such as a mission module target location). Since the grid resolution is fine compared to the accuracy of the drone’s GPS navigation (3m roughly), this approximation doesn’t result in significant navigation issues in practice. &lt;/p&gt;
+&lt;p&gt;Upon reaching a target location, A* is executed to find the path to the next location. &lt;/p&gt;
+&lt;h2&gt;Navigation&lt;/h2&gt;
+&lt;h2&gt;Obstacle Avoidance &amp;#x26; Path Planning&lt;/h2&gt;</content:encoded></item><item><title><![CDATA[Goodbye Wordpress, Hello Gatsby]]></title><description><![CDATA[I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant…]]></description><link>https://gatsby-casper.netlify.com/posts/byebye-wordpress/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/byebye-wordpress/</guid><pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant software development
 projects I did as a kid. However, as my hosting account expired recently and I got hit with renewal fees that were 3x the original cost (this is &lt;em&gt;extremely common&lt;/em&gt; across web hosts), I decided to take a second look at how I could maintain a personal site with less technical and financial overhead. &lt;/p&gt;
 &lt;p&gt;I’ve also been thinking a lot about how I’d like to lay out my site. I really wanted to keep blog posts and projects separate. Wordpress could do this, but the off-the-shelf themes didn’t exactly support what I wanted to do. Of course, I could extend an existing theme, but I didn’t really want to write PHP and deal with Wordpress any more.&lt;/p&gt;
 &lt;p&gt;Enter Gatsby - the static site generator. As opposed to Wordpress which generates pages on the fly by pulling post data from a database, Gatsby takes markdown files (for pages, posts, etc.) and generates an entirely static site. The content can then be hosted inexpensively, with zero server-side dependencies. The pages are constructed using typical modern web technologies, like React. I’ve been having a great time with React recently, so I decided to give it a shot. &lt;/p&gt;
@@ -14,7 +642,9 @@ projects I did as a kid. However, as my hosting account expired recently and I g
 `npm i -g gatsby`&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Adjusting the Theme&lt;/h2&gt;
 &lt;p&gt;Gatsby development was very smooth once the install issue was worked out, so I set about stripping down some elements of the theme that I didn’t want, such as the social media hooks and buttons. For the most part, I commented these out since I may want them later.&lt;/p&gt;
-&lt;p&gt;It didn’t take too long to understand how pages and posts are created. The content folder structure is very similar to Wordpress, too. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[CubeSat Onboard Computer Design]]></title><description><![CDATA[Over the past year and a half, I have been working on the SFU Satellite Design Team as the computing subsystem lead. The team and I have…]]></description><link>https://gatsby-casper.netlify.com/projects/cubesat-onboard-computer-design/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/cubesat-onboard-computer-design/</guid><pubDate>Wed, 06 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Over the past year and a half, I have been working on the SFU Satellite Design Team as the computing subsystem lead. The team and I have been developing a low-cost, reliable, custom onboard computer (OBC) to meet the current and future mission requirements. This post features quite a few details about the project.&lt;/p&gt;
+&lt;p&gt;It didn’t take too long to understand how pages and posts are created. The content folder structure is very similar to Wordpress, too. &lt;/p&gt;
+&lt;h2&gt;Future Considerations&lt;/h2&gt;
+&lt;p&gt;Since sites generated using Gatsby are static, adding comments involves using a 3rd party service. Relying on another service of course brings its own security and integration concerns, so it depends on how much you want comments. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[CubeSat Onboard Computer Design]]></title><description><![CDATA[Over the past year and a half, I have been working on the SFU Satellite Design Team as the computing subsystem lead. The team and I have…]]></description><link>https://gatsby-casper.netlify.com/projects/cubesat-onboard-computer-design/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/cubesat-onboard-computer-design/</guid><pubDate>Wed, 06 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Over the past year and a half, I have been working on the SFU Satellite Design Team as the computing subsystem lead. The team and I have been developing a low-cost, reliable, custom onboard computer (OBC) to meet the current and future mission requirements. This post features quite a few details about the project.&lt;/p&gt;
 &lt;p&gt;The original mission the OBC was designed for was calibration of the CHIME experiment, which was SFUSat’s first CubeSat mission developed during the Canadian Satellite Design Challenge.&lt;/p&gt;
 &lt;h2&gt;Features&lt;/h2&gt;
 &lt;p&gt;The SFUSat OBC is an inexpensive command and data handling system designed to be flexible across CubeSat missions. It features:&lt;/p&gt;
@@ -317,4 +947,190 @@ learn&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fit&lt;span c
 &lt;p&gt;This was an interesting experiment, and it’s encouraging to see how straightforward it is to get a model running, and how good the results were. Looking at the mis-classified data, there appear to only be one or two images (I tweaked my image sets a bit since taking the screenshots). The misses are shadowy pieces of arrows, and are even difficult for me to classify. Given the small amount of data, I’m impressed.&lt;/p&gt;
 &lt;p&gt;I did not find that data augmentation helped with these images. It makes sense, as the arrows appear in all different orientations in the data anyway, so the net is exposed to a variety of versions of the same thing. Tweaking contrast and brightness would likely help for these images, as they’re quite dull and flat even for a human to process.&lt;/p&gt;
 &lt;p&gt;Currently I plan to write some more friendly wrapper functions for this library. Ones that don’t error out when there are no incorrectly classified images, for example. Beyond that, I plan to experiment with the course content a bit more, get more of a feel for deep learning, and then tackle a couple of projects I’ve had in mind.&lt;/p&gt;
-&lt;p&gt;If you’re interested in giving deep learning a go, don’t hesitate. There are many resources out there, and it’s easy to get going on small data sets with a mainstream computing setup.&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;If you’re interested in giving deep learning a go, don’t hesitate. There are many resources out there, and it’s easy to get going on small data sets with a mainstream computing setup.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[TI ARM LaunchPad GPIO Input Tutorial]]></title><description><![CDATA[The TI Tiva Launchpad boards are an excellent way to get started working with ARM microcontrollers. With the Tivaware software suite, they…]]></description><link>https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-input/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-input/</guid><pubDate>Mon, 25 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;The TI Tiva Launchpad boards are an excellent way to get started working with ARM microcontrollers. With the Tivaware software suite, they’re not too much harder than an Arduino to program, either. I’ve found the tutorials from TI and elsewhere online to be very helpful. Unfortunately, the TI tutorials go over GPIO outputs, which are pretty simple, but they totally skip inputs! For someone totally unsure where to look for the correct documentation, I feel this is a major oversight. Fortunately, I’ve been able to figure it out with the help of some 3rd party tutorials. Here’s my take on how to use GPIO inputs, with references back to the TI material so you can get an idea of where to look for functionality in the main documentation.&lt;/p&gt;
+&lt;p&gt;I’ll explain the setup and put the code at the end of this post, along with some links.&lt;/p&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &amp;lt;stdint.h&amp;gt;
+#include &amp;lt;stdbool.h&amp;gt;
+#include &amp;quot;inc/hw_types.h&amp;quot;
+#include &amp;quot;inc/hw_memmap.h&amp;quot;
+#include &amp;quot;driverlib/sysctl.h&amp;quot;
+#include &amp;quot;driverlib/gpio.h&amp;quot;
+int main(void)
+{
+  SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);	// set up the clock
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);	// enable port F
+  GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);	// enable outputs on the launchpad LED pins&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As usual, we need to include the appropriate headers for the board and set up the clock. We also need to enable port F. Then, we set up GPIO F1, F2 and F3 as outputs. This is where the LaunchPad’s red, green and blue LEDs are connected. Also note that some pins need to be unlocked with a code from the datasheet before you can use them. That’s because they’re normally used for one of the programming interfaces. There are examples of this in the Tiva tutorials from TI. Take a look at my tutorial on how to unlock GPIOs.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_4);	// make F4 an input
+
+GPIOPadConfigSet(GPIO_PORTF_BASE,GPIO_PIN_4,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);	// enable F4&amp;#39;s pullup, the drive strength won&amp;#39;t affect the input&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here’s where we start getting to the input side of things. We need to enable port F4 as an input. Pretty simple, but it doesn’t end there. To make it work correctly, we’ll configure the pin to have an internal pullup resistor. WPU stands for ‘weak pullup resistor’ - you could change this to WPD for a pulldown. The details of this function can be found on page 264 here.&lt;/p&gt;
+&lt;p&gt;By giving the pin an internal pullup, we know that when the button is pressed, the input will be grounded (from the LaunchPad datasheet). Otherwise, it’ll be pulled up to 3.3v. That’s the key to making inputs work, but let’s peek at the rest of the code.&lt;/p&gt;
+&lt;h3&gt;Loop&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;while(1)
+  {
+    uint32_t pinVal=0;	// variable to hold the pinRead
+    pinVal= GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_4);	// read F4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pretty standard microcontroller stuff, we’ve got a while(1) loop. This will run forever. Next, we create a 32-bit integer to take the value of GPIOPinRead. This function returns a 32 bit value, but we only need bits 1-8, which will be set if any of the pins on the port are high. GPIOPinRead takes the base port and the specific pin as arguments.&lt;/p&gt;
+&lt;h3&gt;If&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;if( (pinVal &amp;amp; GPIO_PIN_4)==0){	// AND to strip out anything but the value read from F4
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 2);	// turn on one LED
+    }
+    
+    else{
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 4);	// turn on a different LED
+    }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next we have an if statement. It’s pretty easy to see what’s being done here. If the pin is high, we turn on GPIO F2 (that’s the else condition). Otherwise, our input is low (button pressed) and we’ll turn on pin F1.&lt;/p&gt;
+&lt;p&gt;There’s a little bit going on in the if statement though. We’re taking the value from GPIOPinRead, which will have a 0 or a 1 in the position of any pins we read. We logical AND it with the GPIO&lt;em&gt;PIN&lt;/em&gt;4 variable, which will strip away anything except the value in Pin 4’s position. If pin 4 was high, we will get a result of 1. If pin 4 was low, we get a 0. This is because we AND the value on the input, in the input’s place, with a 1 in the input’s place.&lt;/p&gt;
+&lt;h4&gt;What’s the delay for?&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;//   SysCtlDelay(7000000); // uncomment me if you need debouncing
+
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There is an optional delay at the bottom of the code. This is for very simple debouncing of the button. Essentially, when you push a button, it doesn’t immediately connect one way or the other. It’ll actually bounce around between connected and disconnected. This is a physical phenomenon due to springiness. It’s very fast, but not too fast for a micro to keep up with. In some applications, like if you were making each button press increment a counter, you would likely see more than one increment of the counter for each button press, due to the button bouncing a little bit. If you’re just using a button to turn on an LED with no latching, button bounce isn’t something to worry about.&lt;/p&gt;
+&lt;h3&gt;Button bounce&lt;/h3&gt;
+&lt;p&gt;By waiting around for a few ms after reading the button, we physically give it time to settle into wherever it wants to be. Debouncing could be a whole series of blog posts, as you can deal with it in multiple ways through hardware or software. If you find you need it, busy wait delays are the most simple way to deal with it, though they’re definitely not the best.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/button-bounce-4a8d824615e0d25da0fe525be2899741.gif&quot; alt=&quot;bounce waveform&quot;&gt;
+&lt;em&gt;Button bounce waveform&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Complete code&lt;/h3&gt;
+&lt;p&gt;Here’s the complete code for this tutorial. It’s all commented and should be easy to figure out. The project containing this code was actually the Lab 2 code from TI’s set of tutorials. The includes and build options are the same, you just need to put in a few lines to enable and work with the inputs.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;/* 
+Tivaware input tutorial
+*/
+
+#include &amp;lt;stdint.h&amp;gt;
+#include &amp;lt;stdbool.h&amp;gt;
+#include &amp;quot;inc/hw_types.h&amp;quot;
+#include &amp;quot;inc/hw_memmap.h&amp;quot;
+#include &amp;quot;driverlib/sysctl.h&amp;quot;
+#include &amp;quot;driverlib/gpio.h&amp;quot;
+int main(void)
+{
+  SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);	// set up the clock
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);	// enable port F
+  GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);	// enable outputs on the launchpad LED pins
+  GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_4);	// make F4 an input
+
+  GPIOPadConfigSet(GPIO_PORTF_BASE,GPIO_PIN_4,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);	// enable F4&amp;#39;s pullup, the drive strength won&amp;#39;t affect the input
+  while(1)
+  {
+    uint32_t pinVal=0;	// variable to hold the pinRead
+    pinVal= GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_4);	// read F4
+    
+    if( (pinVal &amp;amp; GPIO_PIN_4)==0){	// AND to strip out anything but the value read from F4
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 2);	// turn on one LED
+    }
+    
+    else{
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 4);	// turn on a different LED
+    }
+        
+    //   SysCtlDelay(7000000); // uncomment me if you need debouncing
+
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Resources&lt;/h3&gt;
+&lt;p&gt;I’ll end off with some resources for learning about the ARM LaunchPad. There will definitely be more tutorials from me as well!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://processors.wiki.ti.com/index.php/Tiva_C_Series_TM4C123G_LaunchPad&quot;&gt;TI LaunchPad resources&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ti.com/lit/ug/spmu298a/spmu298a.pdf&quot;&gt;Tivaware Reference&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;%22http://processors.wiki.ti.com/index.php?title=Getting_Started_with_the_TIVA%E2%84%A2_C_Series_TM4C123G_LaunchPad&amp;#x26;DCMP=tivac&amp;#x26;HQS=TM4C123G-Launchpad-Workshop&quot;&gt;TI LaunchPad Workshop&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=qieNBhmWQbA&quot;&gt;AllaboutEE Input Tutorial (C++)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://sites.google.com/site/luiselectronicprojects/tutorials/tiva-tutorials/tiva-gpio/simple-digital-input&quot;&gt;Luis Electronic Projects Input Tutorial&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[TI ARM LaunchPad GPIO Output Tutorial]]></title><description><![CDATA[The GPIO functions in Tivaware take a little fiddling with to understand. For beginners, it may not be immediately obvious what’s going on…]]></description><link>https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-output/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-output/</guid><pubDate>Mon, 25 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;The GPIO functions in Tivaware take a little fiddling with to understand. For beginners, it may not be immediately obvious what’s going on in the output function, especially as there are multiple ways to do the same thing. Let’s take a look at an example of how to use the pins, and at the end we’ll set them up (that’s the boring part).&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1, GPIO_PIN_1);	// turn on one LED&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tivaware includes the GPIOPinWrite function. As arguments, it takes the base port, the pin(s) and the value to write. So to write to PF1, we need to tell it that we’re in port F, we want pin 1, and then the value. The ‘value’ isn’t a 1 or a zero, however. It needs to be a 1 or a 0 in the position of the pin we want to control, that’s the key. GPIO&lt;em&gt;PIN&lt;/em&gt;1 is simply a variable equal to the position of pin 1 in registers, which is actually equal to 2 in decimal notation. You can see the number that these macros are referencing by hovering your mouse over them in Code Composer Studio. Pin 1 = 2, Pin 2 = 4, Pin 3 = 8, and so on.&lt;/p&gt;
+&lt;p&gt;So we are telling the microcontroller to place a 1 in the 2’s place, which corresponds to pin 1 on port F. How confusing is that?! It’s not too bad, but it can take a little while to wrap your head around if you’re coming straight from Arduino. If you’ve dealt with 8-bit microcontroller programming, this won’t be too bad, since there are only 8 pins on a port here too.&lt;/p&gt;
+&lt;h3&gt;Multiple pins at once&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 4);	// turn on one LED&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To set multiple pins at the same time, we need to do two things. As before, we’re specifying that we’re on port F. First, we’ll OR the pins we need together. The pipe character ”|” means OR. So the micro is going to be able to work with any pins we specify here in a string of OR statements. In that case, it’s pins 1, 2, and 3. It’s not a big deal if we put a pin in here that we don’t end up setting.&lt;/p&gt;
+&lt;p&gt;Next up, we set the value. Remember how each GPIO&lt;em&gt;PIN&lt;/em&gt;X is actually a number? Since we’ve placed a 4 here, that corresponds to pin F2. Since pin F2 was specified in our ORing earlier, F4 will go high. Instead of placing a 4, we could’ve also put GPIO&lt;em&gt;PIN&lt;/em&gt;2, like in the previous example, which is equal to 4.&lt;/p&gt;
+&lt;p&gt;So how do we set multiple pins? First, they need to appear in your OR statement. Then, we set the port to equal the addresses of those pins, but added together. Since pin 1 = 2, pin 2 = 4, and pin 3 = 8, we could set the port to 6, 10, 12, or 14. These are all the combinations of adding 2, 4, and 8 to each other. This is how the GPIO bus works, there’s a unique number for any combination of pins being on. Tivaware handles this automatically, so we can just change the pins we want, and the others will keep their states. Awesome!&lt;/p&gt;
+&lt;p&gt;This numbering system could get confusing since we won’t always remember which number corresponds to each pin. Luckily, we can use the OR statement again. In an application like this, OR is actually serving as addition. If we OR 00000010 with 00000100 (2 and 4 in binary), we get 00000110. See, from our two inputs, we’ve set any bit that input 1 OR input 2 have set. To do this with Tivaware, we can set the last argument of our function as GPIO&lt;em&gt;PIN&lt;/em&gt;2|GPIO&lt;em&gt;PIN&lt;/em&gt;3, for example. This will turn on pins 1 and 3. We could’ve even set it to 4|8, which is kind of weird, but is what the GPIO&lt;em&gt;PIN&lt;/em&gt;X variables represent. Here’s an example:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_2|GPIO_PIN_3);	// turn on two LEDs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Turning pins off&lt;/h3&gt;
+&lt;p&gt;To turn a pin off, simply put its address in the second argument of GPIOPinWrite and write a zero as the third argument. Actually, anything except the pin’s address will make turn it off. There is an example of this in the complete demo code at the end, where we turn off pin 1 only.&lt;/p&gt;
+&lt;h3&gt;Setting up outputs&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);	// enable port F
+
+GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);	// enable outputs on the launchpad LED pins&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To set pins as outputs, we just need to enable the port and set some pins as outputs. Like we’ve gone through, we OR together the specific pins we’d like to mess with. There are also includes above this. They’re in the complete demo code below. This program will blink a few of the LEDs on the launchpad. It’s a good example of how to set single and multiple pins, and turn specific pins off.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;/*
+GPIO Output Demo
+*/
+
+#include &amp;lt;stdint.h&amp;gt;
+#include &amp;lt;stdbool.h&amp;gt;
+#include &amp;quot;inc/hw_types.h&amp;quot;
+#include &amp;quot;inc/hw_memmap.h&amp;quot;
+#include &amp;quot;driverlib/sysctl.h&amp;quot;
+#include &amp;quot;driverlib/gpio.h&amp;quot;
+int main(void)
+{
+  SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);	// set up the clock
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);	// enable port F
+  GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);	// enable outputs on the launchpad LED pins
+
+  while(1)
+  {
+
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1, GPIO_PIN_1);	// turn on one LED
+      SysCtlDelay(7000000); // wait a while
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_1|GPIO_PIN_2);	// turn on two LEDs
+      SysCtlDelay(7000000);
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1, 0x00);	// turn pin 1 off
+      SysCtlDelay(7000000);
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[TI ARM LaunchPad GPIO Unlock Tutorial]]></title><description><![CDATA[TI locks some GPIO pins because they’re required for programming interfaces like JTAG. SW2 on the LaunchPad is connected to PF0 ( page 33…]]></description><link>https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-unlock/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-unlock/</guid><pubDate>Mon, 25 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;TI locks some GPIO pins because they’re required for programming interfaces like JTAG. SW2 on the LaunchPad is connected to PF0 (&lt;a href=&quot;http://software-dl.ti.com/trainingTTO/trainingTTO_public_sw/GSW-TM4C123G-LaunchPad/TM4C123G_LaunchPad_Workshop_Workbook.pdf&quot;&gt;page 334&lt;/a&gt;), which is one of these locked up pins. We can’t use it as an input without unlocking it first. Here’s the code from my GPIO Input tutorial, but modified to use SW2. Let’s go over the changes from that tutorial’s code, then see the entire thing.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;Include hw_gpio.h
+
+#include &amp;quot;inc/hw_gpio.h&amp;quot;	// We need to include this. It&amp;#39;s got the GPIO_LOCK_KEY macro, among others&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We need to include this header to get access to the appropriate macros to unlock pins. This wasn’t needed in the GPIO input tutorial, but it makes to include it in every project that’s going to need GPIO.&lt;/p&gt;
+&lt;h3&gt;Unlock the pin&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;HWREG(GPIO_PORTF_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;	// unlock the GPIOCR register for port F
+HWREG(GPIO_PORTF_BASE + GPIO_O_CR) = 0x01;		// Free up pin 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;GPIO&lt;em&gt;LOCK&lt;/em&gt;KEY is equal to 0x4C4F434B - this value can be found on page 684 of the TM4C123GH6PM datasheet, as well as details about what’s going on. Essentially, writing this value to the GPIO Lock register will unlock the GPIO Commit register, where we specify which pins we need opened up for tinkering with. So in the second line we’re opening up pin 0 (they’re 1-indexed here, which is why we’re writing a 1). Also, the key value won’t necessarily be the same between microcontrollers. Check the datasheet to be sure.&lt;/p&gt;
+&lt;h3&gt;Ready to go!&lt;/h3&gt;
+&lt;p&gt;That’s all you need to do to unlock GPIOs. Here’s the entire example code. It’s exactly the same as the GPIO input tutorial, but includes the code to unlock SW2 that we just went over.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &amp;lt;stdint.h&amp;gt;
+#include &amp;lt;stdbool.h&amp;gt;
+#include &amp;quot;inc/hw_gpio.h&amp;quot;	// We need to include this. It&amp;#39;s got the GPIO_LOCK_KEY macro, among others
+#include &amp;quot;inc/hw_types.h&amp;quot;
+#include &amp;quot;inc/hw_memmap.h&amp;quot;
+#include &amp;quot;driverlib/sysctl.h&amp;quot;
+#include &amp;quot;driverlib/gpio.h&amp;quot;
+int main(void)
+{
+  SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);	// set up the clock
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);	// enable port F
+
+    HWREG(GPIO_PORTF_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;	// unlock the GPIOCR register for port F
+    HWREG(GPIO_PORTF_BASE + GPIO_O_CR) = 0x01;		// Free up pin 0
+
+  GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);	// enable outputs on the launchpad LED pins
+  GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_0);	// make F4 an input
+
+  GPIOPadConfigSet(GPIO_PORTF_BASE,GPIO_PIN_0,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);	// enable F0&amp;#39;s pullup, the drive strength won&amp;#39;t affect the input
+  while(1)
+  {
+    uint32_t pinVal=0;	// variable to hold the pinRead
+    pinVal= GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_0);	// read F0
+
+    if( (pinVal &amp;amp; GPIO_PIN_0)==0){	// AND to strip out anything but the value read from F0
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 2);	// turn on one LED
+    }
+
+    else{
+      GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 4);	// turn on a different LED
+    }
+
+    //   SysCtlDelay(7000000); // uncomment me if you need debouncing
+
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Other considerations&lt;/h3&gt;
+&lt;p&gt;In the example I was using to figure this out, you’ll notice that they set the AFSL register. Below are lines 146-148 of the gpio&lt;em&gt;jtag example, which will be installed in the Tivaware C series examples folder for the launchpad board. If you followed all steps of TI’s installation tutorials, this project should exist somewhere for you. Here was the path for me: `C:TITivaWare&lt;/em&gt;C&lt;em&gt;Series-1.1examplesboardsek-tm4c123gxlgpio&lt;/em&gt;jtag`.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;HWREG(GPIO_PORTC_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;
+HWREG(GPIO_PORTC_BASE + GPIO_O_CR) = 0x01;
+HWREG(GPIO_PORTC_BASE + GPIO_O_AFSEL) &amp;amp;= 0xfe;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is the GPIO alternate function select register. In the JTAG example, they need to set this since they’re switching the pins back and forth between GPIO and JTAG. Not something we needed to do in this tutorial, but it’s good to be aware of. Actually, I set this in the otherwise identical code for this tutorial, and GPIO wouldn’t work. Go figure. More info on this register can be found on page 671 of the TM4C123GH6PM datasheet, or you can take a look at the gpio_jtag example.&lt;/p&gt;
+&lt;p&gt;There it is, a quick look on which registers to poke into when you need to unlock a GPIO using the Tivaware API. Thanks for reading!&lt;/p&gt;</content:encoded></item></channel></rss>
