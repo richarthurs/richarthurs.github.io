@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Sat, 12 Jan 2019 19:13:19 GMT</lastBuildDate><item><title><![CDATA[Customizing AXI IP]]></title><description><![CDATA[Customizing IP RTL Now that we have an IP block that can be accessed from userspace, let’s customize it with a register that the user can…]]></description><link>https://gatsby-casper.netlify.com/posts/cora-customizing-axi-ip/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/cora-customizing-axi-ip/</guid><pubDate>Sun, 06 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;Customizing IP RTL&lt;/h3&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Sun, 13 Jan 2019 18:50:08 GMT</lastBuildDate><item><title><![CDATA[Customizing AXI IP]]></title><description><![CDATA[Customizing IP RTL Now that we have an IP block that can be accessed from userspace, let’s customize it with a register that the user can…]]></description><link>https://gatsby-casper.netlify.com/posts/cora-customizing-axi-ip/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/cora-customizing-axi-ip/</guid><pubDate>Sun, 06 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;Customizing IP RTL&lt;/h3&gt;
 &lt;p&gt;Now that we have an IP block that can be accessed from userspace, let’s customize it with a register that the user can read to determine the state of the LEDs. Right now, the example only has a writable register. These changes will allow the user to read data from the block using a memory-mapped register. &lt;/p&gt;
 &lt;p&gt;To do this, we will edit the IP block and assign some of the counter bits to an axi-accessable register. &lt;/p&gt;
 &lt;ul&gt;
@@ -947,7 +947,633 @@ learn&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fit&lt;span c
 &lt;p&gt;This was an interesting experiment, and it’s encouraging to see how straightforward it is to get a model running, and how good the results were. Looking at the mis-classified data, there appear to only be one or two images (I tweaked my image sets a bit since taking the screenshots). The misses are shadowy pieces of arrows, and are even difficult for me to classify. Given the small amount of data, I’m impressed.&lt;/p&gt;
 &lt;p&gt;I did not find that data augmentation helped with these images. It makes sense, as the arrows appear in all different orientations in the data anyway, so the net is exposed to a variety of versions of the same thing. Tweaking contrast and brightness would likely help for these images, as they’re quite dull and flat even for a human to process.&lt;/p&gt;
 &lt;p&gt;Currently I plan to write some more friendly wrapper functions for this library. Ones that don’t error out when there are no incorrectly classified images, for example. Beyond that, I plan to experiment with the course content a bit more, get more of a feel for deep learning, and then tackle a couple of projects I’ve had in mind.&lt;/p&gt;
-&lt;p&gt;If you’re interested in giving deep learning a go, don’t hesitate. There are many resources out there, and it’s easy to get going on small data sets with a mainstream computing setup.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[TI ARM LaunchPad GPIO Input Tutorial]]></title><description><![CDATA[The TI Tiva Launchpad boards are an excellent way to get started working with ARM microcontrollers. With the Tivaware software suite, they…]]></description><link>https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-input/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-input/</guid><pubDate>Mon, 25 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;The TI Tiva Launchpad boards are an excellent way to get started working with ARM microcontrollers. With the Tivaware software suite, they’re not too much harder than an Arduino to program, either. I’ve found the tutorials from TI and elsewhere online to be very helpful. Unfortunately, the TI tutorials go over GPIO outputs, which are pretty simple, but they totally skip inputs! For someone totally unsure where to look for the correct documentation, I feel this is a major oversight. Fortunately, I’ve been able to figure it out with the help of some 3rd party tutorials. Here’s my take on how to use GPIO inputs, with references back to the TI material so you can get an idea of where to look for functionality in the main documentation.&lt;/p&gt;
+&lt;p&gt;If you’re interested in giving deep learning a go, don’t hesitate. There are many resources out there, and it’s easy to get going on small data sets with a mainstream computing setup.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Radiation Testing a CubeSat Computer]]></title><description><![CDATA[At the SFU Satellite Design Team, we are taking part in the Canadian Satellite Design Challenge. As part of the challenge, we were offered…]]></description><link>https://gatsby-casper.netlify.com/posts/radiation-testing-cubesat-computer/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/radiation-testing-cubesat-computer/</guid><pubDate>Sat, 23 Sep 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;At the SFU Satellite Design Team, we are taking part in the Canadian Satellite Design Challenge. As part of the challenge, we were offered the chance to put some of our hardware in a proton beam at the TRIUMF facility, Canada’s national lab for nuclear and particle physics. This was a really unique opportunity, and one we were excited to use to the best of our ability.&lt;/p&gt;
+&lt;p&gt;We designed a test for our onboard computer (OBC), which has the following features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TMS570 microcontroller (ECC flash &amp;#x26; RAM, lockstep architecture)&lt;/li&gt;
+&lt;li&gt;external flash memory&lt;/li&gt;
+&lt;li&gt;real time clock&lt;/li&gt;
+&lt;li&gt;external watchdog&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Primarily, we were interested in a qualitative understanding of how the system performed under the proton beam. The test software we developed had the following functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MCU self-tests (RAM, self-test controller, various peripherals)&lt;/li&gt;
+&lt;li&gt;initialization routine and RTOS control&lt;/li&gt;
+&lt;li&gt;reason for reset reporting&lt;/li&gt;
+&lt;li&gt;external flash reads and writes&lt;/li&gt;
+&lt;li&gt;time stamping of all data in flash&lt;/li&gt;
+&lt;li&gt;serial communication of all flash reads/writes for logging on computer&lt;/li&gt;
+&lt;li&gt;frequent watchdog kicks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Radiation Effects&lt;/h2&gt;
+&lt;p&gt;Radiation can effect hardware in two different ways. First, single event upsets (SEU) are simple bit flips caused by a high energy particle. They don’t typically cause permanent damage, but do result in corrupted data. They are fixed by resetting the appropriate bit. ECC memory, for example, is an appropriate way to deal with SEU effects.&lt;/p&gt;
+&lt;p&gt;Single event latchups are a more serious issue. In these cases, a high energy particle will alter the silicon in such a way that a P-N-P-N junction will be created. This is known as a parasitic thyristor. Thyristors can’t be turned off by any means except removing power to the thyristor (there’s no gate). In practice, this means that a chip that has SEL’d needs a power-on (hard) reset. If this reset happens fast enough, damage can be avoided. SEL events essentially create a short inside the chip, meaning current consumption will increase significantly. Therefore, we can attempt to protect against latchup by monitoring the current draw and toggling the power if the current suddenly spikes drastically. On the SFUSat OBC, we use the INA301 current sense amplifier and a FET to do this.&lt;/p&gt;
+&lt;h2&gt;Test Design&lt;/h2&gt;
+&lt;p&gt;The main idea is that the computer will be running fairly standard functionality (reading and writing to flash). We write, then read flash to determine if any upsets have happened due to radiation, and we print the values (at time of read) to the serial port for logging. All writes to flash are time tagged in the flash itself, and writes happen at a reliable frequency. This allows us to determine whether the RTC is still operational.&lt;/p&gt;
+&lt;p&gt;The watchdog is external, although there is an internal one on the MCU. Should the system lock up due to an SEU or a latchup, the watchdog will power-on reset the MCU. This triggers the self-tests, which utilize the diagnostic structures for testing the chip at the fab, but allow us to access them with software. The idea is that these self-tests are a very fast and efficient way to toggle nearly all of the transistors on the chip, hopefully clearing any temporary upsets that may have triggered the reset in the first place. Since the reason for reset is saved and reported at startup, we can see when this happens on the monitoring computer.&lt;/p&gt;
+&lt;p&gt;Overall, it was a simple test, but one that was representative of the typical types of things that the OBC will need to do. There were a few limitations, which were not implemented due to time constraints:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;no checking of number of errors automatically corrected&lt;/li&gt;
+&lt;li&gt;no self-test of CPU core compare module&lt;/li&gt;
+&lt;li&gt;no verification of flash integrity before writing&lt;/li&gt;
+&lt;li&gt;no use of internal watchdog&lt;/li&gt;
+&lt;li&gt;no test of command/response from the host computer&lt;/li&gt;
+&lt;li&gt;no monitoring of power consumption for silicon degradation effects&lt;/li&gt;
+&lt;li&gt;no dedicated latchup detection or mitigation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It would have been great to get to these features. Particularly, seeing how many errors (in RAM, for example) had been automatically corrected by the chip’s ECC would have been very interesting. Overall, the intent was to test macro functionality, to determine that our OBC design could operate in a radiation rich environment, not to determine what exactly the effects are. The good news is that we can functionally test most of these items without the need for a cyclotron. For example, TI provides an API to inject errors into ECC, which will allow us to test the ECC mechanism itself. Silicon degradation is very interesting to me, and it was suggested that the power consumption will increase with the total dose of radiation received. It would be very interesting and valuable to study this, and I hope we can in the future!&lt;/p&gt;
+&lt;p&gt;Despite the limitations on the scope of our test, it will give us valuable information. Primarily, we aim to establish whether the OBC can perform in low Earth orbit for a period of 1 year, and correct any errors that should arise from radiation effects. Since the reliability features used during the test are only a subset of those to be used on the actual satellite, we can reasonably expect higher reliability under the same test conditions once those features are implemented.&lt;/p&gt;
+&lt;h2&gt;Test Script&lt;/h2&gt;
+&lt;p&gt;To monitor the data coming back from the OBC as it was under test, I developed a simple test script in Python to take in the serial stream and time-tag each message with the UNIX epoch. This allowed us to view the data coming back in real time to determine if anything had happened to the OBC as it was under test. Time-tagging with a very accurate epoch might allow us to see if the RTC clock drifted significantly. However, the system is not deterministic, so we would most likely only be able to detect very large drifts.&lt;/p&gt;
+&lt;p&gt;Of course, all of the incoming data was saved into a file as well. I will do a tutorial on writing a script like this one, as it’s a pretty quick and easy way to do a comprehensive test of an embedded system like our OBC. Also, it featured automatic reconnection, which was done in a clever way thanks to Python.&lt;/p&gt;
+&lt;h2&gt;Test Setup&lt;/h2&gt;
+&lt;p&gt;Going in to the test, I really did not know what to expect. To a piece of plastic, I mounted a TMS570Ls043 LaunchPad, the OBC demo board (for the RTC and watchdog), and an external breakout I made for some new flash memory, since the chips on the demo board had been EOL’d by Cypress.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7553ddb242ebbe11492ccd13ba8055cf/3afc2/triumf-2.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.22263914946842%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAwQA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/2gAMAwEAAhADEAAAARYqoi0mr//EABoQAAMBAAMAAAAAAAAAAAAAAAECAwARIiP/2gAIAQEAAQUCLFtOvet/SYDWKKNccU//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAgBAgEBPwFH/8QAGhAAAwEAAwAAAAAAAAAAAAAAAAERITFhof/aAAgBAQAGPwJkXHo0rnZGOJGH/8QAGxAAAwADAQEAAAAAAAAAAAAAAAERITFBYYH/2gAIAQEAAT8hTJvs+i2uJXqYMhsKXoWE1QYyp4KesKqf/9oADAMBAAIAAwAAABAfP//EABcRAQADAAAAAAAAAAAAAAAAAAABITH/2gAIAQMBAT8QjVv/xAAXEQEAAwAAAAAAAAAAAAAAAAAAAREx/9oACAECAQE/EJxR/8QAHBABAQADAAMBAAAAAAAAAAAAAREAITFRYXHR/9oACAEBAAE/ENm9BF0h4YmTAFckZv1hwkRBF3qXv5ncp4/cpOoBBfPfuDjALdq9z//Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Inside proton beam facility&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7553ddb242ebbe11492ccd13ba8055cf/27561/triumf-2.jpg&quot;
+        srcset=&quot;/static/7553ddb242ebbe11492ccd13ba8055cf/06456/triumf-2.jpg 293w,
+/static/7553ddb242ebbe11492ccd13ba8055cf/4b3e4/triumf-2.jpg 585w,
+/static/7553ddb242ebbe11492ccd13ba8055cf/27561/triumf-2.jpg 1170w,
+/static/7553ddb242ebbe11492ccd13ba8055cf/3afc2/triumf-2.jpg 1599w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Proton beam facility with our test setup&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;It turned out that we were testing in TRIUMF’s proton therapy facility, which is typically used to treat eye cancer. They had removed the patient chair, and there was an X-Y stage that we could mount our boards to. After selecting an appropriately sized collimator, we aimed the beam at the MCU onboard. We decided to primarily irradiate the MCU since we were mostly interested in its reliability features. If we had more time, it would have been interesting to test the RTC and flash more specifically.&lt;/p&gt;
+&lt;h2&gt;Successful Test&lt;/h2&gt;
+&lt;p&gt;I really got the sense that the cyclotron is a living being - and one that straddles the line between being under our control, and out of it. Earlier that day, they had to shut the system down because of a power supply failure. And as they were bringing the beam up to start our test, I watched the numbers in 4 quadrants change, as an operator steered the beam to centre it. You can almost imagine someone driving this beam around, pulling levers and things. It’s not really like that, but all of the older looking control consoles give that kind of vibe. It’s interesting, having cutting edge research (and our simple test), and very well engineered (though old) equipment working together.&lt;/p&gt;
+&lt;p&gt;Digression aside, watching the beam come up to energy was really cool. When they opened the shutter, I was initially nervous that the OBC would kick the bucket very early on in the test. That didn’t happen, and it kept going, and going, and going, as more protons were channeled towards it. About 2/3 the way into the 20 minute test, we had what looked like an SEU event, as we got back some garbled data. More on this in another post after I analyze things further.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1371d1c09d07c56cf1eb9ed9cd604f1f/3afc2/triumf-3.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.22263914946842%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAIDBP/EABUBAQEAAAAAAAAAAAAAAAAAAAIB/9oADAMBAAIQAxAAAAFnhiNuYxH/xAAZEAACAwEAAAAAAAAAAAAAAAABAgADETH/2gAIAQEAAQUCSwazLGLbZ2xQDP/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oACAEDAQE/AVf/xAAXEQEAAwAAAAAAAAAAAAAAAAAAARES/9oACAECAQE/AaYh/8QAGxAAAQQDAAAAAAAAAAAAAAAAAAECEEERITH/2gAIAQEABj8Co7kpB5qP/8QAHBABAAICAwEAAAAAAAAAAAAAAQARIXExQWGx/9oACAEBAAE/IQ1KnZUeXnfZ8Mu4nQgTAFanK7n/2gAMAwEAAgADAAAAEHjf/8QAFhEBAQEAAAAAAAAAAAAAAAAAAQAR/9oACAEDAQE/EFdt3//EABURAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAECAQE/EAJD/8QAHBABAAIDAQEBAAAAAAAAAAAAAQARIUFRMXGB/9oACAEBAAE/EAbGKWqBvyGOCDb8hFbixRh9WOBcEOD6TFHM40RW2rSC+T//2Q==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;TRIUMF Cyclotron&quot;
+        title=&quot;&quot;
+        src=&quot;/static/1371d1c09d07c56cf1eb9ed9cd604f1f/27561/triumf-3.jpg&quot;
+        srcset=&quot;/static/1371d1c09d07c56cf1eb9ed9cd604f1f/06456/triumf-3.jpg 293w,
+/static/1371d1c09d07c56cf1eb9ed9cd604f1f/4b3e4/triumf-3.jpg 585w,
+/static/1371d1c09d07c56cf1eb9ed9cd604f1f/27561/triumf-3.jpg 1170w,
+/static/1371d1c09d07c56cf1eb9ed9cd604f1f/3afc2/triumf-3.jpg 1599w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Inside TRIUMF&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Aside from the SEU event though, the system performed flawlessly, and we noticed no data corruption and no resets during the test. It was also interesting to note the difference in capability between our TMS570, and a standard STM32 part. The initial dose is measured in an arbitrary calibration unit they call MC. Our test finished around 351,000 MC (3 krads), and the system was still going strong. The STM32 tested by another team only was able to handle 6,000 MC (0.05128 krads).&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This test was an extremely valuable opportunity for the team, and I’m very happy with how it went. Clearly, there are more things we should implement for the next time a radiation test rolls around, which would make it that much more valuable. I’d also like to extend thanks to the CSDC management team, and the folks at TRIUMF who stayed up late and volunteered to help us run our tests.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Raspberry Pi & OpenCV - UART Communication (Part 2)]]></title><description><![CDATA[In this second post regarding my experiments with OpenCV on the Raspberry pi, I will go over interfacing the OpenCV code with the Pi’s UART…]]></description><link>https://gatsby-casper.netlify.com/2017/08/23/raspberry-pi-opencv-uart-communication-part-2/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2017/08/23/raspberry-pi-opencv-uart-communication-part-2/</guid><pubDate>Wed, 23 Aug 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In this second post regarding my experiments with OpenCV on the Raspberry pi, I will go over interfacing the OpenCV code with the Pi’s UART, so that I can send image centroids to the auxiliary MCU that will be used for motor control. These posts will be somewhere between a tutorial and a build log - all steps will be mentioned, but not in great detail.&lt;/p&gt;
+&lt;p&gt;Part 1: &lt;a href=&quot;http://richarthurs.com/2017/08/20/getting-started-with-opencv-and-raspberry-pi/&quot;&gt;http://richarthurs.com/2017/08/20/getting-started-with-opencv-and-raspberry-pi/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Configuring UART&lt;/h2&gt;
+&lt;p&gt;First, follow the instructions here: &lt;a href=&quot;https://spellfoundry.com/2016/05/29/configuring-gpio-serial-port-raspbian-jessie-including-pi-3/&quot;&gt;https://spellfoundry.com/2016/05/29/configuring-gpio-serial-port-raspbian-jessie-including-pi-3/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I disabled the UART&gt;console connection using the raspi-config (sudo raspi-config), meaning that I didn’t need to manually remove it from the cmdline.txt file.&lt;/p&gt;
+&lt;h2&gt;Testing UART&lt;/h2&gt;
+&lt;p&gt;On my Pi 3, the UART connected to GPIO 14 and 15 is available at /dev/serial0. On the Pi, run the following commands to install the screen utility and get an instance running.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;sudo apt-get install screen
+screen /dev/serial0 115200&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you short GPIO 14 and 15, you should see the entered characters echoed back on your display. To quit a screen instance on the pi, press escape, then ctrl+a, then \&lt;/p&gt;
+&lt;h2&gt;Laptop Test&lt;/h2&gt;
+&lt;p&gt;I wanted to test out communication to my laptop, so I grabbed a package to install screen. After installing, I connected a 3.3V USB-UART converter, being sure to connect Pi Rx to converter TX, and vice-versa. Also connect a GND line between the Pi and the converter, since they aren’t likely connected to the same power source.&lt;/p&gt;
+&lt;p&gt;To find the location of your serial converter on mac or linux, run ls /dev and look for something along the lines of “tty.usbserial-A50285BI.” This is the equivalent of serial0 on the Pi.  Run the following command to start a screen instance:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;screen /dev/_your_adapter_address_here 115200&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Assuming you have screen instances running on the Pi and computer simultaneously, you should see characters echoed between the two as you type on either keyboard. I initially forgot to connect a common GND between the two devices, which caused me to only receive on my computer from the Pi, but not from my computer.&lt;/p&gt;
+&lt;p&gt;To quit screen on mac or linux, ctrl + a, then :, then “quit” (no quotes).&lt;/p&gt;
+&lt;h2&gt;PySerial&lt;/h2&gt;
+&lt;p&gt;PySerial is an excellent and easy to use serial communication library that I’ve used before. We’ll bring it into this project on the Pi, and it can be installed with pip install pyserial. &lt;/p&gt;
+&lt;p&gt;I wrote up the following test script and ran it with python serialtest.py.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;import serial 
+ser = serial.Serial(&amp;#39;/dev/serial0&amp;#39;, 115200, timeout = 1) 
+print ser.name 
+
+for i in range(0,5,1):
+    ser.write(str(i))
+ser.close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After confirming that everything worked as expected, we are now ready to test integration with the rest of the OpenCV code and confirm that the centroid locations are being sent over correctly.&lt;/p&gt;
+&lt;h2&gt;OpenCV Integration&lt;/h2&gt;
+&lt;p&gt;Since I was already printing the centroid locations to the terminal, I just needed to replace the print() commands with ser.write() and some internal string formatting to include a return and newline. Running the code and looking at the UART output from the Pi, we can see that it is correctly sending the x,y coordinates of the centroid as I move the camera around.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/58108b854078b32a2642bb26955dc92d/c8408/raspi-opencv-2-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 82.69794721407625%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAABYlAAAWJQFJUiTwAAABT0lEQVQ4y62UO07DQBCGbaWI4vj9XJx1CAUV3IWeM8QFQnSWQLIcnBSIM3ARUnAEDoBANIguuAE7w2+TRAjRxNmVPq1mLH+aWe9YkrCIqEv0toe9LSFwpfXKLpLT2/S8vLq5XMzy2Uee58Wa6XRapGlaJElSTCbXTfz7OVggV2ZZ9ghVtxGatj322YB0Vae64Ja8AqcR+r4fH4xGZFlWibCSZXn5F+SX/+VBCQg816pGqGlazBgj7FX94paVVav9BXg/LZtmzIKAFEURIzQMM0bb1Ov1xAhd14s556Sqqhhh/VH2h0MydF2M0HGcOAxDsm1bVMsuhAOyTEuQ0HGbCnEPhZ3hOIqiuuVPhOWWfK2ETxuh53pnnEeE1ncZvffNpOBCn2iaPu8r/TnCbbkHD+CumWUWMLkeFnAIjsFRS/jmb4M5lnkUdQLf7yDcBekbwJJOKf9U1IgAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Screenshot of the screen tool showing output from the pi&quot;
+        title=&quot;&quot;
+        src=&quot;/static/58108b854078b32a2642bb26955dc92d/a66a3/raspi-opencv-2-2.png&quot;
+        srcset=&quot;/static/58108b854078b32a2642bb26955dc92d/65e34/raspi-opencv-2-2.png 293w,
+/static/58108b854078b32a2642bb26955dc92d/8d594/raspi-opencv-2-2.png 585w,
+/static/58108b854078b32a2642bb26955dc92d/a66a3/raspi-opencv-2-2.png 1170w,
+/static/58108b854078b32a2642bb26955dc92d/c8408/raspi-opencv-2-2.png 1364w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Screen output showing centroid locations coming from the Pi over UART&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;Now that serial communication is working and it can be easily integrated with the rest of the OpenCV code, I need to determine if I want to use any sort of protocol between the auxiliary MCU and the Pi. Since I will likely need to send data back and forth, it is probably a good idea to keep everything well defined. More on that in the next post!&lt;/p&gt;
+&lt;p&gt;Reviewing the task list in the first post, I’d say I’m about half way through part 3.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install and compile OpenCV on the pi&lt;/li&gt;
+&lt;li&gt;Track and find centroid of an object&lt;/li&gt;
+&lt;li&gt;Send out obstacle centroid over UART&lt;/li&gt;
+&lt;li&gt;Integrate OpenCV and pySerial&lt;/li&gt;
+&lt;li&gt;Determine message protocol&lt;/li&gt;
+&lt;li&gt;Get a simple motor control system on the auxiliary MCU working&lt;/li&gt;
+&lt;li&gt;Start developing obstacle avoidance functionality&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[CubeSat Computing Boards]]></title><description><![CDATA[At the  SFU Satellite Design Team , we’re building a CubeSat from scratch. One of my main roles is designing the onboard computer hardware…]]></description><link>https://gatsby-casper.netlify.com/2017/08/20/cubesat-computing-boards/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2017/08/20/cubesat-computing-boards/</guid><pubDate>Sun, 20 Aug 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;At the &lt;a href=&quot;sfusat.org&quot;&gt;SFU Satellite Design Team&lt;/a&gt;, we’re building a CubeSat from scratch. One of my main roles is designing the onboard computer hardware, as well as developing a lot of the onboard software. This post is a brief overview of the two boards that I designed and the team have assembled thus far.&lt;/p&gt;
+&lt;p&gt;Both of these boards were designed and laid out by me using KiCad. The repositories for the board files can be found here.&lt;/p&gt;
+&lt;h2&gt;OBC Prototype Rev. A&lt;/h2&gt;
+&lt;p&gt;This board was completed in August, 2017. The design process began about 3 months before the prototype was assembled. It is a prototype of the entire computing system, including the following features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Real time clock with built-in capacitor backup&lt;/li&gt;
+&lt;li&gt;Triple redundant nonvolatile memory (flash)&lt;/li&gt;
+&lt;li&gt;External watchdog timer&lt;/li&gt;
+&lt;li&gt;Single event latchup protection&lt;/li&gt;
+&lt;li&gt;TMS570LS0714 microcontroller&lt;/li&gt;
+&lt;li&gt;FTDI USB-UART converter&lt;/li&gt;
+&lt;li&gt;PC-104 form factor&lt;/li&gt;
+&lt;li&gt;Onboard voltage regulation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a91715c3f6028f390dd4c49f5ede7097/4c221/cubesat-boards-2.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 700px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 72%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAMBAgQF/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAABq/Mw4xAf/8QAGxAAAQUBAQAAAAAAAAAAAAAAAwECEhMyBBH/2gAIAQEAAQUC5sEjU/YXLWQkhEX0n//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABoQAAICAwAAAAAAAAAAAAAAAAACAXEREjH/2gAIAQEABj8CbbhlYGsgmhrP/8QAGhAAAgMBAQAAAAAAAAAAAAAAAREAITFRYf/aAAgBAQABPyEACY3kdgG89i1Y0ASULdQKbhg6U//aAAwDAQACAAMAAAAQpB//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAcEAEBAAMBAAMAAAAAAAAAAAABEQAhMVFBcYH/2gAIAQEAAT8QK9ZDR52X8yjqRSBAHZjbdoTyuaNx+UpazCoC6CHvtwASCA+3P//Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;OBC Revision A&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a91715c3f6028f390dd4c49f5ede7097/4c221/cubesat-boards-2.jpg&quot;
+        srcset=&quot;/static/a91715c3f6028f390dd4c49f5ede7097/610c7/cubesat-boards-2.jpg 293w,
+/static/a91715c3f6028f390dd4c49f5ede7097/a8060/cubesat-boards-2.jpg 585w,
+/static/a91715c3f6028f390dd4c49f5ede7097/4c221/cubesat-boards-2.jpg 700w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;OBC Revision A&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This board will be used by the team to develop the flight software, as it represents a good approximation of the final flight hardware, and includes all of the core features. Crucial to this purpose is the inclusion of the JTAG header and FTDI adapter, meaning that only a standalone debugger is required to debug/program the device. Power and UART out can come over the integrated USB port.&lt;/p&gt;
+&lt;p&gt;Unfortunately, a couple of layout errors were discovered. The resistors surrounding the oscillator are slightly too close, and the edge of the JTAG connector covers one set of pin headers, used to enable and disable the watchdog.&lt;/p&gt;
+&lt;p&gt;Further testing of the board is underway at the time of this writing. Currently, we’re working to diagnose some JTAG connection issues regarding software support for the chip.&lt;/p&gt;
+&lt;p&gt;A key design decision made with this board was to make most functionality modular, in case something else doesn’t work. It is possible to enable and disable most of the auxiliary features such as the watchdog and SEL monitor. This helps isolate errors, and was important in diagnosing the JTAG issue, as it allowed us to ensure that the chip had no power or reset problems.&lt;/p&gt;
+&lt;p&gt;Additionally, communication headers for all peripheral devices are provided, allowing for easy logic analyzer connection, and the ability to interface peripherals with existing development boards that are used by the team.&lt;/p&gt;
+&lt;h2&gt;PC-104&lt;/h2&gt;
+&lt;p&gt;Since the team’s development happens in separate sub teams, we have adopted a set of standards to ensure our hardware will all work together. Our form factor standard is PC-104, which just happens to fit inside a CubeSat. The standard defines the PCB size and connector layout, as well as the pinout of the connector. We have elected not to follow the standard pinout, but have instead created our own which is more modern and suited to our project.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/09f31c497f74ca89c71c019b9a9daf83/3afc2/cubesat-boards-3.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.22263914946842%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMCBAX/xAAVAQEBAAAAAAAAAAAAAAAAAAABAP/aAAwDAQACEAMQAAABzX1kiskR/8QAGRAAAwEBAQAAAAAAAAAAAAAAAAEDAhAS/9oACAEBAAEFApS9FY5WBj5//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAGhAAAgIDAAAAAAAAAAAAAAAAAhEAICExcf/aAAgBAQAGPwJlqMSz2v8A/8QAGRAAAwEBAQAAAAAAAAAAAAAAAAEhETEQ/9oACAEBAAE/IV0d5HRNWeOWYImS55//2gAMAwEAAgADAAAAECs//8QAFREBAQAAAAAAAAAAAAAAAAAAARD/2gAIAQMBAT8QSf/EABURAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAECAQE/EBn/xAAdEAEBAAIBBQAAAAAAAAAAAAABEQAxQRAhYXHB/9oACAEBAAE/EElgBICU334OcXzKdBl+TPPBIlB1hFKD30//2Q==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;PC-104 Stacked OBCs&quot;
+        title=&quot;&quot;
+        src=&quot;/static/09f31c497f74ca89c71c019b9a9daf83/27561/cubesat-boards-3.jpg&quot;
+        srcset=&quot;/static/09f31c497f74ca89c71c019b9a9daf83/06456/cubesat-boards-3.jpg 293w,
+/static/09f31c497f74ca89c71c019b9a9daf83/4b3e4/cubesat-boards-3.jpg 585w,
+/static/09f31c497f74ca89c71c019b9a9daf83/27561/cubesat-boards-3.jpg 1170w,
+/static/09f31c497f74ca89c71c019b9a9daf83/3afc2/cubesat-boards-3.jpg 1599w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;PC-104 Stacked OBCs&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;OBC Demo Board&lt;/h2&gt;
+&lt;p&gt;The demo board came first in the lineage of SFUSat computing hardware. Designed and assembled in May and June of 2017, it served as a test platform for the MCU external peripherals and our more custom circuitry. Its peripherals were connected to the TMS570LS03x-04x LaunchPad, which has served as our development platform so far. The demo board has the following features:&lt;/p&gt;
+&lt;p&gt;Prototype of SEL protection circuitry with external load connector
+Watchdog chip with all important pins broken out
+Real time clock and capacitor backup
+Triple redundant nonvolatile memory
+The testing regime for this board included verification of the SEL mitigation circuitry. Based on the INA301, this circuit detects an over current condition and toggles the power supply accordingly. To test, power resistors were connected to simulate the load of the entire OBC. Then, the frequency of switching was measured. Under light current loads, DC was fed to the circuit. In an over current condition, the power supply was being toggled by the chip at around 60Hz, which matches the spec for chip response time. This meant that since the heavy load was never removed, the protection circuit was repeatedly toggling power to attempt to reset the system.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/621120090bc1c740ed7d2ee61719971f/4c221/cubesat-boards-1.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 700px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 56.285714285714285%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAQBAgX/xAAVAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEAMQAAABzGLpyrklH//EABoQAQACAwEAAAAAAAAAAAAAAAECEgMQESH/2gAIAQEAAQUCp5HAMU4q1ZOv/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAGxAAAgEFAAAAAAAAAAAAAAAAABABERIxQWH/2gAIAQEABj8CO0VujMr/xAAaEAADAQEBAQAAAAAAAAAAAAAAARExIWFx/9oACAEBAAE/Iapxww723hQQ1Z/Jl5L0en//2gAMAwEAAgADAAAAEI8f/8QAFhEBAQEAAAAAAAAAAAAAAAAAARAR/9oACAEDAQE/EEyf/8QAFhEAAwAAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/EE6Q/8QAGhABAAMBAQEAAAAAAAAAAAAAAQARITFBUf/aAAgBAQABPxBJtT2shrV88r5ndIyJSPsZJ9fMv0DABlRqlVfq3P/Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Demo board and rev A&quot;
+        title=&quot;&quot;
+        src=&quot;/static/621120090bc1c740ed7d2ee61719971f/4c221/cubesat-boards-1.jpg&quot;
+        srcset=&quot;/static/621120090bc1c740ed7d2ee61719971f/610c7/cubesat-boards-1.jpg 293w,
+/static/621120090bc1c740ed7d2ee61719971f/a8060/cubesat-boards-1.jpg 585w,
+/static/621120090bc1c740ed7d2ee61719971f/4c221/cubesat-boards-1.jpg 700w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Demo board and OBC rev A&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Issues uncovered using this board include an incorrect RTC footprint (hence the blue bodge wires), as the data sheet provided an unlabelled and improperly placed bottom view, instead of the standard footprint top view. However, the repair was successful and this board was used in development of the RTC driver software. Additionally, the flash memory onboard was EOL’d by the manufacturer shortly after we’d ordered it, so memory driver implementation was delayed.&lt;/p&gt;
+&lt;p&gt;The demo board was very helpful for the team’s design process, and will certainly be used in the future to bring members up to speed with peripheral driver development, and the overall architecture of the system. Since these boards were inexpensive to make, they are an excellent experimentation and learning platform for the higher risk scenarios, and they allow us to leverage a lot of the development hardware already acquired by the team.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Getting Started With OpenCV and Raspberry Pi]]></title><description><![CDATA[I bought a Raspberry Pi nearly a year ago, always intending to use it in OpenCV experiments. Just recently, I got around to starting the…]]></description><link>https://gatsby-casper.netlify.com/2017/08/20/getting-started-with-opencv-and-raspberry-pi/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2017/08/20/getting-started-with-opencv-and-raspberry-pi/</guid><pubDate>Sun, 20 Aug 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I bought a Raspberry Pi nearly a year ago, always intending to use it in OpenCV experiments. Just recently, I got around to starting the project. The current plan is to make a small robot that first, uses computer vision to track and follow an object. The next phase will be obstacle avoidance, and is where the project becomes more of an OpenCV experiment.&lt;/p&gt;
+&lt;p&gt;The main tasks are as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install and compile OpenCV on the pi&lt;/li&gt;
+&lt;li&gt;Track and find centroid of an object&lt;/li&gt;
+&lt;li&gt;Send out obstacle centroid over UART&lt;/li&gt;
+&lt;li&gt;Get a simple motor control system on the auxiliary MCU working&lt;/li&gt;
+&lt;li&gt;Start developing obstacle avoidance functionality&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As of this post, the first two tasks are complete and the 3rd is underway. I’m doing the Pi-side software in Python, and the auxiliary MCU (used primarily for motor control) in C, and I’ll probably use a TI Hercules LaunchPad, since I’ve got one sitting around.&lt;/p&gt;
+&lt;p&gt;What follows are my notes on getting the Pi up and running. I haven’t used one of these for about 2 years, so I was rusty. Hopefully these notes and linked resources will be helpful to others looking to get OpenCV going on their devices.&lt;/p&gt;
+&lt;h2&gt;Pi Bringup&lt;/h2&gt;
+&lt;p&gt;First, the Pi needs to get started up and we need to verify that we can SSH into it. I’m going to assume that you can boot into Raspbian reliably.&lt;/p&gt;
+&lt;p&gt;While trying to set up my WiFi connection, I realized that my keyboard layout was not correct. I didn’t have the tilde and pipe characters, for example, and they’re pretty important for CLI’ing around the device.&lt;/p&gt;
+&lt;p&gt;Keyboard Layout: To fix it, you need to modify the keyboard layout. This link had the right instructions for me: &lt;a href=&quot;https://www.raspberrypi.org/forums/viewtopic.php?f=26&amp;#x26;t=39806&amp;#x26;p=331516#p331516&quot;&gt;https://www.raspberrypi.org/forums/viewtopic.php?f=26&amp;#x26;t=39806&amp;#x26;p=331516#p331516&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In short, run the following commands:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;cd /etc/default
+
+sudo nano keyboard
+In nano, edit the config file to show the following:
+
+XKBMODEL =“ pc105”
+
+XKBLAYOUT =“ US”
+
+To save and exit,
+
+ctrl + x
+ctrl + y&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To shut down, run: &lt;code class=&quot;language-text&quot;&gt;sudo shutdown -r now&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scroll CLI:&lt;/strong&gt; To scroll in your CLI, you can run commands and pipe the output to the “less” utility, using the following syntax: &lt;code class=&quot;language-text&quot;&gt;command | less&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;WiFi:&lt;/strong&gt; I followed this tutorial to get WiFi going. I had to use the tip above to see all the details: &lt;a href=&quot;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&quot;&gt;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SSH:&lt;/strong&gt; Finally, you can set up SSH access by following these instructions: &lt;a href=&quot;https://www.raspberrypi.org/documentation/remote-access/ssh/&quot;&gt;https://www.raspberrypi.org/documentation/remote-access/ssh/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;OpenCV Install&lt;/h2&gt;
+&lt;p&gt;Now that the Pi is ready to go, we can install OpenCV and all of the relevant utilities for developing with it. The de facto standard OpenCV tutorials are by Adrian over at pyimagesearch.com,  and I followed his instructions for getting OpenCV going. Total install and compile time was about 4 hours. The tutorial is here: &lt;a href=&quot;http://www.pyimagesearch.com/2016/04/18/install-guide-raspberry-pi-3-raspbian-jessie-opencv-3/&quot;&gt;http://www.pyimagesearch.com/2016/04/18/install-guide-raspberry-pi-3-raspbian-jessie-opencv-3/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Testing OpenCV&lt;/h2&gt;
+&lt;p&gt;To try out OpenCV, I first wrote up the class to access the Pi Camera. The instructions are here: &lt;a href=&quot;http://www.pyimagesearch.com/2015/03/30/accessing-the-raspberry-pi-camera-with-opencv-and-python/&quot;&gt;http://www.pyimagesearch.com/2015/03/30/accessing-the-raspberry-pi-camera-with-opencv-and-python/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Object Tracking&lt;/h2&gt;
+&lt;p&gt;As a simple intro, I again followed one of Adrian’s tutorials. This time, it was for ball tracking, which is based on colour. &lt;a href=&quot;http://www.pyimagesearch.com/2015/09/14/ball-tracking-with-opencv/&quot;&gt;http://www.pyimagesearch.com/2015/09/14/ball-tracking-with-opencv/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Project Development&lt;/h2&gt;
+&lt;p&gt;With those experiments and introductions complete, I started on the tasks for my project. First, I integrated the Pi camera access code with the object tracking. Next, I cleaned up a lot of the code. Some of the pyimagesearch tutorials do things which I view as unnecessary, such as resizing the image before processing. I chose to bring in images from the Pi at 640x480, and found that the code ran faster when processing that initial size, and slower when I scaled the images down to a width of 600px. Also, I removed all of the image overlays except for the centroid location and the bounding box, since those are the only parts that are necessary for my project.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1ec9b8bb3ad9a2d90a5ddca469d6d9d6/4c221/raspi-opencv-1-2.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 700px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 54.42857142857142%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAIFA//EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAHN5SxRJgv/xAAaEAACAgMAAAAAAAAAAAAAAAAAAgESBBAT/9oACAEBAAEFAk6OPdCcpi7wWadf/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAIAQMBAT8BiP/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAgBAgEBPwGNf//EABwQAAEEAwEAAAAAAAAAAAAAAAABAiFREBKRQf/aAAgBAQAGPwLaZo2qzzhDl6S5cf/EABsQAQACAgMAAAAAAAAAAAAAAAEAESFxEEFR/9oACAEBAAE/IWQhD0lto14YgnEqlDDohxE7eP/aAAwDAQACAAMAAAAQD9//xAAWEQADAAAAAAAAAAAAAAAAAAABECH/2gAIAQMBAT8QNJ//xAAWEQADAAAAAAAAAAAAAAAAAAABECH/2gAIAQIBAT8QKJ//xAAbEAEBAQACAwAAAAAAAAAAAAABEQAhgTFRYf/aAAgBAQABPxCsuBBB7+GTrgK1V470IOgyUToIAMOgXyKmu//Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Screenshot of openCV detecting an object&quot;
+        title=&quot;&quot;
+        src=&quot;/static/1ec9b8bb3ad9a2d90a5ddca469d6d9d6/4c221/raspi-opencv-1-2.jpg&quot;
+        srcset=&quot;/static/1ec9b8bb3ad9a2d90a5ddca469d6d9d6/610c7/raspi-opencv-1-2.jpg 293w,
+/static/1ec9b8bb3ad9a2d90a5ddca469d6d9d6/a8060/raspi-opencv-1-2.jpg 585w,
+/static/1ec9b8bb3ad9a2d90a5ddca469d6d9d6/4c221/raspi-opencv-1-2.jpg 700w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Object centroid detected&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Next, I examined the example ball tracking code and looked at how the centroids were calculated. It’s pretty simple, and the units are in pixels. It’ll be really straightforward to send these values out to the auxiliary MCU, and I’ll probably only need to use a P controller to have the robot follow an object of the correct colour. Pretty neat! So far, thanks to the great documentation available for the Pi and for OpenCV, and the ease of use of Python, it has been very straightforward to get this project rolling. I can’t wait to dig more into the processing capabilities of OpenCV more and keep experimenting.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/42e51baab06b30034fdad640413ae272/17e8f/raspi-opencv-1-3.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1024px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 54.39453125%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAIFA//EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAHN5SxRJgv/xAAbEAACAgMBAAAAAAAAAAAAAAAAAgESAwQTEP/aAAgBAQABBQJOrj9MZO0xdoLNPn//xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAgBAwEBPwGI/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/AY1//8QAHRAAAgIBBQAAAAAAAAAAAAAAAAEhUZECEBIyQf/aAAgBAQAGPwJapmjlVo8wdnklvb//xAAcEAEAAgIDAQAAAAAAAAAAAAABABEhcRAxQYH/2gAIAQEAAT8hYII+UyKNaEC4lSoEPCHsLbx//9oADAMBAAIAAwAAABCM3//EABcRAQADAAAAAAAAAAAAAAAAAAABESH/2gAIAQMBAT8QnSj/xAAWEQADAAAAAAAAAAAAAAAAAAABECH/2gAIAQIBAT8QKJ//xAAbEAEBAQACAwAAAAAAAAAAAAABEQAhYTFRgf/aAAgBAQABPxBCWUjge+jNGCFaK8fdECOhkg4QQAYxB3yKmu//2Q==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Test subjects&quot;
+        title=&quot;&quot;
+        src=&quot;/static/42e51baab06b30034fdad640413ae272/17e8f/raspi-opencv-1-3.jpg&quot;
+        srcset=&quot;/static/42e51baab06b30034fdad640413ae272/2fb5f/raspi-opencv-1-3.jpg 293w,
+/static/42e51baab06b30034fdad640413ae272/06d94/raspi-opencv-1-3.jpg 585w,
+/static/42e51baab06b30034fdad640413ae272/17e8f/raspi-opencv-1-3.jpg 1024w&quot;
+        sizes=&quot;(max-width: 1024px) 100vw, 1024px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Test subjects: squishy promotional things from industry events.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Useful Raspberry Pi Commands&lt;/h2&gt;
+&lt;p&gt;Here’s a list of commands that I use frequently when interfacing with the Pi:&lt;/p&gt;
+&lt;p&gt;Start desktop from CLI: &lt;code class=&quot;language-text&quot;&gt;startx&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Leave Python virtual environment: &lt;code class=&quot;language-text&quot;&gt;deactivate&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Enter Python virtual environment: &lt;code class=&quot;language-text&quot;&gt;workon &amp;lt;name of environment&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;SSH into Pi with X window forwarding: &lt;code class=&quot;language-text&quot;&gt;ssh -X &amp;lt;IP address of Rpi&amp;gt; -l &amp;lt;username on Rpi&amp;gt;&lt;/code&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Multiple Application Trapezoidal Rule in MATLAB]]></title><description><![CDATA[I recently had to implement multi-application trapezoidal rule for some work I was doing. I decided to implement the algorithm in MATLAB…]]></description><link>https://gatsby-casper.netlify.com/2017/03/21/multiple-application-trapezoidal-rule-in-matlab/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2017/03/21/multiple-application-trapezoidal-rule-in-matlab/</guid><pubDate>Tue, 21 Mar 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I recently had to implement multi-application trapezoidal rule for some work I was doing. I decided to implement the algorithm in MATLAB, and figured I’d post a tutorial for it, since I know many people struggle with implementing algorithms in code.&lt;/p&gt;
+&lt;p&gt;This implementation takes advantage of MATLAB’s built in functions, and as such, requires no loop. This technique is referred to as ‘vectorization’ and in many cases, can speed up your code significantly, as it lets MATLAB take advantage of its built in matrix features, which rely on LAPACK and LINPACK - matrix math libraries that have been hand-optimized for various processor architectures. Pretty cool!&lt;/p&gt;
+&lt;p&gt;We’ll build this up in a script so it’s easy to see all of the variables. I often play around with scripts as I’m developing in MATLAB, and encapsulate the code in a function later.&lt;/p&gt;
+&lt;h2&gt;Step 1: Define Function&lt;/h2&gt;
+&lt;p&gt;Trapezoidal rule is a method of numerical integration. It’s not a great one, but it is easy to understand. I’ll assume the reader already has an understanding of how to do it.&lt;/p&gt;
+&lt;p&gt;Let’s use an &lt;a href=&quot;https://www.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html&quot;&gt;anonymous function&lt;/a&gt; to contain the specific function we’d like to integrate. This lets us use standard math notation F(x) to fun the function in our code.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;F = @(x) x^3 + 2*x +5;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Step 2: Setup Integration Variables&lt;/h2&gt;
+&lt;p&gt;Now we need some variables to contain the start and end points of the integral, and the number of sections we’d like to use in our trap rule.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;start = 0;
+endpt = 5;
+n = 3;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We’ll also generate the points to evaluate the function at using the &lt;code class=&quot;language-text&quot;&gt;linspace&lt;/code&gt; function, which generates a set of n evenly spaced points between start and endpt.&lt;/p&gt;
+&lt;p&gt;Also, we’ll generate &lt;code class=&quot;language-text&quot;&gt;h&lt;/code&gt;, our step width using the points we just calculated.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;points = linspace(start, endpt, n+1);
+h = abs(points(2) - points(1));&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Step 3: Implement Algorithm&lt;/h2&gt;
+&lt;p&gt;The algorithm for multi application trapezoidal rule is the following:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/matlab-trap-2-30b0f301cb418b5a0d014583823c3e18.gif&quot; alt=&quot;Multiple application trapezoidal rule&quot;&gt;
+&lt;em&gt;Multiple application trapezoidal rule&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;We can implement this in MATLAB, using the &lt;a href=&quot;https://www.mathworks.com/help/matlab/ref/sum.html&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;sum()&lt;/code&gt;&lt;/a&gt; function as well as the &lt;a href=&quot;https://www.mathworks.com/help/matlab/ref/arrayfun.html&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;arrayfun()&lt;/code&gt;&lt;/a&gt; function, which will apply each element of the points array to our anonymous function &lt;code class=&quot;language-text&quot;&gt;F&lt;/code&gt;. One important note is that the algorithm above has the points zero-indexed. MATLAB arrays use 1-indexing, so we need to add 1 to each subscript of &lt;code class=&quot;language-text&quot;&gt;x&lt;/code&gt; in the image above.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;int = (h/2) * (F(points(1)) + 2*sum(arrayfun(F, points(2:n))) + F(points(n+1)))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Step 4: Vectorize&lt;/h2&gt;
+&lt;p&gt;Right now, we have &lt;code class=&quot;language-text&quot;&gt;arrayfun()&lt;/code&gt;, which is (likely) one step better than using a loop. Even better would be using full vectorization. To do this, we need to reformat the f function to take vectors. So, we’ll use the much-misunderstood dot operator &lt;code class=&quot;language-text&quot;&gt;.&lt;/code&gt; ahead of our caret &lt;code class=&quot;language-text&quot;&gt;^&lt;/code&gt; to make the power element-wise. This means the power will be applied to each element of the input vector, which is what we want. It’s not needed in this application, but using the . before multiplication will result in a more robust function as well, so let’s do it to demonstrate.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;f = @(x) x.^3 + 2*x +5;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The trap expression will now look like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;int = (h/2) * (f(points(1)) + 2*sum(f(points(2:n))) + f(points(n+1)));&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Plotting&lt;/h2&gt;
+&lt;p&gt;Let’s plot the original function at a higher resolution, and plot the trap points we evaluated. I’ll take advantage of linspace again, to plot our “base” function with 30 times more points than n. For small values of &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt;, this will clearly show the points we use in trap rule. For higher n values, it’ll all smush together.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;% plot a high resolution curve of the function and superimpose the trap
+% points
+plot(linspace(start,endpt,n*30),f(linspace(start,endpt,n*30)))
+hold on
+plot(points, f(points))
+title(sprintf(&amp;#39;Trap Rule n = %i&amp;#39;, n))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice that I used &lt;a href=&quot;https://www.mathworks.com/help/matlab/ref/sprintf.html&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;sprintf&lt;/code&gt;&lt;/a&gt; to display &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt; in the title of the plot. Sprintf is used for formatting data into strings, which is what the &lt;code class=&quot;language-text&quot;&gt;title()&lt;/code&gt; function takes.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/51b119f8702c088968b5290a8e434baa/4c221/matlab-trap-1.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 700px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 67.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAG+AD//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAEFAl//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAY/Al//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAE/IV//2gAMAwEAAgADAAAAEPPP/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPxA//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAGBAAAwEBAAAAAAAAAAAAAAAAAAEhEGH/2gAIAQEAAT8QREIvN//Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Plot of our test function&quot;
+        title=&quot;&quot;
+        src=&quot;/static/51b119f8702c088968b5290a8e434baa/4c221/matlab-trap-1.jpg&quot;
+        srcset=&quot;/static/51b119f8702c088968b5290a8e434baa/610c7/matlab-trap-1.jpg 293w,
+/static/51b119f8702c088968b5290a8e434baa/a8060/matlab-trap-1.jpg 585w,
+/static/51b119f8702c088968b5290a8e434baa/4c221/matlab-trap-1.jpg 700w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Plot of our test function&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;The Entire Thing&lt;/h2&gt;
+&lt;p&gt;Here’s the entire script.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;%% Multi application trap rule
+% Richard Arthurs, March 20, 2017
+% Richarthurs.com
+
+f = @(x) x.^3 + 2*x +5; % Function to integrate
+
+start = 0;
+endpt = 5;
+n = 3; % number of sections of trap rule
+points = linspace(start, endpt, n+1);
+h = abs(points(2) - points(1));
+
+int = (h/2) * (f(points(1)) + 2*sum(f(points(2:n))) + f(points(n+1))) % the integral approximation
+
+% plot a high resolution curve of the function and superimpose the trap points
+plot(linspace(start,endpt,n*30),f(linspace(start,endpt,n*30)))
+hold on
+plot(points, f(points))
+title(sprintf(&amp;#39;Trap Rule n = %i&amp;#39;, n))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Running HALCoGen on Mac or Linux With WINE]]></title><description><![CDATA[This tutorial covers installing and running HALCoGen for TI Hercules/TMS570 MCUs on a mac or Linux machine using WINE. I first started using…]]></description><link>https://gatsby-casper.netlify.com/2017/02/01/running-halcogen-on-mac-or-linux-with-wine/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2017/02/01/running-halcogen-on-mac-or-linux-with-wine/</guid><pubDate>Wed, 01 Feb 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This tutorial covers installing and running HALCoGen for TI Hercules/TMS570 MCUs on a mac or Linux machine using WINE. I first started using HALCoGen for the &lt;a href=&quot;sfusat.org&quot;&gt;SFU Satellite Design Team&lt;/a&gt;, where we’re developing an onboard computer using the TI Hercules/TMS570 microcontrollers. These are really interesting industrial lockstep MCUs, with ECC memory and all kinds of neat reliability features.&lt;/p&gt;
+&lt;p&gt;WINE is a layer that translates Windows API calls to POSIX calls, which are used on macOS, Linux, etc. It’s free, and quite easy to set up.&lt;/p&gt;
+&lt;h2&gt;Step 1: Get HALCoGen&lt;/h2&gt;
+&lt;p&gt;Download HALCoGen from the TI site &lt;a href=&quot;http://www.ti.com/tool/HALCOGEN&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Step 2: Get WINE&lt;/h2&gt;
+&lt;p&gt;Download WINE for your system, and any dependencies you may require. I downloaded the “staging” binary package of WINE from &lt;a href=&quot;https://wiki.winehq.org/Download&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I also needed XQuartz, and be sure to download from the XQuartz.org site &lt;a href=&quot;https://www.xquartz.org&quot;&gt;here&lt;/a&gt;, not something like “xquartz.soft32.com,” which came up in the Google search but tries to install a bunch of crapware, and probably malware too.&lt;/p&gt;
+&lt;h2&gt;Step 3: Install WINE&lt;/h2&gt;
+&lt;p&gt;Open up and install the WINE package.&lt;/p&gt;
+&lt;h2&gt;Step 4: Install HALCoGEN With WINE&lt;/h2&gt;
+&lt;p&gt;Unzip the HALCoGen installer. Something along the lines of “HALCoGen-04.06.00-installer.exe” should appear.&lt;/p&gt;
+&lt;p&gt;Launch the WINE application, it will bring up a terminal. Now you need to &lt;code class=&quot;language-text&quot;&gt;cd&lt;/code&gt; to the directory that has the HALCoGen installer you downloaded in step 1.&lt;/p&gt;
+&lt;p&gt;For me, this looked like: &lt;code class=&quot;language-text&quot;&gt;cd Desktop&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now, run WINE on the installer by typing &lt;code class=&quot;language-text&quot;&gt;wine HALCoGen-04.06.00-installer.exe&lt;/code&gt; (but replace with the full name of your particular HALCoGen installer). Note: the WINE terminal will autocomplete with the tab key.&lt;/p&gt;
+&lt;p&gt;WINE may ask you to automatically install a few things. It installed .NET and Gecko after detecting that they weren’t on my system.&lt;/p&gt;
+&lt;h3&gt;Important: select your installation directory&lt;/h3&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/af26e09b6c9d954e72415f58110405b9/e0b92/halcogen-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 700px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 69.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsSAAALEgHS3X78AAADc0lEQVQ4y2WSW2gcZRiG59ILQVB7URR70YogFCqiYrAVbdSLEmJjsVZTEimWikGpbSKlTWqa2gZTag6NpUmxoqlaakzcmhoiiTnuObvZQ3Z3ZnZ39pDd2UNCjLTghfbx281FLQ68vN///zPv//AySsN7J2hs+JSWox00N33BqRPdtDR3c7btSzpae+hqlflkD58cPcvxli5OnfuW06f7aG3p5ePDn9N4+DwfHWzjeGM71767gbJ5QwWjI2O43D7mZp3MTluZnbFhtzmZmZzFJrN1ziFnNqblzO70kjCSdF64ypbH97Bt8xs8/OBOHtlYicvuRXl6aw0Oh4t8PodpZsnlzLJns1nS6TQ52S8U8qysLFPIr3vpsYzN8cRTe9n5zDtUbz9C1atN7Kv+EOWVlxsk2Y2qqYTDETRNQ1VVEokEhmGQTCbXXdapVEouzHP71hoDP/zKA49WsenJfWzbWk/lC++zq2I/Ss3rTditDgkwyGQyZZVCTCE0TZNicZm1tT/5Y3WVYqFYXt/5+y/6B35Duf9NHtp0gPs2vMXGx2rZVXkM5dmXjjAjPRnxOLquC2UYXSg1odRkbUTC5IwIGbmgRJ1OL5EzM0xZvXT23qC//xf6Lg3T032dcx0DKNsPDmGVovPS28rKivRVKKs0l2hTQlso91jg1q3b5f7+ucP/n2WT9Ad1KBUn7dg8QVQh8fmDhKTHQHBRaKMExT0eN7FohJgeJhGLkE5oZddVeUcNkTR00imDeCSI96YFZUfbvASEMZMxMsm4KEYunaCYTbNaNPG6rNjmfsfjmmV8YpLvfxplQn4nLRJADQdIxDUiix6ZF4gbGsprfRrtQ256b87TaXHS9bOLLouLziEXZwasXB2eQAt5CAc9BPwLuOa9hEJBMqmY0OqkhDCq+tEjPvSwH6XqxywvXtGpuLzI86LnLvnX1RtgS7OTY19NkTUWy0QxLYChi0uAJkRa2FeWLmdRNSAugbtHstRYTHYPm1QPZqm6vkTVoOhamh19OmcG7SxFAxLoL3+wrvWAu/ITlf3SrNR6MrztNtlvzVM3WaR2vMDe0Tx7RnJUfpOkfdBBSvNJR/8NvBt8r4TwUIeFQxfGOHBxnLrL09RfsfJu3wz1F6eo+WyU81+PkowG7g0UEjW0gM/rIOhz419wsuifx+dx8C9W5XsmCve2NAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Selecting installation directory&quot;
+        title=&quot;&quot;
+        src=&quot;/static/af26e09b6c9d954e72415f58110405b9/e0b92/halcogen-2.png&quot;
+        srcset=&quot;/static/af26e09b6c9d954e72415f58110405b9/ded24/halcogen-2.png 293w,
+/static/af26e09b6c9d954e72415f58110405b9/099d6/halcogen-2.png 585w,
+/static/af26e09b6c9d954e72415f58110405b9/e0b92/halcogen-2.png 700w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Selecting installation directory&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In the installer, be sure to select your installation directory correctly by clicking the folder icon. Since things are being translated, the old windows-style defaults location won’t work.&lt;/p&gt;
+&lt;p&gt;Keep moving through the installer, clicking “yes” to any dependencies WINE wants to install, and the process should go smoothly!&lt;/p&gt;
+&lt;h2&gt;Step 5: Run HALCoGen&lt;/h2&gt;
+&lt;p&gt;Now that your installation has succeeded, it’s time to exit the installer and launch WINE again. When it comes up, &lt;code class=&quot;language-text&quot;&gt;cd&lt;/code&gt; to the directory with your HALCoGen.exe file in it.&lt;/p&gt;
+&lt;p&gt;For me, I had to go back out of my desktop and into my ti directory, so this looked like: &lt;code class=&quot;language-text&quot;&gt;cd ../ti&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You can use &lt;code class=&quot;language-text&quot;&gt;ls&lt;/code&gt; to list the files in the directory to see if the HALCoGen executable is there. If it is, you’re in the right place.&lt;/p&gt;
+&lt;p&gt;Now type: &lt;code class=&quot;language-text&quot;&gt;wine HALCOGEN.exe&lt;/code&gt; Note: it doesn’t need to be capitalized, and the tab key will autocomplete.&lt;/p&gt;
+&lt;h2&gt;Step 6: You’re done!&lt;/h2&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/cda9e672fb53e780203805dace344506/e0b92/halcogen-3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 700px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 55.85714285714286%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsSAAALEgHS3X78AAACk0lEQVQoz21R30tTYRg+f0IUEd0oaoGRQj/0IpAVWCIpYkh1YzkcJG5nc7iNaU6XRWllN3ZhYQTlhZdlpSlUzmA3UmltoQ5LGeJ07sc5nu3s5zlP7zlDsej9eHje7z3f93zP+x6mXFOF5lYTWJuD0A3W3qPCqHCHEwa7Ey3tnbA9eALbwDCMjrsw9fTD5LgHU9cdOkdnLF1o1rdDc74WzIH8Y3jzaRZv3Ut47/JgasZL/AOTru+YmFnCuGsR76YXVJ747MO4UtsB1aa+BuD2Cfgwv4H84jNgDhaWoKaxDdrrTXDd6sDSfSc8fd342d+DBcpXHt3G8sNe/CL8HtgDqvv6HPDPzUECwHE8TmjqcoI6gxVmsxlejwfRcBiRrSAEnoMYE5BOJiBllSv/CVlClISUEAQBRacrwBwqKgFr0MNqteCb14fVYAyRbRHpTEZFVpIgK0uWIe2BTCLK91A0J7i9LaCgtJwcFhyH3sDCarFg3ruI1QCH9WAUCTEOkZAkh6oZWf4LSmT3CAqxGErP1ed+Cms0wmazwT07h5W1ILYiPKLkMsLHEBNTu45yYtgVzGSzCEV2BOM4WX0NzP68Yuh0OrCsAe4vHqyHRQQ5ESE+iVgig0QqA0lSZij/A3KYJYcRTs15avnIqbNgDheX4fnoa4y+moRneZ1mGIef5rgWiqsIcEls8GnitMqbfEblDWJ/KAH/Zk4wrrRcpQVztKwSZCT3otIGPZ6WclBzKqZpk6JETKSptSTiNIZUKkvzzWAzLECk+4FoCtX942D25ZVCU3MFFxoaUX1VhzqtGQ1sL5qcQ7jUYsfFG52odwzjctcQ9AMjuPlsDB0jH9H2YhrawTHUdr9EZftTVLQOorD5Mf4AWAm/zkBKouEAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;HALCoGEN on Mac&quot;
+        title=&quot;&quot;
+        src=&quot;/static/cda9e672fb53e780203805dace344506/e0b92/halcogen-3.png&quot;
+        srcset=&quot;/static/cda9e672fb53e780203805dace344506/ded24/halcogen-3.png 293w,
+/static/cda9e672fb53e780203805dace344506/099d6/halcogen-3.png 585w,
+/static/cda9e672fb53e780203805dace344506/e0b92/halcogen-3.png 700w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;HALCoGEN on Mac&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Hopefully HALCoGen has popped up and is working! If it does, you’re good to go! I have confirmed that HALCoGen can correctly generate code from an existing project file, so it seems to work quite well under WINE. To launch HALCoGen in the future, just open up WINE, &lt;code class=&quot;language-text&quot;&gt;cd&lt;/code&gt; to the directory with &lt;code class=&quot;language-text&quot;&gt;HALCOGEN.exe&lt;/code&gt;, and type &lt;code class=&quot;language-text&quot;&gt;wine HALCOGEN.exe&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now consider installing Code Composer Studio for &lt;a href=&quot;http://processors.wiki.ti.com/index.php/Download_CCS&quot;&gt;mac or Linux&lt;/a&gt; to get a full TMS570/Hercules toolchain going on your system of choice.&lt;/p&gt;
+&lt;h2&gt;Step 7: Other Apps&lt;/h2&gt;
+&lt;p&gt;I’ve successfully used this procedure with other TI installers for packages such as the flash driver and the safety library.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[WiFI Smart Lock]]></title><description><![CDATA[For a class project, my team and I were lucky enough to be able to build a smart lock. The prototypes were constructed of 3D printed parts…]]></description><link>https://gatsby-casper.netlify.com/2015/09/16/smartlock/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2015/09/16/smartlock/</guid><pubDate>Wed, 16 Sep 2015 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;For a class project, my team and I were lucky enough to be able to build a smart lock. The prototypes were constructed of 3D printed parts for the mechanicals, and all of the electronics and software were designed by me.&lt;/p&gt;
+&lt;h2&gt;Video&lt;/h2&gt;
+&lt;p&gt;I made a video of the project &lt;a href=&quot;https://www.youtube.com/embed/2Xc9gXyf2G4&quot;&gt;here&lt;/a&gt;, which goes into detail about a lot of the design decisions.&lt;/p&gt;
+&lt;h2&gt;Electrical Hardware&lt;/h2&gt;
+&lt;p&gt;MCU: ATmega 328&lt;/p&gt;
+&lt;p&gt;WiFi: ESP8266 module&lt;/p&gt;
+&lt;p&gt;Motor driver: L298&lt;/p&gt;
+&lt;p&gt;A custom designed optical encoder to determine whether the door was locked or unlocked.&lt;/p&gt;
+&lt;p&gt;The motor driver chip was chosen because of my familiarity with it, as well as the fact that I had multiple on hand. Throughout the entire electronics design process, components we already owned were picked to keep the project under budget.&lt;/p&gt;
+&lt;p&gt;Control of the system was handled by the ‘328, which communicated with the WiFi module over serial, and took inputs from the pushbutton and optical encoder. Feedback was provided to the user through an LED, a beeper, and through the web interface itself. Power came from a wall adaptor, as none of the components for the prototype were optimized for low power operation. In the future, the firmware should put the WiFi module to sleep, which would result in considerable power savings. And given that the ESP8266 has an internal ARM microcontroller, we could do all of the control from the module, negating the need for the ATmega 328.&lt;/p&gt;
+&lt;h2&gt;Software&lt;/h2&gt;
+&lt;p&gt;The lock was controlled by a web interface. When buttons on the interface were pressed, the lock would open or close depending on its current state. The state of the lock was checked before every movement and always kept up to date in a  MySQL database that the interface had access to. The backend was written in PHP, and database entries were also updated when the physical button on the lock was pressed. States were saved with a timestamp so users could see when the lock was last actuated. Live user feedback was mostly implemented, using AJAX.&lt;/p&gt;
+&lt;h2&gt;Mechanicals&lt;/h2&gt;
+&lt;p&gt;All of the mechanical components for the lock were designed in SolidWorks and 3D printed. Two prototypes were created, and parts were carried over between prototypes to keep the project under budget. Here are the main components:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Coupler between motor and lock lever&lt;/li&gt;
+&lt;li&gt;Optical encoder wheel&lt;/li&gt;
+&lt;li&gt;Encoder mount&lt;/li&gt;
+&lt;li&gt;Main case with integrated PCB and motor mounts&lt;/li&gt;
+&lt;li&gt;Pushbutton extender (prototype #2 only)&lt;/li&gt;
+&lt;li&gt;Case lid/front panel (prototype #2 only)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f1e7f572cee27122ea250939dfde1493/03eee/smartlock-2.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 66.650390625%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMF/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAL/2gAMAwEAAhADEAAAAVq5ZsLqn//EABsQAAMAAgMAAAAAAAAAAAAAAAACAwQTFDEy/9oACAEBAAEFAks6kck5kRel96Zn/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERMf/aAAgBAwEBPwFYyn//xAAWEQEBAQAAAAAAAAAAAAAAAAABACH/2gAIAQIBAT8BTSy//8QAHhAAAQMEAwAAAAAAAAAAAAAAAAEREhAhIjJBUZH/2gAIAQEABj8CaFjKSnPlI9qxqh//xAAcEAACAgIDAAAAAAAAAAAAAAAAAREhMUFRYeH/2gAIAQEAAT8hWvbzJGnidHM1EE9GjSsbH4R//9oADAMBAAIAAwAAABDPH//EABcRAAMBAAAAAAAAAAAAAAAAAAARUQH/2gAIAQMBAT8Q2qDQ/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERUf/aAAgBAgEBPxBTCaP/xAAdEAEBAAICAwEAAAAAAAAAAAABEQAxIVFBYZHB/9oACAEBAAE/ECRSHYcT9x40cQF3h5k6XmiNXIsoL9xb9xby2P/Z&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Prototype&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f1e7f572cee27122ea250939dfde1493/27561/smartlock-2.jpg&quot;
+        srcset=&quot;/static/f1e7f572cee27122ea250939dfde1493/06456/smartlock-2.jpg 293w,
+/static/f1e7f572cee27122ea250939dfde1493/4b3e4/smartlock-2.jpg 585w,
+/static/f1e7f572cee27122ea250939dfde1493/27561/smartlock-2.jpg 1170w,
+/static/f1e7f572cee27122ea250939dfde1493/278c2/smartlock-2.jpg 1755w,
+/static/f1e7f572cee27122ea250939dfde1493/03eee/smartlock-2.jpg 2048w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Smart Lock Prototype&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I designed everything but the main case for prototype #2, though I did modify it with my own motor and PCB mounting bosses. The entirety of the lock was assembled in CAD to check fit before printing, and 3D printing constraints were considered throughout the entire process. By creating two prototypes, we were able to nail the tolerances for the final prototype, enabling us to create very reliable friction fits for some parts, reducing BOM cost.&lt;/p&gt;
+&lt;h2&gt;Verdict&lt;/h2&gt;
+&lt;p&gt;This was a very rewarding project to complete. I got the opportunity to utilize many sub-modules that I’d had experience with from previous projects (motor driver, power supply, etc), but also the chance to use new modules, like the ESP8266 WiFi board. Programming the web interface was an interesting challenge as I’d never communicated with a MySQL database through PHP before, or set up databases and handled GET requests.&lt;/p&gt;
+&lt;p&gt;In the future, it’d be fun to revisit the project and take more time to design it for low power and make it physically smaller. There are many approaches to this - sleeping the WiFi module, getting rid of the external MCU, or communicating over Bluetooth to a WiFi base station. There was also a lot of empty space inside the prototype. While it looked impressive, the empty space was really just a waste. A case redesign, coupled with a custom PCB (instead of a protoboard one-off) would allow the device to be a lot smaller.&lt;/p&gt;
+&lt;p&gt;The web interface could also do with a security overhaul. I’m no security expert, and it likely shows in the code for the backend, which is obviously not a particularly good thing for a lock connected to the internet. Luckily for the prototype, it can only be actuated by devices on its own local network, which provides a good amount of intrinsic security to the system.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[TI ARM LaunchPad GPIO Input Tutorial]]></title><description><![CDATA[The TI Tiva Launchpad boards are an excellent way to get started working with ARM microcontrollers. With the Tivaware software suite, they…]]></description><link>https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-input/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/posts/ti-launchpad-gpio-input/</guid><pubDate>Mon, 25 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;The TI Tiva Launchpad boards are an excellent way to get started working with ARM microcontrollers. With the Tivaware software suite, they’re not too much harder than an Arduino to program, either. I’ve found the tutorials from TI and elsewhere online to be very helpful. Unfortunately, the TI tutorials go over GPIO outputs, which are pretty simple, but they totally skip inputs! For someone totally unsure where to look for the correct documentation, I feel this is a major oversight. Fortunately, I’ve been able to figure it out with the help of some 3rd party tutorials. Here’s my take on how to use GPIO inputs, with references back to the TI material so you can get an idea of where to look for functionality in the main documentation.&lt;/p&gt;
 &lt;p&gt;I’ll explain the setup and put the code at the end of this post, along with some links.&lt;/p&gt;
 &lt;h2&gt;Setup&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c&quot;&gt;&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;#include &amp;lt;stdint.h&amp;gt;
