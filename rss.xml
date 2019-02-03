@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Wed, 30 Jan 2019 03:17:17 GMT</lastBuildDate><item><title><![CDATA[Raspberry Pi OpenCV Setup]]></title><description><![CDATA[This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board…]]></description><link>https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</guid><pubDate>Sun, 20 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board). You will learn:&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Sun, 03 Feb 2019 19:03:31 GMT</lastBuildDate><item><title><![CDATA[Raspberry Pi OpenCV Setup]]></title><description><![CDATA[This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board…]]></description><link>https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</guid><pubDate>Sun, 20 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board). You will learn:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;How to develop over an SSH connection in VS Code&lt;/li&gt;
 &lt;li&gt;How to forward windows from the pi to your PC&lt;/li&gt;
@@ -731,9 +731,38 @@ the Application&lt;/strong&gt; section. &lt;/p&gt;
 &lt;li&gt;Press the &lt;code class=&quot;language-text&quot;&gt;Test Connection&lt;/code&gt; button. It should succeed. &lt;/li&gt;
 &lt;li&gt;All good, time to flash the bitstream! Click the &lt;code class=&quot;language-text&quot;&gt;Program FPGA&lt;/code&gt; button. &lt;/li&gt;
 &lt;li&gt;Once that’s done, you can debug the software application. Simply hit the &lt;code class=&quot;language-text&quot;&gt;Debug&lt;/code&gt; button and the debugger perspective should open up. Click the &lt;code class=&quot;language-text&quot;&gt;Start&lt;/code&gt; button when you are ready to run the code. &lt;/li&gt;
-&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[Drone Guidance System]]></title><description><![CDATA[For the past few years, I’ve been working on a guidance system for drones with  SFU Team Guardian . This is truly a system, which…]]></description><link>https://gatsby-casper.netlify.com/projects/drone-guidance-system/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/drone-guidance-system/</guid><pubDate>Thu, 03 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;For the past few years, I’ve been working on a guidance system for drones with &lt;a href=&quot;teamguardian.ca&quot;&gt;SFU Team Guardian&lt;/a&gt;. This is truly a system, which encompasses simulator (APM SITL) or real drone support, path planning, mission creation, drone control, and a web-based ground control app. I started the project for the team to meet the requirements of the AUVSI competition, where a drone must complete objectives while avoiding stationary and moving objects. &lt;/p&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[Drone Guidance System]]></title><description><![CDATA[This guidance system for drones encompasses a simulator (APM SITL) or real drone support, path planning, mission creation, drone control…]]></description><link>https://gatsby-casper.netlify.com/projects/drone-guidance-system/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/drone-guidance-system/</guid><pubDate>Thu, 03 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This guidance system for drones encompasses a simulator (APM SITL) or real drone support, path planning, mission creation, drone control, and a web-based ground control app. I started the project for &lt;a href=&quot;teamguardian.ca&quot;&gt;Team Guardian&lt;/a&gt; to meet the requirements of the AUVSI competition, where a drone must complete objectives while avoiding stationary and moving objects. &lt;/p&gt;
 &lt;h2&gt;Tech Stack&lt;/h2&gt;
 &lt;p&gt;The guidance system is executed on a laptop computer in the field, and continuously sends velocity vectors and other commands over the telemetry radio connection. The drone itself is a multicopter, running stock APM firmware and sending back telemetry at roughly 10 Hz. Running the guidance system on a laptop provides flexibility of developing in a high-level language (Python) and facilitates much easier testing when the simulator is involved. For the task at hand (avoiding large obstacles), the communication latency and potential for dropped packets is not a significant concern. &lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ed752c8c3767b02b10484eb3fa1cc666/d1515/comms.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 905px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 21.546961325966848%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsSAAALEgHS3X78AAABCElEQVQY0yWQyUrDYBSF8whulLZJ8w9NS5I2qZk6gDSmgpYiDt0oDgtBSnXpwoUI4ju6cOuTfP5NF4d77ll853ItJQTSD5GDIbqxjxIuSim00mita7+TpNPpILRCSlln2+m2XcKwjxS73VJ2E3dS0Vi9YJ8/IKKEdqtpYJ4BeAhT4DhO7dfrDV9v70T9AbZj19B8mrK8OmN0lKFMmbUNW5fP7MVzDk7v6MUJeWqUF8SDQ4IgYDwekaYF358f/P38Mq9OiKKIOI5ZXFesX1c8Pl3Q7XlY0gDd2QJneU/LKJBtyuPKABJzSUyaZJRlSZ7lTCcTVje3+L5PURSmLKQbeMxmU7JsWL/oHwGwfuUw1vs3AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;System communication&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ed752c8c3767b02b10484eb3fa1cc666/d1515/comms.png&quot;
+        srcset=&quot;/static/ed752c8c3767b02b10484eb3fa1cc666/9ae95/comms.png 293w,
+/static/ed752c8c3767b02b10484eb3fa1cc666/2c4dc/comms.png 585w,
+/static/ed752c8c3767b02b10484eb3fa1cc666/d1515/comms.png 905w&quot;
+        sizes=&quot;(max-width: 905px) 100vw, 905px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Communication overview&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The DroneKit library provides an application layer that allows high-level commands to be sent to the drone via MAVProxy, and hides the details about the connection. During development, the APM SITL simulator is hooked up identically to a real drone by connecting to its provided telemetry stream. When we tune the real copter PID paramaters, we set them in the SITL drone as well, allowing the simulated drone to have similar flight characteristics to the real drone. This makes it easier to tune paramaters of the guidance system. &lt;/p&gt;
 &lt;h2&gt;Control Loop&lt;/h2&gt;
 &lt;p&gt;Control of drone movement is provided by the velocity vector commands exposed by DroneKit. You need to continuously feed velocity vectors to a drone running APM firmware otherwise it will quickly stop and hover. This turns out to be a &lt;em&gt;really&lt;/em&gt; nice safety feature, and apparently wasn’t present in the earliest versions of APM. Yikes!&lt;/p&gt;
@@ -757,11 +786,105 @@ the Application&lt;/strong&gt; section. &lt;/p&gt;
 &lt;p&gt;To execute a mission, the guidance system essentially loops through all of the locations in a mission module, one mission module at a time. &lt;/p&gt;
 &lt;h2&gt;Path Planning&lt;/h2&gt;
 &lt;p&gt;The path planning system uses the A* algorithm, which allows a route to be calculated between a particular location and the target location from the current mission module. Along the way, any “obstacles” will be avoided. A* operates on a grid representation of the flight area, and obstacles are simply nodes on the grid that the path is not allowed to use. In practice, I use a circle generation algorithm from computer graphics to find grid nodes around a central coordinate to mark off as the edges of an obstacle. &lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a3ca0e6f580ae26c61f4cd31f544bb13/042d0/astar.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 37.34034560480841%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAABqElEQVQozxWQ2W7aYBhEeRiWEBKF1aZs3h28A7bZoQFDFKiai/auL3/6cfFrpNH3j+ZMqTJq8Gq2eTa71OU9WR1qtsqbo9IwO1T1NhWjTdVSqNo9ylaPitw9tGYrNMSritYlo6JUKSm+wnhuYa1jhrnBx73HcFFgzgpib0Ec7Bh4AS+hRjOwUBKLhqfzEpioi3fakUlD/Fag8dSvU3KzCeE2INjFWKup6Dv+KiI7ZmxOK9bFlt3sQJjMMdYu7jLGTKcY2RRNdDCz6c9cOoFORZXAeG1xuC5xtj6TzJEWJm+ehn9coKceduKQ/Mw4bM6csw9Ov/v0Yw0lMFAjg740VhcuijStPgKzD4+smGHkLnpmo8YmdWeMJi29TcxWwm5/LoSHCD+PCI+2tJnQE8RhYso/hx+peOED+VmQU43lV8Hlb8Lu7pEc5rR8g27ssvra8f3vG1v2bU0nsnOIs0tp+jrD2EKbO9i5YKcuvce2o1dK5W6Z5rjL8TLi181iIdijqYrtD9hGGmdpdr3mbPcxxSnlfttz/9xzOeUU55xLseJ62RAKXV2t8R9JTQFCJOM8OgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;A* Path Planning&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a3ca0e6f580ae26c61f4cd31f544bb13/a66a3/astar.png&quot;
+        srcset=&quot;/static/a3ca0e6f580ae26c61f4cd31f544bb13/65e34/astar.png 293w,
+/static/a3ca0e6f580ae26c61f4cd31f544bb13/8d594/astar.png 585w,
+/static/a3ca0e6f580ae26c61f4cd31f544bb13/a66a3/astar.png 1170w,
+/static/a3ca0e6f580ae26c61f4cd31f544bb13/042d0/astar.png 1331w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;A* path planning around an obstacle&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The real-world resolution of the grid is customizable, and I usually use 1 metre. So, the flight area is broken up into a set of geographical coordinates along a 1m grid. A* operates on the indices of the geographical coordinates to calculate the path. In various places, a KD tree is used to quickly determine the closest grid coordinate to another coordinate (such as a mission module target location). Since the grid resolution is fine compared to the accuracy of the drone’s GPS navigation (3m roughly), this approximation doesn’t result in significant navigation issues in practice. &lt;/p&gt;
 &lt;p&gt;Upon reaching a target location, A* is executed to find the path to the next location. &lt;/p&gt;
 &lt;h2&gt;Navigation&lt;/h2&gt;
-&lt;p&gt;… this post is a work in progress. &lt;/p&gt;
-&lt;h2&gt;Obstacle Avoidance &amp;#x26; Path Planning&lt;/h2&gt;</content:encoded></item><item><title><![CDATA[Goodbye Wordpress, Hello Gatsby]]></title><description><![CDATA[I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant…]]></description><link>https://gatsby-casper.netlify.com/2019/01/02/byebye-wordpress/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2019/01/02/byebye-wordpress/</guid><pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant software development
+&lt;p&gt;Navigation is fairly straightforward, with a bearing to the next location along the A* planned path being repeatedly calculated, and the velocity components being derived from that. These components constitute the setpoint and are fed to a PID loop to determine the final velocity components to send to the drone. Some checking for velocity limits is also implemented, as are some special considerations for reaching targets accurately. &lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/876e666b71c86284bf04e376ecefbf43/65336/nav.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 661px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 74.88653555219365%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsSAAALEgHS3X78AAADlElEQVQ4yyWTWW/bVhCF+Sv6UsStF8mrJGqnRJGiFlIiRe2iNluS9zhI4tqunbhwijYInG4oWvSpfWlQoOhbf+PXifpwcDmX4OGZc2aUtWKUVStKyEqRMkqsWbElQoJoOc6uYK+ssi31qhnlczPCqhFhraSy/vFO3u/IGS/s8pmlouhtnaifpFby+ZD+R8gjyw/DRSEpJ9m04mxXkmyVE4QEYcGm1KGK1ELwxIii6ds0M+t8WoqhDBd17MAkVU+RrmfJOzo5T0NzVBJ6iEw9jSZ1rJoQtaqccdRKnEhVflKKsynnoFegZeyKmDiK3c1jtTRMQXWQxx0WmQRV3MWI/O0t/UDH91XsdpaSn6bSzGK3cnj9gtzlsbs640mJrjyXOwZKUYj0ZoacmyRRVYlWRJkRJj6Zs/LmT6KTASvv/kD38vhDl0JNZ8+MERMPU5WYdBInbcdJ2QlyTgLF6mRJuioZ72MbCTYKe2yUEqyPFzxRNbZaNba/uUc/SjG+cTFeJdjx9ig0dIJ5HX9UQnPTbOh7Syj1QQ6zncDqpMQrCcGQF+LjJ9//y8qszebDrzj1AwZ5C79sEJzXmD9vcnTepDu1aQmhO7QIFSJEZFoUsy3teqp4mMQUwpi0HBbStXSYjbaM1I+PaNMunZbFy4MZ3z17w8PoCsPNCMkWqh2jHljsFGMyPhGU4LBOtSfm9nWG0xKdwKAkQXmjLtZNkfL5DhcnfS5fzbm8mzJ7KpgcYpVNNDNP0TGZX/TYrm0tZ1XGxmf/tE1vVmMy/9iCRcTcE5M1Um6WsAzsjraD3sgwOmwu1UScGNlaCtst4LWqXB8844PxFzFLQim1c3SGJoFEP55U8GSm0pJYRqB7GVw3x1m/zMWkzvlJj7vrBV9eHXFxMeH8LODqixmvLy/4+/J33n/9GiXvp/CDAvszm5PjBtP9iqg0qXZzVETh7bTBV9M6N7MWJyc+h2cuwawqnucwvCzuwKI3d2jNTS5fTFEyjf8JF/MaZ8ces3176aMjvmqOtGWnOeyY/HZ3xMmpz/GpS/+gIluVJOMkKTQ1WgfVZdrThYOiyQa0hwZHQvhUFAai0JGA+jNRuxgwPR1yf33Kzw8vmR7WOD7zCIQwI6u6JGxoNKYVXFnffQlYUWU7PFE0lst9CaYztqlPLEbi1w+P7/jp8S2/vP+Wt/cvpFWbsajwxPN0LU1KFqHg53CCIrW+cEjr/wH0QSZ7JBiSMwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Drone Navigation&quot;
+        title=&quot;&quot;
+        src=&quot;/static/876e666b71c86284bf04e376ecefbf43/65336/nav.png&quot;
+        srcset=&quot;/static/876e666b71c86284bf04e376ecefbf43/8ea30/nav.png 293w,
+/static/876e666b71c86284bf04e376ecefbf43/cd025/nav.png 585w,
+/static/876e666b71c86284bf04e376ecefbf43/65336/nav.png 661w&quot;
+        sizes=&quot;(max-width: 661px) 100vw, 661px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Velocity vector calculation (excerpt from training presentation)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Tuning the PID constants is accomplished in the simulator once a parameter file from the drone is applied to the simulated drone. This provides a reasonably accurate representation of real flight characteristics, and every mission is simulated before execution to ensure safety. &lt;/p&gt;
+&lt;h2&gt;Ground Control&lt;/h2&gt;
+&lt;p&gt;We decided to use a web-based stack for the ground control UI. The main driver for this was wanting a fully featured mapping library that would allow us to place components (icons, paths, etc.) on the map and have them be georeferenced correctly. GUI solutions like QT didn’t have mapping features advanced enough for our use. We also needed to provide our own map tiles as opposed to using Google Maps or something similar, since there is no internet out at the flightline at compeition. OpenLayers was chosen as the mapping library after experimenting with some alternatives. &lt;/p&gt;
+&lt;p&gt;The ground control system communicates with the guidance layer (providing path planning and navigation). They are maintained as separate projects, and guidance can run standalone from the command line without having a GCS instance connected. &lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/dcbc2a430951a14cab9689f4be5ab1fe/be9be/gcs.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 50.13477088948787%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsSAAALEgHS3X78AAACZUlEQVQozy2SSVMTYRCG81es8mRZSEmBAbIRIDNJZjJbMllmMpOZyR5CADUsikuBIgfUAwfL8urN//jYUh66+uuu7rfffvtLqXWbQjVLvpIlVxZTM2TVLXlvkyv98/sUNEVqxJQCxdI2Bcnn/1uutElGbLO4wXphjdTy/SWLVxHJpEE4sugOLQYLX3I9klkTJ1QweiVs8Y2wgt1VxErUQ5Wqty/5Mq2oSifW8YcmKS8wcLs6tZaC3tyn3C6hBRptyXVjm2ZXihMTLzZp9mr4kUGYWHjiG36F9r9ar0KS2EwmLVKWX8XwyzjSaHpldE/FDDUCib22SkviUOIoqJJIba+r0ZW42auiyXBHcsnYJR44RMM6KTfQafoaDa9Kra1QcfdwoxqTocO0b0mhidnexXVy3G+t8lJNo/m72EGJcFxneT7i8sOc5ZspsfSkXAGzhbLTKUujgmrvUI9rDEY2M2mYT10CiesCelgvctA3GYnGX24vuL464fUyIegbjKctkgdA0coWdoaAacLO7Ci4spIvKwYixVC0Sh70ElkinelxwNnFhKubczwBNzp7WJ7C+NAnkrVTmd1N0tk1MoUXpHfW5ZtsoYs2yaxBf2AxFZZtYV9xdlCtPJYMjAd1jhahHKEpw8wHm8tBRokAPs+v8yS9wqOVxzzLPmW1sMKGsirXrHK86PDp7Zib8yEnBx129DQtuerH0zmzfptBYBOHNkFgEnVrJKFFaiNXYHF6xt3dHRVTEZZprm/e8ef3L5bHY8aJx4+vn7EN+YeehVZTaDYMvt9e8/P+G3tKkXwxw+JowmAQ8Bc/6ZPnT1G53wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Ground Control&quot;
+        title=&quot;&quot;
+        src=&quot;/static/dcbc2a430951a14cab9689f4be5ab1fe/a66a3/gcs.png&quot;
+        srcset=&quot;/static/dcbc2a430951a14cab9689f4be5ab1fe/65e34/gcs.png 293w,
+/static/dcbc2a430951a14cab9689f4be5ab1fe/8d594/gcs.png 585w,
+/static/dcbc2a430951a14cab9689f4be5ab1fe/a66a3/gcs.png 1170w,
+/static/dcbc2a430951a14cab9689f4be5ab1fe/59785/gcs.png 1755w,
+/static/dcbc2a430951a14cab9689f4be5ab1fe/be9be/gcs.png 1855w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Early GCS prototype showing drone, obstacle, planned and real flight paths&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The initial prototype app was implemented in vanilla JavaScript, but is currently being transitioned to React + Redux. This will allow us to handle some of the more complex UI components we want to create in the future. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Goodbye Wordpress, Hello Gatsby]]></title><description><![CDATA[I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant…]]></description><link>https://gatsby-casper.netlify.com/2019/01/02/byebye-wordpress/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2019/01/02/byebye-wordpress/</guid><pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve maintained a Wordpress blog for years now, and I always did like Wordpress. Creating Wordpress themes was one of the first significant software development
 projects I did as a kid. However, as my hosting account expired recently and I got hit with renewal fees that were 3x the original cost (this is &lt;em&gt;extremely common&lt;/em&gt; across web hosts), I decided to take a second look at how I could maintain a personal site with less technical and financial overhead. &lt;/p&gt;
 &lt;p&gt;I’ve also been thinking a lot about how I’d like to lay out my site. I really wanted to keep blog posts and projects separate. Wordpress could do this, but the off-the-shelf themes didn’t exactly support what I wanted to do. Of course, I could extend an existing theme, but I didn’t really want to write PHP and deal with Wordpress any more.&lt;/p&gt;
 &lt;p&gt;Enter Gatsby - the static site generator. As opposed to Wordpress which generates pages on the fly by pulling post data from a database, Gatsby takes markdown files (for pages, posts, etc.) and generates an entirely static site. The content can then be hosted inexpensively, with zero server-side dependencies. The pages are constructed using typical modern web technologies, like React. I’ve been having a great time with React recently, so I decided to give it a shot. &lt;/p&gt;
@@ -889,7 +1012,75 @@ Clock Speed:                                        60 MHz&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;0.5&lt;/strong&gt; – Version used at CSDC final testing, black + ENIG 4-layer PCB. Minor bug fixes from 0.4, remove before flight programming jumper, full PC/104 connector layout.
 The software operated on a continuous release schedule.&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.academia.edu/11992711/On-board_data_handling_for_ambitious_nanosatellite_missions_using_automotive-grade_lockstep_microcontrollers&quot;&gt;1- On-board data handling for ambitious nanosatellite missions&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Getting Started With Deep Learning – Classifying Images From a Drone]]></title><description><![CDATA[Being as wrapped up in the tech industry as I am, I knew it would only be a matter of time until I would try my hand at some deep learning…]]></description><link>https://gatsby-casper.netlify.com/2018/04/06/deep-learning-drone-getting-started/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2018/04/06/deep-learning-drone-getting-started/</guid><pubDate>Fri, 06 Apr 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Being as wrapped up in the tech industry as I am, I knew it would only be a matter of time until I would try my hand at some deep learning. For me, the motivation to get stated came from two things; the realization that deep learning and ML are just another tool in the modelling toolbox, and the availability of a top-down and free course called FastAI.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.academia.edu/11992711/On-board_data_handling_for_ambitious_nanosatellite_missions_using_automotive-grade_lockstep_microcontrollers&quot;&gt;1- On-board data handling for ambitious nanosatellite missions&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[DemoSat For Educational Outreach]]></title><description><![CDATA[I’ve been part of a lot of educational outreach for the SFU Satellite Design Team. It’s super fun talking about our projects to the public…]]></description><link>https://gatsby-casper.netlify.com/projects/demosat/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/demosat/</guid><pubDate>Tue, 05 Jun 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I’ve been part of a lot of educational outreach for the SFU Satellite Design Team. It’s super fun talking about our projects to the public and showing what we’ve built. However, our good hardware is usually not available for these events since subteams are usually using it for development and we don’t want to risk damage. That’s where DemoSat comes in. It’s a purpose-built 3D printed CubeSat and a custom interactive desktop app. &lt;/p&gt;
+&lt;h3&gt;Concept of Operations&lt;/h3&gt;
+&lt;p&gt;I wanted this project to interactively show some of the issues we deal with when desigining satellites. Power was chosen as the main issue to demonstrate. It’s easy to show and everyone knows the pain of a dead battery. To do this, users will use a flashlight to charge up DemoSat. They will be able to see the “telemetry” on the screen, and they will be given several buttons to interact with. The satellite’s payload will be some LEDs that users can control. &lt;/p&gt;
+&lt;h4&gt;Interactivity&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;DemoSat shall have some RGB LEDs onboard that users can control from the ground station app. &lt;/li&gt;
+&lt;li&gt;Users shall be able to use a flashlight to charge DemoSat.&lt;/li&gt;
+&lt;li&gt;The groundstation will simulate some temperature effects from charging and operating the payload. &lt;/li&gt;
+&lt;li&gt;Users will be able to see how different elements of a mission (charging, payload operation) work together.&lt;/li&gt;
+&lt;li&gt;Advice hints for running the mission will be provided from the groundstation. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are two parts of this project - the groundstation app and the DemoSat hardware itself. &lt;/p&gt;
+&lt;h4&gt;DemoSat Hardware&lt;/h4&gt;
+&lt;p&gt;The hardware had the following requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Small and 3D-printable in a short period of time.&lt;/li&gt;
+&lt;li&gt;Support for a repeatedly deployable antenna.&lt;/li&gt;
+&lt;li&gt;Provide protection for the electronics inside. &lt;/li&gt;
+&lt;li&gt;Illustate the real scale of a CubeSat.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I decided to use our previous generation onboard computer (OBC) that I developed as the embedded platform for this project. I know the hardware and the firmware very well, so adding the necessary commands for interactivity was sraightforward. It’s also cool to use some satellite hardware on the demonstration platform. &lt;/p&gt;
+&lt;h4&gt;DemoSat Ground Station&lt;/h4&gt;
+&lt;p&gt;The ground station was built using ReactJS, Redux and Electron. This will allow it to be cross-platform so it can be run on anyone’s laptop at events in the future. A few months ago, I built a simple serial monitor with this tech stack as a development experiment for the &lt;a href=&quot;http://www.asc-csa.gc.ca/eng/satellites/cubesat/selected-teams-map.asp&quot;&gt;ORCASAT project&lt;/a&gt;. Since the requirements are almost identical, I based the DemoSat groundstation off this experiment. &lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/6b4a4811b42482c5cfc40f7876ad1ac1/d7ddf/header2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 69.13183279742765%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsSAAALEgHS3X78AAACj0lEQVQ4y61TzUsUYRwego5BHvoTOm72f1QXg/QWQdBBL12KxqhDdCgKkg4heUlQV4XsgyBI0kgqMNR13XZmZ1vd2U/dXHXXmX3n/Xr6zShqoIeod3iY39c88/s97/sasy9ftWV+fLu54uZ7C3nXXF7Om/kV13TJLrgFM+tkzeRi0kwmkqaVtqJYqVQxXbdoFsleq5bD2luEu6mlVLvxZmLiDP566T1r29+PZrPZ60Z8dDQmpAzDcnUT3HYZX61zTv6RqHtbvOL5XAnJV8vFMMZCwkwm022MjY3FhBBcKwV/m2nmk8m11lJpikeQUmoppA58FkFxRb6OctAyzMuQ0HGcHmMkHo8pKfmW34RVcnRxo4LKdg3UBYIgQIsxCC7QoHyqkIFTXkau5uKXV0fAorymugOEozuETeEjVc9pZ7OARM1BqbFGhByMSEPJmoGH1EYOYX5p/SdymyUipDwLaDgld0fuMUZDDWlkJRW8hq+9JsnJd0SnwSMc3IQjdmifME4jkwS85fsou65erVbR9D14QQtCiYgw4ApcKChNbx52zRDKJoQMZdnTMCIcGRiIKeqpOfkBzqUOzV6/xby3gq7p27hnPcNcegunzi7g3JUclvNlXL56DRcuduHxk6e4Yd7B+Y5Off/Bo4gwnbaow8HBGHmc2RYqz/s1W0igEKzjhfMO76szKFRb6H1YRP9QDVsNDzNfvmLq02cspdKY/T6HyY/TOrG4FBHatt1jDA0PxyrlMqs3GpoOlGQksGBcInw4pOCMikX4T7m7m4eBK6WRTCa7jfHx8XY6cvgfK7opfX19py3bnqV2Fy3LXrAsK/En7D2bzlmCPjoM8wR7amqq06B1jHCC0EY4+Y84/hvLYqM87YAyuQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;DemoSat Ground Station&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6b4a4811b42482c5cfc40f7876ad1ac1/a66a3/header2.png&quot;
+        srcset=&quot;/static/6b4a4811b42482c5cfc40f7876ad1ac1/65e34/header2.png 293w,
+/static/6b4a4811b42482c5cfc40f7876ad1ac1/8d594/header2.png 585w,
+/static/6b4a4811b42482c5cfc40f7876ad1ac1/a66a3/header2.png 1170w,
+/static/6b4a4811b42482c5cfc40f7876ad1ac1/d7ddf/header2.png 1244w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;DemoSat Ground Station App&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Redux was used as the state management library. It handles all of the state variables, and is updated from the various buttons and from the telemetry stream that comes in from the satellite. The telemetry stream is a pared down version of what we normally send, and reports the following elements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Deployment status&lt;/li&gt;
+&lt;li&gt;ADC reading of solar panel voltage&lt;/li&gt;
+&lt;li&gt;LED status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The app parses this stream when it comes in and updates the UI. Telemetry comes in at 1 Hz and commands are sent out from the app asynchronously. The interface for this is a UART, using the &lt;code class=&quot;language-text&quot;&gt;Node-SerialPort&lt;/code&gt; package. &lt;/p&gt;
+&lt;p&gt;The app also includes the logic for providing advice popups, and some logic to demonstrate the temperature level and battery state of charge. These aspects were handled on the app side (as opposed to on the OBC itself) to make it faster to prototype. &lt;/p&gt;
+&lt;h4&gt;Demonstration Logic&lt;/h4&gt;
+&lt;p&gt;The logic for temperature and battery state of charge operates as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Shining a light on the solar panel will begin to charge the satellite. &lt;/li&gt;
+&lt;li&gt;Charging the satellite will cause its temperature to increase, since it’s in the Sun. &lt;/li&gt;
+&lt;li&gt;Activating the payload will drain the battery and increase the temperature. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Users are given some nominal zones to keep the battery state of charge and the temperature, and the advice popups occur to guide the user to the nominal zones. I plan to implement a very simple scoring system so that users can get a single-number metric on how well they’re doing with their satellite operations. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Getting Started With Deep Learning – Classifying Images From a Drone]]></title><description><![CDATA[Being as wrapped up in the tech industry as I am, I knew it would only be a matter of time until I would try my hand at some deep learning…]]></description><link>https://gatsby-casper.netlify.com/2018/04/06/deep-learning-drone-getting-started/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2018/04/06/deep-learning-drone-getting-started/</guid><pubDate>Fri, 06 Apr 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Being as wrapped up in the tech industry as I am, I knew it would only be a matter of time until I would try my hand at some deep learning. For me, the motivation to get stated came from two things; the realization that deep learning and ML are just another tool in the modelling toolbox, and the availability of a top-down and free course called FastAI.&lt;/p&gt;
 &lt;p&gt;As I tend to do, this article will be part tutorial (I’ll share the steps and interesting things I’ve found), and part observational in nature. Let’s start learning!&lt;/p&gt;
 &lt;h3&gt;My Interest in ML and Deep Learning&lt;/h3&gt;
 &lt;p&gt;I’m interested in applying machine learning to the following areas:&lt;/p&gt;
