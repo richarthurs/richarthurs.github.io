@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Thu, 22 Aug 2019 19:18:37 GMT</lastBuildDate><item><title><![CDATA[CubeSat Camera Module]]></title><description><![CDATA[The goal of this project was to develop a small, low-power camera system suitable for integration as a CubeSat payload. Three prototypes…]]></description><link>https://gatsby-casper.netlify.com/projects/cubesat-camera/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/cubesat-camera/</guid><pubDate>Thu, 22 Aug 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;The goal of this project was to develop a small, low-power camera system suitable for integration as a CubeSat payload. Three prototypes were developed, resulting in a flexible dual-camera architecture for many kinds of on-orbit imaging needs. &lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Richard Arthurs]]></title><description><![CDATA[Engineering student, tinkerer]]></description><link>https://gatsby-casper.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Sun, 01 Dec 2019 05:54:41 GMT</lastBuildDate><item><title><![CDATA[CubeSat Camera Module]]></title><description><![CDATA[The goal of this project was to develop a small, low-power camera system suitable for integration as a CubeSat payload. Three prototypes…]]></description><link>https://gatsby-casper.netlify.com/projects/cubesat-camera/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/projects/cubesat-camera/</guid><pubDate>Thu, 22 Aug 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;The goal of this project was to develop a small, low-power camera system suitable for integration as a CubeSat payload. Three prototypes were developed, resulting in a flexible dual-camera architecture for many kinds of on-orbit imaging needs. The extent of the project is a proof of concept prototype to demonstrate the imaging pipeline capabilities, not a final space-grade module. &lt;/p&gt;
 &lt;h2&gt;High-Level Requirements&lt;/h2&gt;
 &lt;p&gt;This project was intended to satisfy the requirements for the Canadian Satellite Design Challenge, with the goal of flying it as a payload on &lt;a href=&quot;http://sfusat.org&quot;&gt;SFUSat’s&lt;/a&gt; entry to the competition. The competition requires that the satellite provide imaging capability that can be scheduled from the ground.  &lt;/p&gt;
-&lt;p&gt;As an extension to these requirements, the team decided to develop a dual-band system targeting the visbile and NIR bands. With the capability to image in both of these bands, we can create data products such as NDVI, which are used to determine health of crops. &lt;/p&gt;
+&lt;p&gt;As an extension to these requirements, the team decided to develop a dual-band system targeting the visbile and NIR bands. With the capability to image in both of these bands, we can create interesting data products such as NDVI. Products like these can be used to evaluate the health of crops, and doing the processing on-orbit reduces the downlink requirements of the satellite. To my knowledge, there is currently no COTS module with all of these capabilities. &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;40x40 km swath at 400 km orbit &lt;/li&gt;
 &lt;li&gt;Low power&lt;/li&gt;
@@ -36,7 +36,192 @@
 &lt;li&gt;operate over a single 3.3 V supply &lt;/li&gt;
 &lt;li&gt;consume no more than 1 W when in use (imaging)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;This page is under construction. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[OpenCV Development Over SSH]]></title><description><![CDATA[This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board…]]></description><link>https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</guid><pubDate>Sun, 20 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board) over SSH. You will learn:&lt;/p&gt;
+&lt;h3&gt;3. Visible and NIR Imaging&lt;/h3&gt;
+&lt;p&gt;To accomplish the dual-band imaging, we employ two sensors, one with the IR filter removed. &lt;a href=&quot;https://publiclab.org/notes/khufkens/05-10-2015/multispectral-raspberry-pi-first-light-ndvi-images&quot;&gt;Public Lab&lt;/a&gt; demonstrates that with two sensors and appropriate filtering, acceptable NDVI images can be obtained from COTS image sensors from OmniVision. We employ similar filtering. &lt;/p&gt;
+&lt;h3&gt;4. On-Orbit Image Processing&lt;/h3&gt;
+&lt;p&gt;As previously mentioned, the ability to process images on-orbit is extremely useful for reducing downlink requirements. Three classes of devices were considered - FPGAs, applications-class processors (think Cortex A), or microcontrollers. &lt;/p&gt;
+&lt;p&gt;Microcontrollers are interesting from a low-power perspective. Some STM32 devices have built-in JPEG encoding and parallel camera interfaces. Unfortunately, the devices available were limited to a resolution maximum of about 4 MP. Processing NDVI images with a microcontroller is also a decent challenge from a memory perspective. No microcontrollers I surveyed could easily support two image sensors with the dedicated camera interface hardware. Given more time, I still really want to try to make an STM32-based NDVI camera. I do think it’s possible with some creativity (and maybe some FPGA help).&lt;/p&gt;
+&lt;p&gt;Applications processors are certainly capable of doing the required processing, and are available with camera interfaces and Linux support for image sensors. However, they are relatively power hungry. Additionally, radiation tolerance becomes a concern with devices built on modern semiconductor nodes. While the duty cycle of this payload is likely low, it would still be prudent to implement error detection and correction in software, which is not a small undertaking. I have also personally witnessed the death of multiple microprocessors at radiation tests at dose levels that would not support the mission timeline requirements. &lt;/p&gt;
+&lt;p&gt;Because of the drawbacks of the other two device classes, we selected an FPGA as the processing platform for this project. Some benefits of this are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ability to implement completely parallel image acquisition in two bands&lt;/li&gt;
+&lt;li&gt;Ability to hardware accelerate NDVI processing&lt;/li&gt;
+&lt;li&gt;With Xilinx parts, built-in support for ECC memory and TMR for radiation tolerance of the soft microcontroller (more on this later)&lt;/li&gt;
+&lt;li&gt;Complete flexibility on interfacing and system architecture (processors, sensors, memories, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Of course, developing a system around an FPGA is a significant undertaking. However, the ability to optimize the system for any particular desired feature (parallelism, power, fancy processing) is a large benefit. It’s also way more fun!&lt;/p&gt;
+&lt;h3&gt;5. Ease of Assembly&lt;/h3&gt;
+&lt;p&gt;This is a low-budget capstone project with some fairly expensive components. Therefore, we could not realistically budget anything for professional assembly services. The compressed timeline also presented a great risk even when we were given a sponsorship opportunity for professional assembly. A two week or month-long turnaround is a significant chunk of time in this project.&lt;/p&gt;
+&lt;p&gt;Therefore, we had to keep everything within the realm of what I know well - hand assembly of large-ish SMD components. The general constraints this presents are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;0402 components or larger&lt;/li&gt;
+&lt;li&gt;No large BGAs (this is a problem for modern FPGAs).&lt;/li&gt;
+&lt;li&gt;Relatively coarse spacing between components.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Over the past few years, I’ve developed a solid soldering process at SFUSat, one that has been rated “I’d fly it on a CubeSat” by a Canadian Space Agency PCB expert upon inspecting one of our boards :). Given that we’ve decided to use an FPGA, how are we ever going to assemble this thing when our only options are BGA parts?&lt;/p&gt;
+&lt;h4&gt;FPGA Selection&lt;/h4&gt;
+&lt;p&gt;In order to incorporate an FPGA into this prototype without having to solder the device ourselves, we need to use a System on Module (SoM). The plan from the start of the project was to mount the SoM “backpack-style”  to PCB on the opposite side from the image sensors. &lt;/p&gt;
+&lt;p&gt;Having to choose a SoM limits the FPGA selection quite significantly. As always, we have cost and availability as key decision factors too. However, the limiting factor on our SoM selection was pin availability. The pin map of our final revision looked like this, but multiplied by 2:&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/237b6dd6f9d8b508c3424decb12b6786/d2d99/pin_map.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1019px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 59.96074582924435%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsSAAALEgHS3X78AAAB+0lEQVQoz01SaY+iUBDkzxqTwSvRD/7M2ajjsYIHoKicIngg1na1x+xLXvLorq6ursbodDpotVpoNptoNBro9Xrodrv4+jLRbrdRq9U0bpoNEGuapuKJ6ff7mmNtvV7XnHG5XJBlGaIoxvF4xN/5HHEcw3VdMHc+n/XyfTqdcDgccL1eMZlM4HkedrvdB8NrPB4PAZ+V5Ha7YbFYIAxDzIWYAH+71YY8JNoLIc9qtcRWcrzl/f4ScH0SspDqSiFk11Tem81GYyRjnjgSRlGkb9/3EQQBvr//aA1xFKSEHIWqGJjNZgp0XUfHu91KlGWJqqpwEWKO+BCFtmXBk6aj0QiO4yrmLkqNqnogEyUkoQJLgBx/Op1qQZqmqpCERVHIiL4qXC4XQu5jYdsyzfZjmUE/4jhSL0jIjpEkf35GsARM9YyTpChy2OIxz3Q6ESJPljPG3LKflolKHZkfh5dCLoOqGOMIVE5lT68L9eutkJbwm+r2+73UvzyMo1+F7JwkCYbDoQKZf3uY5znW67XGaI3jrDEYDBTHvCqk/Cw7fpZi20/59FAXIMVUqkuR34vbZ2y1WqlCEv6PM57eFLp2duDvQCX8PfK8UKI3ISdgM77DMECSJmKRpcS06aMwlRG5CBaMx2MtIumbjJeN8/ykCnk4MnGheBy8piPuHyO7c4cdWuDMAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Pin Map&quot;
+        title=&quot;&quot;
+        src=&quot;/static/237b6dd6f9d8b508c3424decb12b6786/d2d99/pin_map.png&quot;
+        srcset=&quot;/static/237b6dd6f9d8b508c3424decb12b6786/8a273/pin_map.png 293w,
+/static/237b6dd6f9d8b508c3424decb12b6786/a5d4a/pin_map.png 585w,
+/static/237b6dd6f9d8b508c3424decb12b6786/d2d99/pin_map.png 1019w&quot;
+        sizes=&quot;(max-width: 1019px) 100vw, 1019px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;50% of the pin map for AROS v2&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Our pin requirements took out a lot of SoM/development board possibilities like some of the &lt;a href=&quot;https://www.arrow.com/en/research-and-events/videos/arrow-electronics-embedded-development-boards&quot;&gt;inexpensive ones from Arrow&lt;/a&gt;. Trenz Electronic has an extensive range of &lt;a href=&quot;https://shop.trenz-electronic.de/en/Products/Trenz-Electronic/4-x-5-SoMs/&quot;&gt;4x5 cm SoMs&lt;/a&gt; that are also available on Digi-Key. We settled on the &lt;a href=&quot;https://shop.trenz-electronic.de/en/TE0725-03-35-2C-FPGA-Module-with-Xilinx-Artix-7-XC7A35T-2CSG324C-2x50-pin-header-3.5-x-7.3-cm&quot;&gt;TE0725&lt;/a&gt; which is more of a development board, due to its lower cost and small-enough footprint. &lt;/p&gt;
+&lt;p&gt;The FPGA on board has 35k logic elements, and our utilization was less than 12% of that when the final design (including MicroBlaze processor) was instantiated. The board also has 87 IO pins, and we used nearly all of them. The TE0725 itself fit our requirements well, but we did encounter some problems while using it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TE0725 Drawbacks&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PCB pads for all through-hole connectors have &lt;em&gt;very&lt;/em&gt; small annular rings. They are extremely difficult to solder reliably, especially GND pads that sink heat into the ground plane. &lt;/li&gt;
+&lt;li&gt;Poor connector mate between TE0790 JTAG adaptor and the board resulted in flaky JTAG connections.&lt;/li&gt;
+&lt;li&gt;HyperRAM onboard uses 1.8 V logic and is not configurable, so locks several IO banks to 1.8 V. &lt;/li&gt;
+&lt;li&gt;Poorly organized documentation. Most details are in the schematic as opposed to the reference manual. It would be great to see a pin map in the reference manual!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;TE0725 Advantages&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inexpensive, available, and offers several FPGA sizes and grades.&lt;/li&gt;
+&lt;li&gt;Large number of user IOs.&lt;/li&gt;
+&lt;li&gt;Configuration and the general design flow were smooth when JTAG connected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;System&lt;/h1&gt;
+&lt;p&gt;The system is built from several IP components and several distinct pieces of hardware. &lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/081d3bcf8f9bb274bce9353d0172ea25/f630b/system.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 53.09548793284365%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB7UlEQVQoz41S247TMBDN/38A/AEP8M5l97FCCImKwrJs2yW72bZpm4sbJ7bjW5LDxC0VBSEx0omtzNg+c85EOMUwDPgrhhP+Faczvbc47GIMfY8oq/bgsjpf2o+gxAgqJXRh33UdvPdhHesCQg3grEb6sKC6DtHzF8/wZvIa1rTImMR0WWC1OyDL9ng3vcPbT7coGUNVHdC2LZRS4YGR3HD8QFuH+SZFNzJcsxXyJgsvO9+BVTUljgySTYZtxtAoh5u4RM4t7tccya656Fwbgw+3s+OF1++v8GUxCwmlHdJCoKolhGjwsE0JG2JYIUlLNNJQFw0KrpHXHrXy8M4iqwt8TmIoqxC9un6JyWwC3Sqw2uBrzJBXGrVQuJr+CBBSwmhFLaugl3U9lsR0zxQU5XZVijV7BGtKRNpp+N4fudsGjsWASDGILdrsHqaIRxvPmo2mdR2Z4w2Z0l20bo1F5EjQ0a1xAHp9ADhR389Rb77BFQv4cgkta2htAkNDegmpsNkfwEUbzkojUbccQglE1tpgyGh5GInOgK9v4EUG6ox0NeEyTQ5zzql1DcYlvj9xbApJrAyeigTz7R1pmyP6NV/eOagyAc9XaB4/wpQx/Jij/+4PNHUT1vPZE0b20YUG1iDPcxLdnQf9f/B7/ASF+04xiRZuKQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;System block diagram&quot;
+        title=&quot;&quot;
+        src=&quot;/static/081d3bcf8f9bb274bce9353d0172ea25/a66a3/system.png&quot;
+        srcset=&quot;/static/081d3bcf8f9bb274bce9353d0172ea25/65e34/system.png 293w,
+/static/081d3bcf8f9bb274bce9353d0172ea25/8d594/system.png 585w,
+/static/081d3bcf8f9bb274bce9353d0172ea25/a66a3/system.png 1170w,
+/static/081d3bcf8f9bb274bce9353d0172ea25/59785/system.png 1755w,
+/static/081d3bcf8f9bb274bce9353d0172ea25/f630b/system.png 1906w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;System block diagram&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;MicroBlaze Microcontroller&lt;/h2&gt;
+&lt;p&gt;A MicroBlaze soft microcontroller is instantiated inside the FPGA fabric. This device was selected because it is royalty free and features extensive support for the design flow within the Xilinx tools. Other options such as RISC-V and ARM cores were also evaluated, but MicroBlaze offered the best tool support.&lt;/p&gt;
+&lt;h3&gt;Firmware&lt;/h3&gt;
+&lt;p&gt;Firmware is written in C++ and consists of a simple state machine. The camera sits idle until commands are received over the control UART. Commands generally trigger a sequence of triggers and waits on various register bits. These bits control the custom hardware.&lt;/p&gt;
+&lt;h2&gt;AXI Register Block&lt;/h2&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/06e1665aea8d3e4d462bb65dfd8ce77f/e3fae/regs.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 44.166666666666664%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsSAAALEgHS3X78AAABZklEQVQoz3VS146DQAzk/z8xSg5FUUjodRvLMucx4ZSXQ7IMyPYUO+v7Hm3bou06OOc03u836rqGtVbDGINlWfT9rGH0XY95nrWWuaxqZCwKa0S/BOz7Dj6dDH8+nyiKAo/HA6/XC+M4YktJa84gSNw2VFWJYZww2IjMOQ5cYX38KxyGXliWB/I0KzqBkwz8DmMNYtyUwDQvGE04BjofMMhH+jAYhkGLKIus/ntoRYxRLZsXg9GulGxgnUczeaF/NFdVpVIpuWkalXb6SLbTNGlmbCKZSsiwNzIwhIBVUGyIyhDYlV0hvmmhNJOx916bGafk4186FiZqTKCH9iN5YXgE8WSSBZAlpXAoWRKEoUsUEhxG1gQ4PBTm9ouhkaUsbkUSD0s5m+v1ivznB3me43a74XK5aC7LY1kEpMcpHdt2AmDDhmz9GujXTT1kw/1+19Nh5tmc3rGZmQxXuQ7dtjDlpTjp/wUaFrWQxhbUxQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Registers&quot;
+        title=&quot;&quot;
+        src=&quot;/static/06e1665aea8d3e4d462bb65dfd8ce77f/a66a3/regs.png&quot;
+        srcset=&quot;/static/06e1665aea8d3e4d462bb65dfd8ce77f/65e34/regs.png 293w,
+/static/06e1665aea8d3e4d462bb65dfd8ce77f/8d594/regs.png 585w,
+/static/06e1665aea8d3e4d462bb65dfd8ce77f/a66a3/regs.png 1170w,
+/static/06e1665aea8d3e4d462bb65dfd8ce77f/e3fae/regs.png 1200w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Register block generated with airhdl&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The purpose of the register block is to allow firmware to monitor and control custom hardware using a memory-mapped interface. Essentially, we are just implementing our own microcontroller peripherals. Various register bits can be toggled in firmware, and those bits can directly trigger some custom hardware. Similarly, outputs of custom hardware blocks can be piped back into the register block so we can read them from firmware. When it’s all said and done, the firmware looks just like a low-level driver for any peripheral, like an SPI module, except all of the bits are exactly what we need to monitor and control the imaging process.&lt;/p&gt;
+&lt;p&gt;The design uses a custom AXI register block generated using &lt;a href=&quot;https://airhdl.com&quot;&gt;airhdl&lt;/a&gt;. Airhdl is a free web-based tool that lets you design a register block and export VHDL (or other representations) to use in a design or simulation. Airhdl is &lt;em&gt;fantastic&lt;/em&gt;. I really enjoyed using it, and it enabled us to link hardware and firmware very quickly. &lt;/p&gt;
+&lt;h2&gt;Control&lt;/h2&gt;
+&lt;p&gt;The camera is controlled over a UART. Commands are strings terminated with &lt;code class=&quot;language-text&quot;&gt;\r\n&lt;/code&gt;, and the firmware picks up the commands and executes the appropriate function. &lt;/p&gt;
+&lt;h2&gt;Export Handling&lt;/h2&gt;
+&lt;p&gt;To export images, we provide two interfaces. The first is a UART at 115200 baud. This interface was chosen for its simplicity in terms of interfacing it to a PC to grab images. Using any USB-serial convertor like the &lt;code class=&quot;language-text&quot;&gt;FT232&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;pyserial&lt;/code&gt;, we can easily write scripts to grab image data and process it. It’s very slow (a full resolution raw image takes several minutes to transfer), but it was simple to get working. I used this interface during development.&lt;/p&gt;
+&lt;p&gt;The export UART and the control UART shared a TX line. Firmware controlled a hardware multiplexer on this line, which swapped its drive from the control UART to the export block. The control UART is connected to the MicroBlaze and was used for commands and responses. The export UART only could transmit, and offered hardware-accelerated exporting of images from frame buffer RAM.&lt;/p&gt;
+&lt;p&gt;The other interface is an 8-bit parallel to USB chip, the &lt;code class=&quot;language-text&quot;&gt;FT245&lt;/code&gt;. After writing drivers to interact with it, we could have grabbed images from the camera at USB 2.0 speeds.&lt;/p&gt;
+&lt;h2&gt;Frame Buffer&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cypress.com/products/hyperram-memory&quot;&gt;HyperRAM&lt;/a&gt; was used as a frame buffer. HyperRAM is DRAM that has the refresh managed internally, so it presents similar to an SRAM and is therefore fairly easy to use. HyperRAM was chosen for its large-enough size and straightforward interface.&lt;/p&gt;
+&lt;p&gt;The image is placed into the frame buffer as it is transferred out of the image sensor. From there, it sits until the export block draws the image out, or we initiate a transfer to nonvolatile storage.&lt;/p&gt;
+&lt;h1&gt;Software&lt;/h1&gt;
+&lt;p&gt;A member of our team was responsible for the ground segment software development. They created a pretty slick app in Python with &lt;code class=&quot;language-text&quot;&gt;Tkinter&lt;/code&gt; as the GUI solution. It offered several buttons and menus for configurability, and sent commands to a backend script using &lt;code class=&quot;language-text&quot;&gt;zeroMQ&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a22efa205b41eae7b02c169730bcc9d0/a5009/gcs.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 1170px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACsUlEQVQ4y41TbUtTYRg+vyAK0m1u55znbGuTdGGm7AWHbtKwINEPhiJYEtaHEeh6GbUyM1+azULRLV/CyUznfJvOXkDDIoLoxU8SkdEoyH8QfQmunvNMp9YXD1zcz3Pu+7nu67qfc7hIdBIz8QTGolOYnV9EYvEZ5hNPsUBjfOEJYtNzaUQnYgiPjrH11Ewc0dg0pmmcjM1gNr6At+8+gnM3NcLt8eBsQwPKKiogiiIEnocg8CxqNOo05JwkERoFBkL3hIgsZzLlIhQMgouMRtDR3oFQfxDXrvvAC7SQkF2QJImBECn9TpTBCAkl1FBCEwKBALgPq6tIJpP4ubGBseFH0KjVINL2QYEekpvwQkotL6tnCsXtGpo3Go2w2+3gsON5vfwCKoVyU41cKCLHaMAx2t2UmweLuQj5R/KQYziMQzo9a7ZFaDAYYLVawb1aWcL65zV8T35BeCCUUshsEmRpeJTZC+Gtr0TfyBDCK2/gb/Gi5uQpFNImGqpW2kFos9nABQf6MTQyiODwQzT6mpg1Rkih5gU4C03wnjmB8Wgfnr9fxnjYj6vu87AV5NOGGuZmF2Grvw2d3XfhvX0TtefqUrMRCbRaLRQKBepqa/E4MoHenh4M9j9AqDcAX1MzzEcLoKYz/Y/QR2+25VYLLnsuofp0NSMUicgKZftWmx31FzxwuCpRVFwGi6UYebkW6kDP6si/ltu7OuC/34WqmiqUukoZESPdHHiWSoUD+/dBkXkQSmUmVColstSq1He445bThLHZKSy9XMJcIo4bnc0pdURK37RsXa/XQ6vT0bWO7WVs5bcEZGdnpwh/fP2G9bVP+PPrN+LTMWRkZLAPVU3t7gVyrYq6kInNZjO4e6130Ebn2N3WjivuiygpLoHT6dwzHA4HjrtcqKC/bXl5Of4CebzuZQ5CKssAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;AROS Ground Control Software&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a22efa205b41eae7b02c169730bcc9d0/a66a3/gcs.png&quot;
+        srcset=&quot;/static/a22efa205b41eae7b02c169730bcc9d0/65e34/gcs.png 293w,
+/static/a22efa205b41eae7b02c169730bcc9d0/8d594/gcs.png 585w,
+/static/a22efa205b41eae7b02c169730bcc9d0/a66a3/gcs.png 1170w,
+/static/a22efa205b41eae7b02c169730bcc9d0/59785/gcs.png 1755w,
+/static/a22efa205b41eae7b02c169730bcc9d0/11551/gcs.png 2340w,
+/static/a22efa205b41eae7b02c169730bcc9d0/a5009/gcs.png 2560w&quot;
+        sizes=&quot;(max-width: 1170px) 100vw, 1170px&quot;
+      /&gt;
+  &lt;/span&gt;
+  &lt;/a&gt;
+&lt;em&gt;Ground Control Software&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The backend script communicated with the board using &lt;code class=&quot;language-text&quot;&gt;pyserial&lt;/code&gt; and was adapted from a script used to process images during development. The backend would read in the image data and transform it from raw RGB 565 into a JPEG. Once this was done, it would signal to the GUI that the image coule be updated in the UI. &lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Three prototypes were built over a period of 8 months, all were capable of taking small images by the end of the project timeline. While none of the modules would be ready for on-orbit use, we developed a proof-of-concept electronics and firmware platform that could be used as a starting point for developing any kind of custom camera. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[OpenCV Development Over SSH]]></title><description><![CDATA[This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board…]]></description><link>https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</link><guid isPermaLink="false">https://gatsby-casper.netlify.com/2019/01/20/raspberrypi-cv-setup/</guid><pubDate>Sun, 20 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;This post is a collection of a few tips and tricks for developing openCV applications on a Raspberry Pi (or any other embedded linux board) over SSH. You will learn:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;How to develop over an SSH connection in VS Code&lt;/li&gt;
 &lt;li&gt;How to forward windows from the pi to your PC&lt;/li&gt;
